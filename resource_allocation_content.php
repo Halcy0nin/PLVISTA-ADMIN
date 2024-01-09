@@ -18,20 +18,11 @@
 
 
     <div class = "container">
-        <h3 class = "mx-3">Registered Schools</h3>
+        <h3 class = "mx-3">Resource Allocation</h3>
         <br>
 
         <div class = "row">
             <div class = "col">
-            <!-- search bar -->
-            <div class = "container d-flex">
-                <div style = "width:260px;" class="input-group rounded">
-                    <input  type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="bi bi-search"></i>
-                    </span>
-                </div>
-            <div>
 
             <!-- dropdown filter -->
             <div class = "container d-flex">
@@ -50,24 +41,21 @@
             </div>
             </div>
         
-        <!-- add school and export button -->
+        <!-- export button -->
         <div class = "col">
             <div class = "container d-flex justify-content-end">
-                <a href = "#">
-                    <button type="button" class="btn btn-primary rounded mx-2">Add School</button>
-                </a>
 
                 <!--export data button -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exportSchools">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exportReport">
             Export
             </button>
 
             <!-- modal before exporting data -->
-            <div class="modal fade" id="exportSchools" tabindex="-1" role="dialog" aria-labelledby="exportSchoolsLabel" aria-hidden="true">
+            <div class="modal fade" id="exportReport" tabindex="-1" role="dialog" aria-labelledby="exportReportLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exportSchoolsLabel">Export Data</h5>
+                    <h5 class="modal-title" id="exportReportLabel">Export Data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -118,12 +106,10 @@
                     <td>Lorem Ipsum</td>
                     <td>Lorem Ipsum</td>
                     <td>
-                        <!-- Edit Button -->
-                        <button type="button" class="btn btn-success btn-sm my-2"><i class="bi bi-pencil-fill"></i></button>
-                        <!-- Add Button -->
-                        <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
-                        <!-- Delete Button -->
-                        <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></button>
+                        <!-- Approve Button -->
+                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
+                        <!-- Reject Button -->
+                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
                     </td>
                 </tr>
             </thead>

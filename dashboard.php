@@ -22,6 +22,9 @@
           <a href="#" data-content="dashboard_content.php" class="menu-link">Dashboard</a>
         </li>
         <li class="item">
+          <a href="#" data-content="resource_allocation_content.php" class="menu-link">Resource Allocation</a>
+        </li>
+        <li class="item">
           <a href="#" data-content="school_content.php" class="menu-link">Schools</a>
         </li>
         <li class="item">
