@@ -51,7 +51,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-  <!-- script for php content WAG GALAWIN PLES-->
+  <!-- loads pages indicated in data_content while retaining the sidebar-->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // click event listener to the menu links

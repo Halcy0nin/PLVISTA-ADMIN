@@ -13,7 +13,7 @@
 <body>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col">
                 <div class="settings-box">
                     <h2 class="mt-3 mb-4">Account Settings</h2>
                     <!-- form goes here -->
