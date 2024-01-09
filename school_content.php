@@ -57,9 +57,31 @@
                     <button type="button" class="btn btn-primary rounded mx-2">Add School</button>
                 </a>
 
-                <a href = "#">
-                    <button type="button" class="btn btn-success rounded">Export</button>
-                </a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exportData">
+            Export
+            </button>
+
+            <!-- modal before exporting data -->
+            <div class="modal fade" id="exportData" tabindex="-1" role="dialog" aria-labelledby="exportDataLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportDataLabel">Export Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to export this set of data?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary">Yes</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
             </div>
         </div>
 
