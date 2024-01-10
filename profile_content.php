@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="account_settings.css">
+    <link rel="stylesheet" href="profile_content.css">
 </head>
 
 <body>

@@ -28,10 +28,10 @@
           <a href="#" data-content="school_content.php" class="menu-link">Schools</a>
         </li>
         <li class="item">
-          <a href="#" data-content="users_content.php" class="menu-link">Manage Users</a>
+          <a href="#" data-content="manage_users_content.php" class="menu-link">Manage Users</a>
         </li>
         <li class="item">
-          <a href="#" data-content="account_settings_content.php" class="menu-link">Account Settings</a>
+          <a href="#" data-content="profile_content.php" class="menu-link">Profile</a>
         </li>
         <li class="item">
           <a href="login.php">Log Out</a>
