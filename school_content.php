@@ -181,7 +181,7 @@
         <!-- Table showing all school info in the database -->
         <table style="margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
             <thead class="thead-light"></thead>
-                <tr>
+                <tr class = "text-center">
                     <th scope="col">ID</th>
                     <th scope="col">School Name</th>
                     <th scope="col">School ID</th>
