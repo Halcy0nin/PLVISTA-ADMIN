@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="dashboard.css" /> <!-- css -->
   <link rel="icon" type="images/x-icon" href="sdo.png" /> <!-- icon sa tab -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" /> <!-- bootstrap -->
+  <!-- bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -19,22 +21,22 @@
       <ul class="menu-items">
         <div class="menu-title">ICT Resource Management System</div>
         <li class="item">
-          <a href="#" data-content="dashboard_content.php" class="menu-link">Dashboard</a>
+          <a href="#" data-content="dashboard_content.php" class="menu-link"><i class="bi bi-bar-chart-fill"></i>Dashboard</a>
         </li>
         <li class="item">
-          <a href="#" data-content="resource_allocation_content.php" class="menu-link">Resource Allocation</a>
+          <a href="#" data-content="resource_allocation_content.php" class="menu-link"><i class="bi bi-pie-chart-fill"></i>Resource Allocation</a>
         </li>
         <li class="item">
-          <a href="#" data-content="school_content.php" class="menu-link">Schools</a>
+          <a href="#" data-content="school_content.php" class="menu-link"><i class="fa-solid fa-school"></i>Schools</a>
         </li>
         <li class="item">
-          <a href="#" data-content="users_content.php" class="menu-link">Manage Users</a>
+          <a href="#" data-content="manage_users_content.php" class="menu-link"><i class="fa-solid fa-user-group"></i>Manage Users</a>
         </li>
         <li class="item">
-          <a href="#" data-content="account_settings_content.php" class="menu-link">Account Settings</a>
+          <a href="#" data-content="profile_content.php" class="menu-link"><i class="bi bi-person-circle"></i>Profile</a>
         </li>
         <li class="item">
-          <a href="login.php">Log Out</a>
+          <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a>
         </li>
       </ul>
     </div>

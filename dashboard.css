@@ -75,7 +75,8 @@
 }
 
 .item i {
-  font-size: 12px;
+  margin-right: 9px;
+  font-size: 20px;
 }
 
 .item a:hover,

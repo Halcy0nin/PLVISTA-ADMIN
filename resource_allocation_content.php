@@ -24,7 +24,7 @@
         <div class = "row">
             <div class = "col">
 
-            <!-- dropdown filter -->
+            <!-- dropdown -->
             <div class = "container d-flex">
                 <div class="dropdown">
 
@@ -55,7 +55,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exportReportLabel">Export Data</h5>
+                    <h5 class="modal-title" id="exportReportLabel">Export Resource Allocation Report</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -77,9 +77,9 @@
     </div>
 
     <div class = "container mt-5">
-        <!-- Table showing all school info in the database -->
+        <!-- Table showing resource allocation info in the database -->
         <table style="margin-left: auto; margin-right: auto;" class = "table table-striped centerTable text-center">
-            <thead class="thead-light">
+            <thead class="thead-light"></thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">School Name</th>
@@ -112,7 +112,6 @@
                         <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
                     </td>
                 </tr>
-            </thead>
         </table>
 
             <div class = "container d-flex justify-content-end">
