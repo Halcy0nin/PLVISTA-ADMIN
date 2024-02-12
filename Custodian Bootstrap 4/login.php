@@ -12,7 +12,7 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form action="dashboard.php" onsubmit="return authenticate()">
+            <form action="school_inventory.php" onsubmit="return authenticate()">
                 <h1>Sign in</h1>
                 <div class="infieldone">
                     <input id="username" type="username" placeholder="Username" name="username" required />

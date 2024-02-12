@@ -80,7 +80,7 @@
 .item a:hover,
 .submenu-item:hover,
 .submenu .menu-title:hover {
-  background: #2d8ac4;
+  background: #3a0ca3;
   color: white;
   text-decoration: transparent;
 }
@@ -130,7 +130,7 @@
   height: 65px;
   padding: 5px 10px;
   font-size: 25px;
-  background: #2d8ac4;
+  background: #3a0ca3;
   cursor: pointer;
 }
 

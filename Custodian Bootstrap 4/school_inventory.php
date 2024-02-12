@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>Inventory Management System | DEPED</title>
-  <link rel="stylesheet" href="dashboard.css" /> <!-- css -->
+  <link rel="stylesheet" href="school_inventory.css" /> <!-- css -->
   <link rel="icon" type="images/x-icon" href="sdo.png" /> <!-- icon sa tab -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> <!-- bootstrap -->
  <!-- bootstrap icons-->
@@ -24,16 +24,10 @@
       <ul class="menu-items">
         <div class="menu-title">ICT Resource Management System</div>
         <li class="item">
-          <a href="#" data-content="dashboard_content.php" class="menu-link"><i class="bi bi-bar-chart-fill"></i>Dashboard</a>
+          <a href="#" data-content="school_inventory_content.php" class="menu-link"><i class="bi bi-archive-fill"></i>School Inventory</a>
         </li>
         <li class="item">
-          <a href="#" data-content="resource_allocation_content.php" class="menu-link"><i class="bi bi-pie-chart-fill"></i>Resource Allocation</a>
-        </li>
-        <li class="item">
-          <a href="#" data-content="school_content.php" class="menu-link"><i class="bi bi-building-fill"></i>Schools</a>
-        </li>
-        <li class="item">
-          <a href="#" data-content="manage_users_content.php" class="menu-link"><i class="bi bi-person-vcard-fill"></i>Manage Users</a>
+          <a href="#" data-content="resource_allocation_content.php" class="menu-link"><i class="bi bi-journal-bookmark-fill"></i>Report</a>
         </li>
         <li class="item">
           <a href="#" data-content="profile_content.php" class="menu-link"><i class="bi bi-person-circle"></i>Profile</a>
