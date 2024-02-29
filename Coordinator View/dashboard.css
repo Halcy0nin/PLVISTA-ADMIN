@@ -12,7 +12,7 @@
   width: 260px;
   background: #fff;
   padding: 15px;
-  z-index: 99;
+  z-index: 10;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); /* Added box-shadow */
 }
 
@@ -121,35 +121,48 @@
 .main {
   left: 260px;
   width: calc(100% - 260px);
-  z-index: 1000;
+  z-index: -1;
 }
 
 .navbar {
   position: fixed;
-  color: #fff;
-  height: 65px;
+  height: 6.82vh; /* Adjust the height as needed */
+  width: 190vh; /* Match the width of the sidebar */
   padding: 5px 10px;
-  font-size: 25px;
   background: #2d8ac4;
-  cursor: pointer;
+  z-index: 0;
 }
+
 
 .navbar #sidebar-close {
   cursor: pointer;
-}
-
-.main {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  z-index: 100;
-  background: #e7f2fd;
 }
 
 .main h1 {
   color: #11101d;
   font-size: 40px;
   text-align: center;
+}
+
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  z-index: -1;
+  background: #e7f2fd;
+}
+
+.content-container {
+  position: absolute;
+  top: 10%; /* Adjust as needed */
+  left: 20%; /* Adjust as needed */
+  right: 5%; /* Adjust as needed */
+  bottom: 0;
+  overflow: auto;
+  padding: 20px;
 }
