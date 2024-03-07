@@ -51,15 +51,15 @@
         <div class="overlay-container" id="overlayCon">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    <h3>Inventory System</h3>
-                    <p>Description dito pwede </p>
+                    <h3>ICT Resource Inventory System</h3>
+                    <p>Schools Divisions Office of Valenzuela</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap JS CDN for mobile responsiveness -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
