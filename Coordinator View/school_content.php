@@ -132,6 +132,7 @@ include "../Coordinator View/Processes/school_info.php";
         </div>
 
 
+
                 <!--export data button -->
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exportSchools">
             Export
@@ -227,6 +228,7 @@ include "../Coordinator View/Processes/school_info.php";
                     "id"
                 ]; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateschoolLabel" aria-hidden="true">
                         <div class="modal-dialog">
+                          
                             <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="updateschoolLabel">Edit School</h1>
