@@ -2,17 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Sign in || Admin</title>
-    <link rel="icon" type="images/x-icon" href="sdo.png" /> <!-- icon on tab -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> <!-- bootstrap -->    
-    <link rel="stylesheet" href="login.css"> <!-- css -->
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sign In | Custodian</title>
+
+  <!-- CSS FILES -->
+  <link href="../Custodian View/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="../Custodian View/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../Custodian View/assets/css/login.css" rel="stylesheet">
+
+  <!-- bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+   <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
+</head>
 </head>
 
 <body>
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form action="school_inventory.php" onsubmit="return authenticate()">
+            <form action="school_inventory_content.php" onsubmit="return authenticate()">
                 <h1>Sign in</h1>
                 <div class="infieldone">
                     <input id="username" type="username" placeholder="Username" name="username" required />
@@ -22,8 +34,8 @@
                     <input id="password" type="password" placeholder="Password" name="password" required />
                     <label></label>
                 </div>
-                <a href="#" class="forgot">Forgot your password?</a>
-                <button type="submit">Sign In</button>
+                <a href="#" class="forgot">Forgot your password?</a> 
+                <button type="submit" >Sign In</button> 
             </form>
             <script>
                 //Following function gets values of the username and password fields and checks to see if they match a hard coded username and password 
@@ -58,11 +70,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS CDN for mobile responsiveness -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
     <!-- this makes sure the error message shows up -->
     <script>
         //Following function gets values of the username and password fields and checks to see if they match a hard coded username and password 
@@ -88,18 +95,21 @@
     </script>
 
     <!-- the error message itself -->
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Sorry, username or password is incorrect.</h5>
-                </div>
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Sorry, username or password is incorrect.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>
+</div>
 
-
+    <!-- JS FILES -->
+    <script src="../try/assets/js/bootstrap.bundle.js"></script>
+    <script src="../try/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../try/assets/js/bootstrap.js"></script>
 </body>
 
 </html>
