@@ -7,77 +7,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title></title>
-    <!-- bootstrap css-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- bootstrap icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="modal.css">
+<!-- CSS FILES -->
+    <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Coordinator View/assets/css/resource_allocation.css" rel="stylesheet">
+    <link href="../Coordinator View/assets/css/modal.css" rel="stylesheet">
+
+
+
+  <!-- bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
 
 <body>
 
-  <!-- Bootstrap JS CDN for mobile responsiveness -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<div class="container">
+<nav class="sidebar">
+    <div class="menu">
+  
+      <div class="main-menu">
+  
+        <div class="logo">
+        <a href="#" class="SDOlogo"><img src="sdo.png"></a>
+        </div>
+  
+      <div class="menu-content">
+      <ul class="menu-items">
+        <div class="menu-title">ICT Resource Management System</div>
+        <li class="item">
+          <a href="dashboard_content.php">
+          <i class="bi bi-bar-chart-fill"></i>Dashboard</a>
+        </li>
+        <li class="item">
+          <a href="resource_allocation_content.php">
+          <i class="bi bi-pie-chart-fill"></i>Resource Allocation</a>
+        </li>
+        <li class="item">
+          <a href="school_content.php">
+          <i class="bi bi-building-fill"></i>Schools</a>
+        </li>
+        <li class="item">
+          <a href="manage_users_content.php">
+          <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
+        </li>
+        <li class="item">
+          <a href="profile_content.php">
+          <i class="bi bi-person-circle"></i>Profile</a>
+        </li>
+        <li class="item">
+          <a href="login.php">
+          <i class="bi bi-box-arrow-in-left"></i>Log Out</a>
+        </li>
+      </ul>
+    </div>
+          </div>
+        </div>
+     </nav>
 
-
-    <div class = "content-container">
+    
+    <div class="content">
         <h3 class = "mx-3">Resource Allocation</h3>
         <br>
 
-        <div class = "row">
-            <div class = "col">
-
-            <!-- dropdown -->
-            <div class = "container d-flex">
-                <div class="dropdown">
-
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Filter
-                    </button>
-
-                    <div class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="row">
+                <div class="col">
+                    <!-- dropdown -->
+                    <div class="container d-flex">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filter
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </div>
         
         <!-- export button -->
-        <div class = "col">
-            <div class = "container d-flex justify-content-end">
-
-                <!--export data button -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exportReport">
+<div class="col">
+    <div class="container d-flex justify-content-end">
+        <!-- export data button -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportReport">
             Export
-            </button>
+        </button>
 
-            <!-- modal before exporting data -->
-            <div class="modal fade" id="exportReport" tabindex="-1" role="dialog" aria-labelledby="exportReportLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <!-- modal before exporting data -->
+        <div class="modal fade" id="exportReport" tabindex="-1" aria-labelledby="exportReportLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exportReportLabel">Export Resource Allocation Report</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportReportLabel">Export Resource Allocation Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to export this data?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary">Yes</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    Are you sure you want to export this data?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-primary">Yes</button>
-                </div>
-                </div>
-            </div>
-            </div>
-
             </div>
         </div>
 
     </div>
+</div>
 
     <div class = "container mt-5">
         <!-- Table showing resource allocation info in the database -->
@@ -237,6 +276,15 @@
                     </nav>
             </div>
     </div>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <!-- JS FILES -->
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
+  
 </body>
 
 

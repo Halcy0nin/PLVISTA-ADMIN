@@ -7,51 +7,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <title>Account Settings</title>
-    <!-- Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- bootstrap icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+     <!-- CSS FILES -->
+  <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/profile_content.css" rel="stylesheet">
+
+  <!-- bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+   <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
 
 </head>
 
 <body>
-    <!-- Bootstrap JS CDN for mobile responsiveness -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <div class="content-container">
-        <div class="row">
-            <div class="col">
-                <div class="settings-box">
-                    <h2 class="mt-3 mb-4">Account Settings</h2>
-                    <!-- form goes here -->
-                    <form action="update_settings.php" method="post">
-                        <div class="form-group">
-                            <label for="full-name">Full Name</label>
-                            <input type="text" class="form-control" id="full-name" name="full-name" value="">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                        <div class="form-group">
-                            <label for="birthday">Birthday</label>
-                            <input type="text" class="form-control" id="birthday" name="birthday">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                            <button type="button" class="btn btn-secondary"
-                                onclick="window.location.href='dashboard.php'">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<nav class="sidebar">
+    <div class="menu">
+  
+      <div class="main-menu">
+  
+        <div class="logo">
+        <a href="#" class="SDOlogo"><img src="sdo.png"></a>
         </div>
+  
+      <div class="menu-content">
+      <ul class="menu-items">
+        <div class="menu-title">ICT Resource Management System</div>
+        <li class="item">
+          <a href="dashboard_content.php">
+          <i class="bi bi-bar-chart-fill"></i>Dashboard</a>
+        </li>
+        <li class="item">
+          <a href="resource_allocation_content.php">
+          <i class="bi bi-pie-chart-fill"></i>Resource Allocation</a>
+        </li>
+        <li class="item">
+          <a href="school_content.php">
+          <i class="bi bi-building-fill"></i>Schools</a>
+        </li>
+        <li class="item">
+          <a href="manage_users_content.php">
+          <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
+        </li>
+        <li class="item">
+          <a href="profile_content.php">
+          <i class="bi bi-person-circle"></i>Profile</a>
+        </li>
+        <li class="item">
+          <a href="login.php">
+          <i class="bi bi-box-arrow-in-left"></i>Log Out</a>
+        </li>
+      </ul>
     </div>
+          </div>
+        </div>
+     </nav>
 
+     <div class="col-md-9">
+            
+            <div class="container content clear-fix">
+        
+            <h2 class="mt-5 mb-5">Profile Settings</h2>
+            
+            <div class="row" style="height:100%">
+            
+                <div class="col-md-3"></div>
+                
+                <div class="col-md-9">
+                    
+                    <div class="container">
+                    
+                        <form>
+                    
+                            <div class="form-group">
+
+                                <label for=fullName>Full Name</label>
+                                <input type="text" class="form-control" id="fullName">
+
+                            </div>
+                            <div class="form-group">
+
+                                <label for=email>Email</label>
+                                <input type="email" class="form-control" id="email">
+
+                            </div>
+                            <div class="form-group">
+
+                                <label for=pass>Password</label>
+                                <input type="password" class="form-control" id="pass">
+
+                            </div>
+                            <div class="form-group ">
+
+                                <label for=birthday>Birthday</label>
+                                <input type="date" class="form-control" id="birthday">
+
+                            </div>
+                            
+                            <div class="row mt-5">
+                            
+                                <div class="col">
+                                
+                                    <button type="button" class="btn btn-primary btn-block">Save Changes</button>
+                                
+                                </div>
+                                
+                                <div class="col">
+                                
+                                    <button type="button" class="btn btn-default btn-block"
+                                    onclick="window.location.href='dashboard.php'">Cancel</button>
+                                
+                                </div>
+                            
+                            </div>
+
+                        </form>
+                    
+                    </div>
+                
+                </div>
+            
+            </div>
+        
+        </div>
+            
+        </div>
     
+    </div>
+    
+</div>
+
+  <!-- JS FILES -->
+  <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
+  <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../Coordinator View/assets/js/profile.js"></script>
 </body>
 
 </html>

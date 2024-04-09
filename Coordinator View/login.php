@@ -2,13 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sign in || Admin</title>
-    <link rel="icon" type="images/x-icon" href="sdo.png" /> <!-- icon on tab -->
-    <!-- bootstrap css-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="login.css"> <!-- css -->
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sign In | Admin</title>
+
+  <!-- CSS FILES -->
+  <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/login.css" rel="stylesheet">
+
+  <!-- bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+   <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
+</head>
 </head>
 
 <body>
@@ -25,7 +35,7 @@
                     <label></label>
                 </div>
                 <a href="#" class="forgot">Forgot your password?</a> 
-                <button type="submit">Sign In</button> 
+                <button type="submit" >Sign In</button> 
             </form>
             <script>
                 //Following function gets values of the username and password fields and checks to see if they match a hard coded username and password 
@@ -60,9 +70,6 @@
         </div>
     </div>
 
-<!-- Bootstrap JS CDN for mobile responsiveness -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
     <!-- this makes sure the error message shows up -->
     <script>
         //Following function gets values of the username and password fields and checks to see if they match a hard coded username and password 
@@ -88,18 +95,21 @@
     </script>
 
     <!-- the error message itself -->
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Sorry, username or password is incorrect.</h5>
-                </div>
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Sorry, username or password is incorrect.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>
+</div>
 
-
+    <!-- JS FILES -->
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.js"></script>
 </body>
 
 </html>

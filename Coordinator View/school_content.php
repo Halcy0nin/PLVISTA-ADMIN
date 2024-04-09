@@ -1,6 +1,5 @@
 <?php
-include "../Coordinator View/Processes/db_conn_high_school.php";
-include "../Coordinator View/Processes/school_info.php";
+
 
 ?>
 
@@ -13,25 +12,62 @@ include "../Coordinator View/Processes/school_info.php";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title></title>
-    <!-- bootstrap css-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- bootstrap icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="modal.css">
+     <!-- CSS FILES -->
+  <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/dashboard.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/modal.css" rel="stylesheet">
 
-    <style>
+  <!-- bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        select{
-            width:200px;
-        }
-
-    </style>
+   <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
 </head>
 
 <body>
-  <!-- Bootstrap JS CDN for mobile responsiveness -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
+<nav class="sidebar">
+    <div class="menu">
+  
+      <div class="main-menu">
+  
+        <div class="logo">
+        <a href="#" class="SDOlogo"><img src="sdo.png"></a>
+        </div>
+  
+      <div class="menu-content">
+      <ul class="menu-items">
+        <div class="menu-title">ICT Resource Management System</div>
+        <li class="item">
+          <a href="dashboard_content.php">
+          <i class="bi bi-bar-chart-fill"></i>Dashboard</a>
+        </li>
+        <li class="item">
+          <a href="resource_allocation_content.php">
+          <i class="bi bi-pie-chart-fill"></i>Resource Allocation</a>
+        </li>
+        <li class="item">
+          <a href="school_content.php">
+          <i class="bi bi-building-fill"></i>Schools</a>
+        </li>
+        <li class="item">
+          <a href="manage_users_content.php">
+          <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
+        </li>
+        <li class="item">
+          <a href="profile_content.php">
+          <i class="bi bi-person-circle"></i>Profile</a>
+        </li>
+        <li class="item">
+          <a href="login.php">
+          <i class="bi bi-box-arrow-in-left"></i>Log Out</a>
+        </li>
+      </ul>
+    </div>
+          </div>
+        </div>
+     </nav>
 
     <div class = "content-container">
         <h3 class = "mx-3">Registered Schools</h3>
@@ -41,28 +77,27 @@ include "../Coordinator View/Processes/school_info.php";
             <div class = "col">
             <!-- search bar -->
             <div class = "container d-flex">
-                <div style = "width:260px;" class="input-group rounded">
+                <div style = "width:260px; margin-left: 11%" class="input-group rounded">
                     <input  type="text" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <i class="bi bi-search"></i>
                     </span>
                 </div>
-            <div>
+            
 
             <!-- dropdown filter -->
+            <div>
             <div class = "container d-flex">
-                <div class="dropdown">
-
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Filter
-                    </button>
-
-                    <div class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+            <div class="dropdown">
+    <button style="margin-left: 10%;"class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter
+    </button>
+    <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+</div>
             </div>
             </div>
         
@@ -71,7 +106,7 @@ include "../Coordinator View/Processes/school_info.php";
             <div class = "container d-flex justify-content-end">
 
 <!-- Button for add schools -->
-<button style = "margin-left: 1020px; margin-bottom: 15px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSchool">
+<button style = "margin-left: 0px; margin-bottom: 0px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSchool">
         Add School
         </button><br>
 
@@ -87,10 +122,10 @@ include "../Coordinator View/Processes/school_info.php";
             <div class="modal-body">
                 
                     <div class="form-group mb-3">
-                        <input type = "text" name ="schoolname" placeholder= "School name" value = "<?php echo $schoolname; ?>"></input>
+                        <input type = "text" name ="schoolname" placeholder= "School name" value = ""></input>
                     </div>
                     <div class="form-group mb-3">
-                        <input type = "text" name ="schoolid" placeholder= "School ID" value = "<?php echo $schoolid; ?>"></input>
+                        <input type = "text" name ="schoolid" placeholder= "School ID" value = ""></input>
                     </div>
                     <div class="form-group mb-3">
                     <label> Division </label> <br>
@@ -106,17 +141,17 @@ include "../Coordinator View/Processes/school_info.php";
                         </select>
                     </div>
                     <div class="form-group mb-3">
-                        <input type = "text" name ="schoolcontact" placeholder= "School Contact Person" value = "<?php echo $schoolcontact; ?>"></input>
+                        <input type = "text" name ="schoolcontact" placeholder= "School Contact Person" value = ""></input>
                 `   </div>
                     <div class="form-group mb-3">
-                        <input type = "text" name ="schoolcontactno" placeholder= "School Contact Number" value = "<?php echo $schoolcontactno; ?>"></input>
+                        <input type = "text" name ="schoolcontactno" placeholder= "School Contact Number" value = ""></input>
                     </div>
                     <div class="form-group mb-3">
-                        <input type = "text" name ="schoolemail" placeholder= "School Email" value = "<?php echo $schoolemail; ?>"></input>
+                        <input type = "text" name ="schoolemail" placeholder= "School Email" value = ""></input>
                     </div>
                     <div class="form-group mb-3">
                     <label> School District </label> <br>
-                        <select name="schooldistrict" value = "<?php echo $schooldivision; ?>">
+                        <select name="schooldistrict" value = "">
                             <option>Congressional I</option>
                             <option>Congressional II</option>
                         </select>
@@ -134,7 +169,7 @@ include "../Coordinator View/Processes/school_info.php";
 
 
                 <!--export data button -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exportSchools">
+                <button style = "margin-left: 10px; margin-bottom: 0px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#exportSchools">
             Export
             </button>
 
@@ -166,67 +201,42 @@ include "../Coordinator View/Processes/school_info.php";
 
     <div class = "container mt-5">
         <!-- Table showing all school info in the database -->
-        <table style="margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
-            <thead class="thead-light"></thead>
-                <tr class = "text-center">
-                    <th scope="col">ID</th>
-                    <th scope="col">School Name</th>
-                    <th scope="col">School ID</th>
-                    <th scope="col">Division</th>
-                    <th scope="col">School Type</th>
-                    <th scope="col">Contact Person</th>
-                    <th scope="col">Contact No.</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">School District</th>
-                    <th scope="col">Date Added</th>
-                    <th style = "width:13%;" scope="col">Action</th>
-                </tr>
+        <table style="width: 1000px; margin-left: auto; margin-right: auto;" class="table table-striped centerTable">
+    <thead class="thead-light"></thead>
+        <tr class="text-center">
+            <th style="width: 10%;" scope="col">ID</th>
+            <th style="margin: right 50px;" scope="col">School Name</th>
+            <th style="width: 10%;" scope="col">School ID</th>
+            <th style="width: 10%;" scope="col">Division</th>
+            <th style="width: 10%;" scope="col">School Type</th>
+            <th style="width: 10%;" scope="col">Contact Person</th>
+            <th style="width: 10%;" scope="col">Contact No.</th>
+            <th style="width: 10%;" scope="col">Email</th>
+            <th style="width: 10%;" scope="col">School District</th>
+            <th style="width: 10%;" scope="col">Date Added</th>
+            <th style="width: 10%;" scope="col"></th>
+            <th style="width: 10%;" scope="col">Action</th>
+            <th style="width: 10%;" scope="col"></th> <!-- Adjusted width -->
+        </tr>
 
                 <!-- loops through all of the data in the table and displays it per row -->
-                <?php foreach ($highschools as $school) { ?>
-                <tr>
-                    <td scope="row"><?php echo htmlspecialchars(
-                        $school["id"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_name"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_id"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_division"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_type"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_contact"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_contact_no"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_email"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_district"]
-                    ); ?></td>
-                    <td><?php echo htmlspecialchars(
-                        $school["school_added"]
-                    ); ?></td>
 
-             <!-- button to edit school record -->
-             <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateschool<?php echo $school[
-                 "id"
-             ]; ?>">
+                <td scope="row"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateschool">
             Edit School
             </button></td>
 
                 <!-- Pop-up form for updating schools -->
-                <div class="modal fade" id="updateschool<?php echo $school[
-                    "id"
-                ]; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateschoolLabel" aria-hidden="true">
+                <div class="modal fade" id="updateschool" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateschoolLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           
                             <div class="modal-content">
@@ -237,86 +247,47 @@ include "../Coordinator View/Processes/school_info.php";
                             <form action = "../Coordinator View/Processes/edit_school.php" method ="POST">
                             <div class="modal-body">
                                 <!-- set the following values to the last selected value in the dropdown list -->
-                                <?php
-                                $lastdivision = $school["school_division"];
-                                $lasttype = $school["school_type"];
-                                $lastdistrict = $school["school_district"];
-                                ?>
 
                                     <div class="form-group mb-3">
-                                        <input type = "text" name ="schoolname" placeholder= "School name" value = "<?php echo $school[
-                                            "school_name"
-                                        ]; ?>"></input>
+                                        <input type = "text" name ="schoolname" placeholder= "School name" value = ""></input>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type = "text" name ="schoolid" placeholder= "School ID" value = "<?php echo $school[
-                                            "school_id"
-                                        ]; ?>"></input>
+                                        <input type = "text" name ="schoolid" placeholder= "School ID" value = ""></input>
                                     </div>
                                     <div class="form-group mb-3">
                                     <label> Division </label> <br>
                                         <select name="schooldivision">
-                                        <option value="DCS-Valenzuela" <?php if (
-                                            $lastdivision === "DCS-Valenzuela"
-                                        ) {
-                                            echo "selected";
-                                        } ?>>DCS-Valenzuela</option>
+                                        <option value="DCS-Valenzuela" >DCS-Valenzuela</option>
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
                                     <label> School Type </label> <br>
                                         <select name="schooltype">
-                                            <option value="Public School" <?php if (
-                                                $lasttype === "Public School"
-                                            ) {
-                                                echo "selected";
-                                            } ?>> Public School </option>
-                                            <option value="Private School" <?php if (
-                                                $lasttype === "Private School"
-                                            ) {
-                                                echo "selected";
-                                            } ?>> Private School</option>
+                                            <option value="Public School" > Public School </option>
+                                            <option value="Private School" > Private School</option>
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type = "text" name ="schoolcontact" placeholder= "School Contact Person" value = "<?php echo $school[
-                                            "school_contact"
-                                        ]; ?>"></input>
+                                        <input type = "text" name ="schoolcontact" placeholder= "School Contact Person" value = ""></input>
                                 `   </div>
                                     <div class="form-group mb-3">
-                                        <input type = "text" name ="schoolcontactno" placeholder= "School Contact Number" value = "<?php echo $school[
-                                            "school_contact_no"
-                                        ]; ?>"></input>
+                                        <input type = "text" name ="schoolcontactno" placeholder= "School Contact Number" value = ""></input>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type = "text" name ="schoolemail" placeholder= "School Email" value = "<?php echo $school[
-                                            "school_email"
-                                        ]; ?>"></input>
+                                        <input type = "text" name ="schoolemail" placeholder= "School Email" value = ""></input>
                                     </div>
                                     <div class="form-group mb-3">
                                     <label> School District </label> <br>
                                         <select name="schooldistrict">
-                                            <option value="Congressional I" <?php if (
-                                                $lastdistrict ===
-                                                "Congressional I"
-                                            ) {
-                                                echo "selected";
-                                            } ?>>Congressional I</option>
-                                            <option value="Congressional II" <?php if (
-                                                $lastdistrict ===
-                                                "Congressional II"
-                                            ) {
-                                                echo "selected";
-                                            } ?>>Congressional II</option>
+                                            <option value="Congressional I" >Congressional I</option>
+                                            <option value="Congressional II" >Congressional II</option>
                                         </select>
                                     </div>
                                 </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <!-- shows the current id of the row of data through an input field -->
-                                <input type = "hidden" name = "id_to_update" value = "<?php echo $school[
-                                    "id"
-                                ]; ?>">
+                                <input type = "hidden" name = "id_to_update" value = "">
                                 <button type="submit" name = "updateschool" class="btn btn-primary">Edit School</button>
                             </form>
                             </div>
@@ -327,15 +298,11 @@ include "../Coordinator View/Processes/school_info.php";
              <!-- button to delete school record -->
             <td>
             <!-- creates a unique id for each modal as to not create loops -->
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteschool<?php echo $school[
-                "id"
-            ]; ?>">
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteschool">
             Delete School
             </button>
             </td>   
-            <div class="modal fade" id="deleteschool<?php echo $school[
-                "id"
-            ]; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteschoolLabel" aria-hidden="true">
+            <div class="modal fade" id="deleteschool" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteschoolLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                         <div class="modal-header">
@@ -344,15 +311,11 @@ include "../Coordinator View/Processes/school_info.php";
                                         </div>
                                         <form action = "../Coordinator View/Processes/delete_school.php" method ="POST">
                                         <div class="modal-body">
-                                        <h4>Are you sure you want to delete <?php echo "<h4>" .
-                                            $school["school_name"] .
-                                            "? </h4>"; ?></h4>
+                                        <h4>Are you sure you want to delete </h4>
                                         <p>This action cannot be undone</p>
                                         
                                                 <!-- shows the current id of the row of data through an input field -->
-                                                <input type = "hidden" name = "id_to_delete" value = "<?php echo $school[
-                                                    "id"
-                                                ]; ?>">
+                                                <input type = "hidden" name = "id_to_delete" value = "">
                                             </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -364,40 +327,19 @@ include "../Coordinator View/Processes/school_info.php";
                                 </div>
                                 </div>
             <td><form action='"../Coordinator View/Processes/school_inventory.php"' method='GET'>
-                                <input type='hidden' name='inventoryid' value= "<?php echo $school[
-                                    "school_id"
-                                ]; ?>">
-                                <input type='hidden' name='inventoryname' value= "<?php echo $school[
-                                    "school_name"
-                                ]; ?>">
+                                <input type='hidden' name='inventoryid' value= "">
+                                <input type='hidden' name='inventoryname' value= "">
                                 <button type='submit' class="btn btn-primary btn-sm">View Inventory</button>
                             </form></td>
         </tr>
-        <?php } ?>
         </table>
 
-            <div class = "container d-flex justify-content-end">
-
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="school_content.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-                        </li>
-
-                        <?php for ($i = 1;$i <= $totalPages;$i++): ?>
-                            <li class="page-item">
-                                <a class="page-link" href="school_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            </li>
-                        <?php
-                endfor; ?>
-
-                        <li class="page-item">
-                            <a class="page-link" href="school_content.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-                        </li>
-                    </ul>
-             </nav>
-
-            </div>
+           
+    <!-- JS FILES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 
