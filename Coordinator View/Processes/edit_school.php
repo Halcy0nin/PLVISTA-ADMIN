@@ -15,10 +15,10 @@
 
         $updateschool = "UPDATE high_schools SET school_name = '$schoolname',school_id = $schoolid
         ,school_division = '$schooldivision',school_type = '$schooltype',school_contact = '$schoolcontact',school_contact_no = '$schoolcontactno'
-        ,school_email = '$schoolemail', school_district = '$schooldistrict' WHERE id = $id_to_update";
+        ,school_email = '$schoolemail', school_district = '$schooldistrict' WHERE school_id = $id_to_update";
 
         if(mysqli_query($conn,$updateschool)){
-            header('Location: ../school_content.php');
+            header('Location: school_content.php');
             exit();
         } else {
             echo 'query error: '. mysqli_error($conn);

@@ -1,6 +1,6 @@
 <?php
 
-include "db_conn_high_school.php";
+include('db_conn_high_school.php');
 
     if(isset($_POST['add_school'])){
         //insert variables into database

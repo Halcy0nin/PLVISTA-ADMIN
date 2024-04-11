@@ -12,8 +12,9 @@
     // Calculate the offset based on the current page number
     $offset = max(0, ($current_page - 1) * $itemsPerPage);
 
-    $selectschoolinfo = "SELECT *
-        FROM high_schools LIMIT $offset, $itemsPerPage";
+   $selectschoolinfo = "SELECT *
+        FROM high_schools ORDER BY school_id LIMIT $offset, $itemsPerPage";
+
 
     $totalRowsQuery = "SELECT COUNT(school_name) as total_count
         FROM high_schools";
