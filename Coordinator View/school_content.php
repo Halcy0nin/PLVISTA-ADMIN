@@ -90,18 +90,21 @@ include "Processes/school_info.php";
 
             <!-- dropdown filter -->
             <div>
-            <div class = "container d-flex">
-            <div class="dropdown">
-    <button style="margin-left: 10%;"class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        Filter
-    </button>
-    <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-    </ul>
+            <div class="container d-flex">
+    <div class="dropdown">
+        <button style="margin-left: 10%;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter
+        </button>
+        <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
+            <li><a class="dropdown-item" href="#" data-value="publicschools">Public Schools</a></li>
+            <li><a class="dropdown-item" href="#" data-value="privateschools">Private Schools</a></li>
+            <li><a class="dropdown-item" href="#" data-value="congressionalI">Congressional I</a></li>
+            <li><a class="dropdown-item" href="#" data-value="congressionalII">Congressional II</a></li>
+        </ul>
+    </div>
 </div>
-            </div>
+
             </div>
         
         <!-- add school and export button -->
@@ -451,6 +454,33 @@ $(document).ready(function() {
 });
 
         </script>
+
+<script>
+    $(document).ready(function() {
+        // Function to handle dropdown item selection
+        $(".dropdown-item").on("click", function() {
+            var selectedValue = $(this).data("value"); // Get the value from data-value attribute
+            // Hide the table while loading
+            $("#schooltable").hide();
+            // Send AJAX request
+            $.ajax({
+                url: "Processes/filter_school.php", // Path to your PHP file
+                method: "POST",
+                data: { filterValue: selectedValue }, // Data to send
+                success: function(response) {
+                    // Handle success response
+                    $("#schooltable").html(response); // Update table with filtered data
+                    $("#schooltable").show(); // Show the table again
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 
     <!-- JS FILES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>

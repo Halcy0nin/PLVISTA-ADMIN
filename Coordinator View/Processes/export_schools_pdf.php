@@ -13,10 +13,11 @@ if (isset($_POST["exportPDF"])) {
 
     mysqli_free_result($selectschoolsquery);
 
+    date_default_timezone_set("Asia/Manila");
     $html = '';
     $html .= '
     <h3>School Data</h3>
-    <p>Issued: '. date('M-Y-D') .'</p>
+    <p>Issued: '. date("d/m/Y") . ' at ' . date("h:i:sa").'</p>
     <table style="width: 1000px; margin-left: auto; margin-right: auto; border-collapse: collapse;">
     <thead class="thead-light"></thead>
         <tr class="text-center">
