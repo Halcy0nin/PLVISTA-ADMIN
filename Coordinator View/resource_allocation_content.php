@@ -125,21 +125,21 @@ include "Processes/resource_allocation_info.php";
 
     <div class = "container mt-5">
         <!-- Table showing resource allocation info in the database -->
-        <table style="margin-left: auto; margin-right: auto;" class = "table table-striped centerTable text-center">
-            <thead class="thead-light"></thead>
+        <table style="margin-left: auto; margin-right: auto;" class="table table-striped centerTable text-center">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">School</th>
+            <th scope="col">Item Code</th>
+            <th scope="col">Item Article</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date Acquired</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php if (is_array($reports)) {
+        foreach ($reports as $report) { ?>
             <tr>
-                    <th scope="col">School</th>
-                    <th scope="col">Item Code</th>
-                    <th scope="col">Item Article</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Date Acquired</th>
-                    <th scope="col">Action</th>
-                </tr>
-                <tbody>
-            <?php if (is_array($reports))
-    {
-        foreach ($reports as $report)
-        { ?> 
                 <td scope="col"><?php echo htmlspecialchars($report["school_name"]); ?></td>
                 <td scope="col">SDOVAL-<?php echo htmlspecialchars($report["item_code"]); ?></td>
                 <td scope="col"><?php echo htmlspecialchars($report["item_article"]); ?></td>
@@ -155,19 +155,30 @@ include "Processes/resource_allocation_info.php";
                         Deny
                     </button>
                 </td>
-            </tbody>
-        </table>
+            </tr>
+    <?php } ?>
+    </tbody>
+</table>
+
 
             <div class = "container d-flex justify-content-end">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
+            <nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="resource_allocation_content.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+        </li>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item">
+                <a class="page-link" href="resource_allocation_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            </li>
+        <?php endfor; ?>
+
+        <li class="page-item">
+            <a class="page-link" href="resource_allocation_content.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+        </li>
+    </ul>
+</nav>
             </div>
     </div>
 </div>
@@ -179,7 +190,7 @@ include "Processes/resource_allocation_info.php";
     <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
     <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
   
-    <?php } } ?>
+    <?php } ?>
 </body>
 
 
