@@ -1,3 +1,9 @@
+<?php
+include "Processes/db_conn_high_school.php";
+include "Processes/resource_allocation_info.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,23 +76,17 @@
         <h3 class = "mx-3">Resource Allocation</h3>
         <br>
 
-        <div class="row">
-                <div class="col">
-                    <!-- dropdown -->
-                    <div class="container d-flex">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                Filter
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <div>
+            <div class="container d-flex">
+    <div class="dropdown">
+        <button style="margin-left: 10%;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter
+        </button>
+        <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
+        </ul>
+    </div>
+</div>
         
         <!-- export button -->
 <div class="col">
@@ -109,7 +109,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-primary">Yes</button>
+                        <form action = "Processes/export_allocation_excel.php" method = "POST">
+                        <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
+                        </form>
+                        <form action = "Processes/export_allocation_pdf.php" method = "POST">
+                        <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -122,146 +127,35 @@
         <!-- Table showing resource allocation info in the database -->
         <table style="margin-left: auto; margin-right: auto;" class = "table table-striped centerTable text-center">
             <thead class="thead-light"></thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">School Name</th>
-                    <th scope="col">School ID</th>
-                    <th scope="col">Division</th>
-                    <th scope="col">School Type</th>
-                    <th scope="col">Contact Person</th>
-                    <th scope="col">Contact No.</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">School District</th>
-                    <th scope="col">Date Added</th>
-                    <th style = "width:13%;" scope="col">Action</th>
+            <tr>
+                    <th scope="col">School</th>
+                    <th scope="col">Item Code</th>
+                    <th scope="col">Item Article</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date Acquired</th>
+                    <th scope="col">Action</th>
                 </tr>
-
-                <tr>
-                    <td scope="row">123456</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>
-                        <!-- Approve Button -->
-                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
-                        <!-- Reject Button -->
-                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">123456</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>
-                        <!-- Approve Button -->
-                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
-                        <!-- Reject Button -->
-                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">123456</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>
-                        <!-- Approve Button -->
-                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
-                        <!-- Reject Button -->
-                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">123456</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>
-                        <!-- Approve Button -->
-                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
-                        <!-- Reject Button -->
-                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">123456</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>
-                        <!-- Approve Button -->
-                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
-                        <!-- Reject Button -->
-                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">123456</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>
-                        <!-- Approve Button -->
-                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
-                        <!-- Reject Button -->
-                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">123456</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>
-                        <!-- Approve Button -->
-                        <button type="button" class="btn btn-success "><i class="bi bi-check-lg"></i></button>
-                        <!-- Reject Button -->
-                        <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                    </td>
-                </tr>
+                <tbody>
+            <?php if (is_array($reports))
+    {
+        foreach ($reports as $report)
+        { ?> 
+                <td scope="col"><?php echo htmlspecialchars($report["school_name"]); ?></td>
+                <td scope="col">SDOVAL-<?php echo htmlspecialchars($report["item_code"]); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($report["item_article"]); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($report["item_status"]); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($report["item_date_acquired"]); ?></td>
+                <td> 
+                    <button type="button" id="approvereport" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateitem<?php echo $item["item_code"]; ?>">
+                        Approve
+                    </button>
+                </td>
+                <td>
+                    <button type="button" id="deletereport" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteitem<?php echo htmlspecialchars($item["item_code"]); ?>">
+                        Deny
+                    </button>
+                </td>
+            </tbody>
         </table>
 
             <div class = "container d-flex justify-content-end">
@@ -285,6 +179,7 @@
     <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
     <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
   
+    <?php } } ?>
 </body>
 
 

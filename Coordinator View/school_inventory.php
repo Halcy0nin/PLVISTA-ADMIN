@@ -40,6 +40,39 @@ if (isset($_GET["inventoryid"]))
     } ?>
     </div>
             
+ <!-- export data button -->
+ <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+            Export
+        </button>
+
+        <!-- modal before exporting data -->
+        <div class="modal fade" id="exportSchool" tabindex="-1" aria-labelledby="exportSchoolLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportSchoolLabel">Export Resource Allocation Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to export this data?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <form action = "Processes/export_inventory_excel.php" method = "POST">
+                        <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
+                        </form>
+                        <form action = "Processes/export_inventory_pdf.php" method = "POST">
+                        <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
           <!-- Button for add item -->
           <button style = "margin-left: 1020px; margin-bottom: 15px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
         Add Item
@@ -49,6 +82,20 @@ if (isset($_GET["inventoryid"]))
          <div>
             <input type = "text" id = "searchitemfield" name ="searchitem" placeholder= "Search"></input>
         </div>
+
+        <!--dropdown filter -->
+        <div>
+            <div class="container d-flex">
+    <div class="dropdown">
+        <button style="margin-left: 10%;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter
+        </button>
+        <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
+        </ul>
+    </div>
+</div>
+
 
         <!-- Pop-up form for adding items -->
         <div class="modal fade" id="addItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addItemLabel" aria-hidden="true">
@@ -103,9 +150,37 @@ if (isset($_GET["inventoryid"]))
             </div>
             </div>
         </div>
+
+         <!-- export data button -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+            Export
+        </button>
+
+        <!-- modal before exporting data -->
+        <div class="modal fade" id="exportSchool" tabindex="-1" aria-labelledby="exportSchoolLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportSchoolLabel">Export Resource Allocation Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to export this data?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <form action = "Processes/export_schools_excel.php" method = "POST">
+                        <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
+                        </form>
+                        <form action = "Processes/export_schools_pdf.php" method = "POST">
+                        <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
       
-
         <div id = "tablecontent">
              <!-- Table showing all inventory info per school in the database -->
         <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
