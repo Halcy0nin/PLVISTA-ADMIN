@@ -58,7 +58,7 @@ if (isset($_GET["inventoryid"]))
                 <h1 class="modal-title fs-5" id="addItemLabel">Add Item</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action = "add_item.php" method ="POST" >
+            <form action = "Processes/add_item.php" method ="POST" >
             <div class="modal-body">
                 
                     <div class="form-group mb-3">
@@ -172,7 +172,7 @@ if (isset($_GET["inventoryid"]))
                                 <h1 class="modal-title fs-5" id="updateitemLabel">Edit Item</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action = "edit_item.php" method ="POST">
+                            <form action = "Processes/edit_item.php" method ="POST">
                             <div class="modal-body">
                     <!-- store last value stored in dropdown list -->
                         <?php $laststatus = $item["item_status"]; ?>
@@ -225,7 +225,7 @@ if (isset($_GET["inventoryid"]))
                                             <h1 class="modal-title fs-5" id="deleteschoolLabel">Delete Item</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <form action = "delete_item.php" method ="POST">
+                                        <form action = "Processes/delete_item.php" method ="POST">
                                         <div class="modal-body">
                                         <h4>Are you sure you want to delete this row?</h4>
                                         <p>This action cannot be undone</p>
@@ -316,7 +316,47 @@ endfor; ?>
     </ul>
 </nav>
 
+<!-- Jquery script for detecting input in searchbar and displaying results on it -->
+<script type="text/javascript"> 
+$(document).ready(function() {
+    var defaultTableContent = $("#tablecontent").html();
+    var schoolid = "<?php echo $schoolidtomatch; ?>";
 
+    var debounceFunction = function(func, delay) {
+        var timeout;
+        return function() {
+            var context = this;
+            var args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+                func.apply(context, args);
+            }, delay);
+        };
+    };
+
+    var updateTableVisibility = debounceFunction(function() {
+        var searchitem = $("#searchitemfield").val().toLowerCase(); // Convert to lowercase for case-insensitive search
+        $("#tablecontent tr").each(function(index) {
+            if (index === 0) {
+                $(this).show(); // Show the header row
+            } else {
+                var rowText = $(this).text().toLowerCase(); // Convert row text to lowercase
+                if (rowText.includes(searchitem)) {
+                    $(this).show(); // Show the row if it contains the search string
+                } else {
+                    $(this).hide(); // Hide the row if it doesn't contain the search string
+                }
+            }
+        });
+    }, 300); // Reduced delay to 300ms
+
+    // Attach keyup event listener directly to the search input
+    $("#searchitemfield").on("keyup", updateTableVisibility);
+});
+
+
+
+        </script>
 
         </body>
 </html>
