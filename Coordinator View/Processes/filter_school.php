@@ -1,6 +1,18 @@
 <?php
 include "db_conn_high_school.php";
 
+
+if (!isset($_GET["page"]))
+{
+    $_GET["page"] = 1;
+}
+    // Set the number of items per page and the current page number
+    $itemsPerPage = 5;
+    $current_page = $_GET["page"];
+
+    // Calculate the offset based on the current page number
+    $offset = max(0, ($current_page - 1) * $itemsPerPage);
+
 // Check if filter value is set
 if (isset($_POST["filterValue"])) {
     $filter = $_POST["filterValue"];
@@ -8,25 +20,40 @@ if (isset($_POST["filterValue"])) {
     // Construct the query based on the selected filter
     switch ($filter) {
         case "publicschools":
-            $filterQuery = "SELECT * FROM high_schools WHERE school_type = 'Public School'";
+            $filterQuery = "SELECT * FROM high_schools WHERE school_type = 'Public School' LIMIT $offset, $itemsPerPage";
             break;
         case "privateschools":
-            $filterQuery = "SELECT * FROM high_schools WHERE school_type = 'Private School'";
+            $filterQuery = "SELECT * FROM high_schools WHERE school_type = 'Private School' LIMIT $offset, $itemsPerPage";
             break;
         case "congressionalI":
-            $filterQuery = "SELECT * FROM high_schools WHERE school_district = 'Congressional I'";
+            $filterQuery = "SELECT * FROM high_schools WHERE school_district = 'Congressional I' LIMIT $offset, $itemsPerPage";
             break;
         case "congressionalII":
-            $filterQuery = "SELECT * FROM high_schools WHERE school_district = 'Congressional II'";
+            $filterQuery = "SELECT * FROM high_schools WHERE school_district = 'Congressional II' LIMIT $offset, $itemsPerPage";
             break;
         case "all":
-            $filterQuery = "SELECT * FROM high_schools";
+            $filterQuery = "SELECT * FROM high_schools LIMIT $offset, $itemsPerPage";
             break;
         default:
             // Default case if no specific filter is selected
-            $filterQuery = "SELECT * FROM high_schools";
+            $filterQuery = "SELECT * FROM high_schools LIMIT $offset, $itemsPerPage";
             break;
     }
+
+    $totalRowsQuery = "SELECT COUNT(school_name) as total_count
+        FROM high_schools";
+
+    $totalRowsResult = mysqli_query($conn, $totalRowsQuery);
+
+    // Fetch the result as an associative array
+    $totalRowsArray = mysqli_fetch_assoc($totalRowsResult);
+
+    // Access the value of total_count and store it in a variable
+    $totalCount = (int)$totalRowsArray["total_count"];
+
+    // Calculate the total number of pages
+    $totalPages = ceil($totalCount / $itemsPerPage);
+
 
     // Execute the query
     $result = mysqli_query($conn, $filterQuery);
@@ -226,6 +253,8 @@ if (isset($_POST["filterValue"])) {
                             </form></td>
         </tr>
 
+
+
         <?php
             }
         }
@@ -233,3 +262,4 @@ if (isset($_POST["filterValue"])) {
             echo "<h3>No results found</h3>";
         }
 ?>
+

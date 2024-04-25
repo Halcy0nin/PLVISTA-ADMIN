@@ -92,6 +92,12 @@ if (isset($_GET["inventoryid"]))
         </button>
         <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
             <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
+            <li><a class="dropdown-item" href="#" data-value="working">Working</a></li>
+            <li><a class="dropdown-item" href="#" data-value="needrepair">Need Repair</a></li>
+            <li><a class="dropdown-item" href="#" data-value="condemned">Condemned</a></li>
+            <form>
+            <input type='hidden' id='schoolidtomatch' value= "<?php echo $schoolidtomatch; ?>">
+            </form>
         </ul>
     </div>
 </div>
@@ -428,10 +434,39 @@ $(document).ready(function() {
     // Attach keyup event listener directly to the search input
     $("#searchitemfield").on("keyup", updateTableVisibility);
 });
-
-
-
         </script>
+
+<script>
+    $(document).ready(function() {
+        // Function to handle dropdown item selection
+        $(".dropdown-item").on("click", function() {
+            var selectedValue = $(this).data("value"); // Get the value from data-value attribute
+            var schoolidtomatch = $("#schoolidtomatch").val(); // Get the value of schoolidtomatch
+
+            // Hide the table while loading
+            $("#tablecontent").hide();
+
+            // Send AJAX request
+            $.ajax({
+                url: "Processes/filter_inventory.php", // Path to your PHP file
+                method: "POST",
+                data: {
+                    filterValue: selectedValue, // Filter value
+                    schoolidtomatch: schoolidtomatch // schoolidtomatch value
+                },
+                success: function(response) {
+                    // Handle success response
+                    $("#tablecontent").html(response); // Update table with filtered data
+                    $("#tablecontent").show(); // Show the table again
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 
         </body>
 </html>

@@ -76,6 +76,7 @@ include "Processes/resource_allocation_info.php";
         <h3 class = "mx-3">Resource Allocation</h3>
         <br>
 
+        <!--dropdown filter -->
         <div>
             <div class="container d-flex">
     <div class="dropdown">
@@ -84,6 +85,9 @@ include "Processes/resource_allocation_info.php";
         </button>
         <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
             <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
+            <li><a class="dropdown-item" href="#" data-value="working">Working</a></li>
+            <li><a class="dropdown-item" href="#" data-value="needrepair">Need Repair</a></li>
+            <li><a class="dropdown-item" href="#" data-value="condemned">Condemned</a></li>
         </ul>
     </div>
 </div>
@@ -123,6 +127,7 @@ include "Processes/resource_allocation_info.php";
     </div>
 </div>
 
+<div id = "tablecontent">
     <div class = "container mt-5">
         <!-- Table showing resource allocation info in the database -->
         <table style="margin-left: auto; margin-right: auto;" class="table table-striped centerTable text-center">
@@ -145,14 +150,9 @@ include "Processes/resource_allocation_info.php";
                 <td scope="col"><?php echo htmlspecialchars($report["item_article"]); ?></td>
                 <td scope="col"><?php echo htmlspecialchars($report["item_status"]); ?></td>
                 <td scope="col"><?php echo htmlspecialchars($report["item_date_acquired"]); ?></td>
-                <td> 
-                    <button type="button" id="approvereport" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateitem<?php echo $item["item_code"]; ?>">
-                        Approve
-                    </button>
-                </td>
                 <td>
                     <button type="button" id="deletereport" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteitem<?php echo htmlspecialchars($item["item_code"]); ?>">
-                        Deny
+                        Reject
                     </button>
                 </td>
             </tr>
@@ -182,7 +182,33 @@ include "Processes/resource_allocation_info.php";
             </div>
     </div>
 </div>
+        </div>
 
+        <script>
+    $(document).ready(function() {
+        // Function to handle dropdown item selection
+        $(".dropdown-item").on("click", function() {
+            var selectedValue = $(this).data("value"); // Get the value from data-value attribute
+            // Hide the table while loading
+            $("#tablecontent").hide();
+            // Send AJAX request
+            $.ajax({
+                url: "Processes/filter_allocation.php", // Path to your PHP file
+                method: "POST",
+                data: { filterValue: selectedValue }, // Data to send
+                success: function(response) {
+                    // Handle success response
+                    $("#tablecontent").html(response); // Update table with filtered data
+                    $("#tablecontent").show(); // Show the table again
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
