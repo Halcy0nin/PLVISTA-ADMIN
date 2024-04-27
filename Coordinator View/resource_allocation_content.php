@@ -24,6 +24,8 @@ include "Processes/resource_allocation_info.php";
   <!-- bootstrap icons-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+   <!--Importing jquery-->
+   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -85,7 +87,6 @@ include "Processes/resource_allocation_info.php";
         </button>
         <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
             <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
-            <li><a class="dropdown-item" href="#" data-value="working">Working</a></li>
             <li><a class="dropdown-item" href="#" data-value="needrepair">Need Repair</a></li>
             <li><a class="dropdown-item" href="#" data-value="condemned">Condemned</a></li>
         </ul>
