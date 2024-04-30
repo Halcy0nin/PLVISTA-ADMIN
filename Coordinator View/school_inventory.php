@@ -186,6 +186,35 @@ if (isset($_GET["inventoryid"]))
             </div>
         </div>
         </div>
+
+         <!-- import data button -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
+            Import
+        </button>
+
+        <!-- modal before importing data -->
+        <div class="modal fade" id="importData" tabindex="-1" aria-labelledby="importDataLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importDataLabel">import Resource Allocation Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Upload the data to be imported here:
+                    <form action = "Processes/import_data.php" enctype = "multipart/form-data" method = "POST">
+                        <input type = "file" name = "importData">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" name = "submitImport" class="btn btn-primary">Import</button>
+                        <input type='hidden' name='inventoryid' value= "<?php echo $schoolidtomatch; ?>">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
       
         <div id = "tablecontent">
              <!-- Table showing all inventory info per school in the database -->
@@ -195,13 +224,13 @@ if (isset($_GET["inventoryid"]))
                 <th scope="col">Item Code</th>
                 <th scope="col">Item Article</th>
                 <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Source of Funds</th>
                 <th scope="col">Date Acquired</th>
                 <th scope="col">Unit Value</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Total Value</th>
-                <th scope="col">Source of Funds</th>
                 <th scope="col">Last Updated</th>
-                <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -215,6 +244,17 @@ if (isset($_GET["inventoryid"]))
             $qty = $item["item_quantity"] * $item["item_unit_value"];
             //formats the answer above to a decimal
             $itemtotalvalue = number_format($qty, 2);
+            
+            $timestamp = strtotime($item["item_date_input"]);
+
+            // Format date in mm-dd-yyyy format
+            $date_formatted = date("m-d-Y", $timestamp);
+            
+            // Format time in 12-hour format
+            $time_formatted = date("g:i a", $timestamp);
+            
+            // Combine date and time
+            $itemdateadded = $date_formatted . ' ' . $time_formatted;
 ?>
 
 
@@ -223,13 +263,13 @@ if (isset($_GET["inventoryid"]))
     <td><?php echo "SDOVAL-" , htmlspecialchars($item["item_code"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_article"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_desc"]); ?></td>
-    <td><?php echo htmlspecialchars($item["item_date_acquired"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
+    <td><?php echo date("m/d/Y", strtotime(htmlspecialchars($item["item_date_acquired"])));?></td>
     <td><?php echo "PHP " . htmlspecialchars($item["item_unit_value"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_quantity"]); ?></td>
     <td><?php echo "PHP " . htmlspecialchars($itemtotalvalue); ?></td>
-    <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
-    <td><?php echo htmlspecialchars($item["item_date_input"]); ?></td>
-    <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
+    <td><?php echo htmlspecialchars($itemdateadded); ?></td>
     
     <td> 
         <button type="button" id="editbutton<?php echo $item["item_code"]; ?>" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateitem<?php echo $item["item_code"]; ?>">
