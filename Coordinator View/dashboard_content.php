@@ -61,6 +61,7 @@
           </div>
         </div>
      </nav>
+
   <!-- JS FILES -->
   <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
   <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
