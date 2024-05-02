@@ -18,19 +18,21 @@ if (isset($_POST["exportPDF"])) {
     $html .= '
     <h3>School Data</h3>
     <p>Issued: '. date("d/m/Y") . ' at ' . date("h:i:sa").'</p>
-    <table style="width: 1000px; margin-left: auto; margin-right: auto; border-collapse: collapse;">
-    <thead class="thead-light"></thead>
-        <tr class="text-center">
-            <th style="margin: right 50px; border: 1px solid black;" scope="col">School Name</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">School ID</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">Division</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">School Type</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">Contact Person</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">Contact No.</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">Email</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">School District</th>
-            <th style="width: 10%; border: 1px solid black;" scope="col">Date Added</th>
-        </tr>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr>
+                <th style="width: 25%; border: 1px solid black;">School Name</th>
+                <th style="width: 10%; border: 1px solid black;">School ID</th>
+                <th style="width: 10%; border: 1px solid black;">Division</th>
+                <th style="width: 10%; border: 1px solid black;">School Type</th>
+                <th style="width: 10%; border: 1px solid black;">Contact Person</th>
+                <th style="width: 10%; border: 1px solid black;">Contact No.</th>
+                <th style="width: 10%; border: 1px solid black;">Email</th>
+                <th style="width: 10%; border: 1px solid black;">School District</th>
+                <th style="width: 10%; border: 1px solid black;">Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
     ';
 
     foreach ($highschools as $school) {
@@ -45,10 +47,11 @@ if (isset($_POST["exportPDF"])) {
             <td style="border: 1px solid black;">'. htmlspecialchars($school["school_email"]) .'</td>
             <td style="border: 1px solid black;">'. htmlspecialchars($school["school_district"]) .'</td>
             <td style="border: 1px solid black;">'. htmlspecialchars($school["school_added"]) .'</td>
+        </tr>
         ';
     }
 
-    $html .= '</table>';
+    $html .= '</tbody></table>';
     $schoolpdf = new DOMPDF();
     $schoolpdf->loadHtml($html);
     $schoolpdf->setPaper("legal", "landscape");

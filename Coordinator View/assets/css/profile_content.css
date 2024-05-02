@@ -8,7 +8,7 @@
 
 h2 {
     font-weight: bolder;
-    color: #898dbf;
+    color: #000000;
     margin-left: 16vw;
 }
 
@@ -173,8 +173,7 @@ form .btn {
 }
 
 .content {
-    flex: 1;
-    padding: 70px;
+    padding: 60px;
     margin-left: 15%;
 }
 

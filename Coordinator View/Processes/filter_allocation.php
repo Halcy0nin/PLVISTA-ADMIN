@@ -34,17 +34,23 @@ if (isset($_POST["filterValue"])) {
     $result = mysqli_query($conn, $filterQuery);
     $rowCount = mysqli_num_rows($result);
     $filteredData = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Calculate total pages
+    $totalRecords = count($filteredData); // Assuming $filteredData contains the filtered records
+    $recordsPerPage = 10; // Change this value according to your requirement
+    $totalPages = ceil($totalRecords / $recordsPerPage);
 ?>
 
 <!--Importing bootstrap styles and icons-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <!--Importing jquery-->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <!-- Table showing resource allocation info in the database -->
-    <table style="margin-left: auto; margin-right: auto;" class="table table-striped centerTable text-center">
+    <table style="margin-left: 1vw; margin-top: 2.5vw;" class="table table-striped centerTable text-center">
+
     <thead class="thead-light">
         <tr>
             <th scope="col">School</th>
@@ -74,13 +80,28 @@ if (isset($_POST["filterValue"])) {
     </tbody>
 </table>
 
-    </div>
+<div class="container d-flex justify-content-end">
+    <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="resource_allocation_content.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+            </li>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="resource_allocation_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <li class="page-item">
+                <a class="page-link" href="resource_allocation_content.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
-        </div>
-    <?php
-            }
-        }
-        else {
-            echo "<h3>No results found</h3>";
-        }
+
+<?php
+} else 
+    echo "<h3>No results found</h3>";
+}
 ?>

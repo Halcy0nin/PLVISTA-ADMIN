@@ -45,6 +45,12 @@ if (isset($_POST["filterValue"])) {
     $result = mysqli_query($conn, $filterQuery);
     $rowCount = mysqli_num_rows($result);
     $filteredData = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Calculate total pages
+    $totalRecords = count($filteredData); // Assuming $filteredData contains the filtered records
+    $recordsPerPage = 10; // Change this value according to your requirement
+    $totalPages = ceil($totalRecords / $recordsPerPage);
+}
 ?>
 
 <!--Importing bootstrap styles and icons-->
@@ -56,22 +62,23 @@ if (isset($_POST["filterValue"])) {
 
     <div id = "tablecontent">
              <!-- Table showing all inventory info per school in the database -->
-        <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
+        <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:auto;" class = "table table-striped centerTable">
         <thead class="thead-light">
             <tr>
                 <th scope="col">Item Code</th>
                 <th scope="col">Item Article</th>
                 <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Source of Funds</th>
                 <th scope="col">Date Acquired</th>
                 <th scope="col">Unit Value</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Total Value</th>
-                <th scope="col">Source of Funds</th>
                 <th scope="col">Last Updated</th>
-                <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
+</div>
         <!--get array of inventory from inventoryid from schools page-->
         <?php if (is_array($filteredData))
     {
@@ -90,13 +97,13 @@ if (isset($_POST["filterValue"])) {
     <td><?php echo "SDOVAL-" , htmlspecialchars($item["item_code"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_article"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_desc"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_date_acquired"]); ?></td>
     <td><?php echo "PHP " . htmlspecialchars($item["item_unit_value"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_quantity"]); ?></td>
     <td><?php echo "PHP " . htmlspecialchars($itemtotalvalue); ?></td>
-    <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_date_input"]); ?></td>
-    <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
     
     <td> 
         <button type="button" id="editbutton<?php echo $item["item_code"]; ?>" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateitem<?php echo $item["item_code"]; ?>">
@@ -193,6 +200,26 @@ if (isset($_POST["filterValue"])) {
                                     </div>
                                 </div>
                                 </div>
+                                <div style="position: fixed; bottom: 20px; right: 4vw;" class="container d-flex justify-content-end">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="school_inventory.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+                                            </li>
+
+                                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="school_inventory.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                                </li>
+                                            <?php endfor; ?>
+
+                                            <li class="page-item">
+                                                <a class="page-link" href="school_inventory.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
 
                                 <?php
             }
@@ -200,5 +227,4 @@ if (isset($_POST["filterValue"])) {
         else {
             echo "<h3>No results found</h3>";
         }
-    }
 ?>

@@ -113,9 +113,18 @@
 }
 
 .content {
-  flex: 1;
-  padding: 70px; /* Adjust padding as needed */
+  padding: 60px; /* Adjust padding as needed */
   margin-left: 15%; /* Ensure content starts after the sidebar */
+}
+
+.nav-tabs {
+  padding: 2%;
+  margin-left: 0vw;
+}
+
+.tab-content {
+  padding: 2%;
+  margin-left: -3vw;
 }
 
 /* Responsive Styles */
