@@ -1,30 +1,71 @@
+<?php
+
+session_start();
+
+// Include the database connection file
+include "../Coordinator View/Processes/db_conn_high_school.php";
+
+// Check if form is submitted
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    // Get username and password from the form
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // Authenticate username and select row where username is associated with the input
+    $usernameverifyQuery = "SELECT * FROM users WHERE user_name = '$username'";
+    $usernameverifyResult = mysqli_query($conn, $usernameverifyQuery);
+
+    // Store query result in $user variable as an associative array
+    $user = mysqli_fetch_assoc($usernameverifyResult);
+
+    // Verify the password
+    if ($user && $password == $user['user_pass']) {
+        // Credentials are correct, retrieve the school ID associated with the user
+        $school_id = $user['school_id'];
+
+        // Redirect the user using the school_id as a parameter
+        $_SESSION['school_id'] = $school_id;
+        header("Location: school_inventory_content.php?school_id=$school_id");
+        exit();
+    } else {
+        // Authentication failed, redirect back to login page with an error message
+        header("Location: login.php?error=1");
+        exit();
+    }
+
+    // Free result set
+    mysqli_free_result($usernameverifyResult);
+
+    // Close database connection
+    mysqli_close($conn);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<!-- Required meta tags -->
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign In | Custodian</title>
 
-  <title>Sign In | Custodian</title>
+    <!-- CSS FILES -->
+    <link href="../Custodian View/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../Custodian View/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Custodian View/assets/css/login.css" rel="stylesheet">
 
-  <!-- CSS FILES -->
-  <link href="../Custodian View/assets/css/bootstrap.css" rel="stylesheet">
-  <link href="../Custodian View/assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../Custodian View/assets/css/login.css" rel="stylesheet">
+    <!-- bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <!-- bootstrap icons-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-   <!-- icon sa tab -->
-  <link rel="icon" type="images/x-icon" href="sdo.png"/>
-</head>
+    <!-- icon sa tab -->
+    <link rel="icon" type="images/x-icon" href="sdo.png" />
 </head>
 
 <body>
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form action="school_inventory_content.php" onsubmit="return authenticate()">
+            <form action="" method="post" onsubmit="return authenticate()">
                 <h1>Sign in</h1>
                 <div class="infieldone">
                     <input id="username" type="username" placeholder="Username" name="username" required />
@@ -34,30 +75,9 @@
                     <input id="password" type="password" placeholder="Password" name="password" required />
                     <label></label>
                 </div>
-                <a href="#" class="forgot">Forgot your password?</a> 
-                <button type="submit" >Sign In</button> 
+                <a href="#" class="forgot">Forgot your password?</a>
+                <button type="submit">Sign In</button>
             </form>
-            <script>
-                //Following function gets values of the username and password fields and checks to see if they match a hard coded username and password 
-                function authenticate() {
-                    var authorized;
-
-                    //get input values
-                    var username = document.getElementById("username").value;
-                    var password = document.getElementById("password").value;
-
-                    //check to see if the password and username match
-                    if (username == "admin" && password == "admin") {
-                        authorized = true;
-                    } else { // username or password do not match
-                        authorized = false;
-                        //alert user
-                        alert("Sorry, username or password is incorrect.");
-                    }
-                    //return result
-                    return authorized;
-                }
-            </script>
         </div>
 
         <div class="overlay-container" id="overlayCon">
@@ -72,39 +92,22 @@
 
     <!-- this makes sure the error message shows up -->
     <script>
-        //Following function gets values of the username and password fields and checks to see if they match a hard coded username and password 
+        // Following function gets values of the username and password fields and checks to see if they match a hard-coded username and password 
         function authenticate() {
-            var authorized;
-
-            //get input values
+            // Get input values
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
-            //check to see if the password and username match
-            if (username == "admin" && password == "admin") {
-                authorized = true;
-            } else { // username or password do not match
-                authorized = false;
-
-                // Show the error message in a Bootstrap modal
-                $('#errorModal').modal('show');
+            // Client-side validation: Check if fields are empty
+            if (username.trim() === "" || password.trim() === "") {
+                alert("Please enter both username and password.");
+                return false;
             }
-            //return result
-            return authorized;
+
+            // No need for password verification here, as it will be done server-side
+            return true;
         }
     </script>
-
-    <!-- the error message itself -->
-    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="errorModalLabel">Sorry, username or password is incorrect.</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-</div>
 
     <!-- JS FILES -->
     <script src="../try/assets/js/bootstrap.bundle.js"></script>
