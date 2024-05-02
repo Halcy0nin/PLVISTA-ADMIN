@@ -15,7 +15,7 @@ include "Processes/school_info.php";
      <!-- CSS FILES -->
   <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
   <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../Coordinator View/assets/css/dashboard.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/school_content.css" rel="stylesheet">
   <link href="../Coordinator View/assets/css/modal.css" rel="stylesheet">
 
   <!-- bootstrap icons-->
@@ -75,12 +75,10 @@ include "Processes/school_info.php";
     <div class = "content-container">
         <h3 class = "mx-3">Registered Schools</h3>
         <br>
-
-        <div class = "row">
             <div class = "col">
             <!-- search bar -->
             <div class = "container d-flex">
-                <div style = "width:260px; margin-left: 11%" class="input-group rounded">
+                <div style = "width:260px; margin-left: -1.5vw;" class="input-group rounded">
                     <input  type="text" id = "searchschool" name = "searchschool" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <i class="bi bi-search"></i>
@@ -112,7 +110,7 @@ include "Processes/school_info.php";
             <div class = "container d-flex justify-content-end">
 
 <!-- Button for add schools -->
-<button style = "margin-left: 0px; margin-bottom: 0px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSchool">
+<button style = "margin-right: 1vw; margin-bottom: 0px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSchool">
         Add School
         </button><br>
 
@@ -148,7 +146,7 @@ include "Processes/school_info.php";
                     </div>
                     <div class="form-group mb-3">
                         <input type = "text" name ="schoolcontact" placeholder= "School Contact Person" value = ""></input>
-                `   </div>
+                   </div>
                     <div class="form-group mb-3">
                         <input type = "text" name ="schoolcontactno" placeholder= "School Contact Number" value = ""></input>
                     </div>
@@ -174,7 +172,7 @@ include "Processes/school_info.php";
 
 
             <!-- export data button -->
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+        <button style = "margin-right: 6vw; margin-bottom: 0px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
             Export
         </button>
 
@@ -209,26 +207,26 @@ include "Processes/school_info.php";
 </div>
     <div id = "schooltable" class = "container mt-5">
         <!-- Table showing all school info in the database -->
-        <table style="width: 1000px; margin-left: auto; margin-right: auto;" class="table table-striped centerTable">
-    <thead class="thead-light"></thead>
-        <tr class="text-center">
-            <th style="margin: right 50px;" scope="col">School Name</th>
-            <th style="width: 10%;" scope="col">School ID</th>
-            <th style="width: 10%;" scope="col">Division</th>
-            <th style="width: 10%;" scope="col">School Type</th>
-            <th style="width: 10%;" scope="col">Contact Person</th>
-            <th style="width: 10%;" scope="col">Contact No.</th>
-            <th style="width: 10%;" scope="col">Email</th>
-            <th style="width: 10%;" scope="col">School District</th>
-            <th style="width: 10%;" scope="col">Date Added</th>
-            <th style="width: 10%;" scope="col"></th>
-            <th style="width: 10%;" scope="col">Action</th>
-            <th style="width: 10%;" scope="col"></th> <!-- Adjusted width -->
-        </tr>
+        <table style="width: 1200px; margin-left: -3vw;" class="table table-striped centerTable">
+        <thead class="thead-light"></thead>
+            <tr class="text-center">
+                <th style="width: 10%;" scope="col">School Name</th>
+                <th style="width: 10%;" scope="col">School ID</th>
+                <th style="width: 10%;" scope="col">Division</th>
+                <th style="width: 10%;" scope="col">School Type</th>
+                <th style="width: 10%;" scope="col">Contact Person</th>
+                <th style="width: 10%;" scope="col">Contact No.</th>
+                <th style="width: 10%;" scope="col">Email</th>
+                <th style="width: 10%;" scope="col">School District</th>
+                <th style="width: 10%;" scope="col">Date Added</th>
+                <th style="width: 10%;" scope="col"></th>
+                <th style="width: 10%;" scope="col">Action</th>
+                <th style="width: 10%;" scope="col"></th> <!-- Adjusted width -->
+            </tr>
+        
 
                 <!-- loops through all of the data in the table and displays it per row -->
-
-                <td scope="row"></td>
+                
                 <?php foreach ($highschools as $school) { ?>
         <tr>
             <td><?php echo htmlspecialchars($school["school_name"]); ?></td>
@@ -236,9 +234,7 @@ include "Processes/school_info.php";
             <td><?php echo htmlspecialchars($school["school_division"]); ?></td>
             <td><?php echo htmlspecialchars($school["school_type"]); ?></td>
             <td><?php echo htmlspecialchars($school["school_contact"]); ?></td>
-            <td><?php echo htmlspecialchars(
-                $school["school_contact_no"]
-            ); ?></td>
+            <td><?php echo htmlspecialchars($school["school_contact_no"]); ?></td>
             <td><?php echo htmlspecialchars($school["school_email"]); ?></td>
             <td><?php echo htmlspecialchars($school["school_district"]); ?></td>
             <td><?php echo htmlspecialchars($school["school_added"]); ?></td>
@@ -383,7 +379,7 @@ include "Processes/school_info.php";
                                     </div>
                                 </div>
                                 </div>
-            <td><<form action='school_inventory.php' method='GET'>
+            <td><form action='school_inventory.php' method='GET'>
                                 <input type='hidden' name='inventoryid' value= "<?php echo $school[
                                     "school_id"
                                 ]; ?>">
@@ -396,24 +392,23 @@ include "Processes/school_info.php";
 
     <?php } ?>
     </table>
-
-    <nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="school_content.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-        </li>
-
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <li class="page-item">
-                <a class="page-link" href="school_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-            </li>
-        <?php endfor; ?>
-
-        <li class="page-item">
-            <a class="page-link" href="school_content.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-        </li>
-    </ul>
-</nav>
+    <div style="position: fixed; bottom: 7vh; right: 10vw;" class="container d-flex justify-content-end">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="school_content.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+                </li>
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="school_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+                <?php endfor; ?>
+                <li class="page-item">
+                    <a class="page-link" href="school_content.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
 
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->

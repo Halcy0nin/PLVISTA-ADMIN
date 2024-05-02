@@ -14,6 +14,8 @@ if (isset($_GET["inventoryid"]))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Schools</title>
     
+    <link href="../Coordinator View/assets/css/school_inventory.css" rel="stylesheet">
+
     <!--Importing bootstrap styles and icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
@@ -32,16 +34,17 @@ if (isset($_GET["inventoryid"]))
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!--get school name to show on upper portion-->
         <div>
-        <a href = "school_content.php"><i class="bi bi-arrow-left-square-fill"></i></a>
+        <a href="school_content.php" class="arrow-link"><i class="bi bi-arrow-left-circle-fill"></i></a>
+
         <?php if (isset($_GET["inventoryname"]))
     {
         $inventoryname = $_GET["inventoryname"];
-        echo '<h3 style="margin-left: 240px;">' . $inventoryname . "'s Inventory</h3>";
+        echo '<h3 style="margin-left: 12vw;">' . $inventoryname . "'s Inventory</h3>";
     } ?>
     </div>
             
  <!-- export data button -->
- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+ <button style = "margin-left: 90vw; margin-top: 9vh; margin-bottom:0%;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
             Export
         </button>
 
@@ -74,12 +77,12 @@ if (isset($_GET["inventoryid"]))
         </div>
 
           <!-- Button for add item -->
-          <button style = "margin-left: 1020px; margin-bottom: 15px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
+          <button style = "margin-left: 79.7vw; margin-top: -7vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
         Add Item
         </button><br>
 
          <!--search bar -->
-         <div>
+         <div style = "margin-left: 12vw; margin-top: -6.5vh; margin-bottom:0%;">
             <input type = "text" id = "searchitemfield" name ="searchitem" placeholder= "Search"></input>
         </div>
 
@@ -87,7 +90,7 @@ if (isset($_GET["inventoryid"]))
         <div>
             <div class="container d-flex">
     <div class="dropdown">
-        <button style="margin-left: 10%;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        <button style="margin-left: 6vw; margin-top: -6.4vh" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             Filter
         </button>
         <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
@@ -156,39 +159,10 @@ if (isset($_GET["inventoryid"]))
             </div>
             </div>
         </div>
-
-         <!-- export data button -->
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
-            Export
-        </button>
-
-        <!-- modal before exporting data -->
-        <div class="modal fade" id="exportSchool" tabindex="-1" aria-labelledby="exportSchoolLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exportSchoolLabel">Export Resource Allocation Report</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to export this data?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <form action = "Processes/export_schools_excel.php" method = "POST">
-                        <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
-                        </form>
-                        <form action = "Processes/export_schools_pdf.php" method = "POST">
-                        <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
 
          <!-- import data button -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
+        <button style = "margin-left: 85.3vw; margin-top: -10.4vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
             Import
         </button>
 
@@ -218,7 +192,7 @@ if (isset($_GET["inventoryid"]))
       
         <div id = "tablecontent">
              <!-- Table showing all inventory info per school in the database -->
-        <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
+        <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:auto;" class = "table table-striped centerTable">
         <thead class="thead-light">
             <tr>
                 <th scope="col">Item Code</th>
@@ -417,25 +391,24 @@ $(document).ready(function() {
 
 <?php }
 ?>
+                <div style="position: fixed; bottom: 20px; right: 4vw;" class="container d-flex justify-content-end">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="school_inventory.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+                            </li>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="school_inventory.php?inventoryid=<?php echo $schoolidtomatch; ?>&inventoryname=<?php echo urlencode($inventoryname); ?>&page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-        </li>
-
-        <?php for ($i = 1;$i <= $totalPages;$i++): ?>
-            <li class="page-item">
-                <a class="page-link" href="school_inventory.php?inventoryid=<?php echo $schoolidtomatch; ?>&inventoryname=<?php echo urlencode($inventoryname); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-            </li>
-        <?php
-endfor; ?>
-
-        <li class="page-item">
-            <a class="page-link" href="school_inventory.php?inventoryid=<?php echo $schoolidtomatch; ?>&inventoryname=<?php echo urlencode($inventoryname); ?>&page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-        </li>
-    </ul>
-</nav>
+                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="school_inventory.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="school_inventory.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+                                </li>
+                         </ul>
+                    </nav>
+                </div>
 
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->
 <script type="text/javascript"> 

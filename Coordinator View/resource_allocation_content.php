@@ -82,7 +82,7 @@ include "Processes/resource_allocation_info.php";
         <div>
             <div class="container d-flex">
     <div class="dropdown">
-        <button style="margin-left: 10%;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        <button style="margin-left: 10%; margin-top: 1vh;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             Filter
         </button>
         <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
@@ -97,7 +97,7 @@ include "Processes/resource_allocation_info.php";
 <div class="col">
     <div class="container d-flex justify-content-end">
         <!-- export data button -->
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportReport">
+        <button style="margin-top: -4vh;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportReport">
             Export
         </button>
 
@@ -131,7 +131,7 @@ include "Processes/resource_allocation_info.php";
 <div id = "tablecontent">
     <div class = "container mt-5">
         <!-- Table showing resource allocation info in the database -->
-        <table style="margin-left: auto; margin-right: auto;" class="table table-striped centerTable text-center">
+        <table style="margin-left: 0.5vw;" class="table table-striped centerTable text-center">
     <thead class="thead-light">
         <tr>
             <th scope="col">School</th>
@@ -162,25 +162,26 @@ include "Processes/resource_allocation_info.php";
 </table>
 
 
-            <div class = "container d-flex justify-content-end">
-            <nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="resource_allocation_content.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-        </li>
-
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+<div class="container d-flex justify-content-end">
+    <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
+        <ul class="pagination">
             <li class="page-item">
-                <a class="page-link" href="resource_allocation_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <a class="page-link" href="resource_allocation_content.php?page=<?php echo max($current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
             </li>
-        <?php endfor; ?>
 
-        <li class="page-item">
-            <a class="page-link" href="resource_allocation_content.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-        </li>
-    </ul>
-</nav>
-            </div>
+            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="resource_allocation_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <li class="page-item">
+                <a class="page-link" href="resource_allocation_content.php?page=<?php echo min($current_page + 1, $totalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
     </div>
 </div>
         </div>
@@ -210,6 +211,7 @@ include "Processes/resource_allocation_info.php";
         });
     });
 </script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

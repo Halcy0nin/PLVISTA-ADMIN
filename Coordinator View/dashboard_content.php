@@ -62,6 +62,92 @@
         </div>
      </nav>
 
+    <div class = "content">
+
+    <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div style="margin-left:3vw; margin-top:0vh;" class="dropdown">
+                            <button style="width: 10vw; margin-left: 14vw;" class="btn btn-outline-secondary dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButtonDate" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Date</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDate">
+                                <!-- Dropdown items here -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div style="margin-left:4vw; margin-top:0vh;" class="dropdown">
+                            <button style="width: 10vw; margin-left: -23vw;" class="btn btn-outline-secondary dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButtonSchool" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>School</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSchool">
+                                <!-- Dropdown items here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="container">
+                <div style="margin-left:3vw; margin-top:1vh;" class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Total No. of Equipment</h4>
+                        <h2 class="card-text">0000</h2>
+                    </div>
+                </div>
+            </div>
+                <div style="margin-left:34.4vw; margin-top:-14.3vh;" class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Working</h4>
+                        <h2 class="card-text">0000</h2>
+                    </div>
+                </div>
+            </div>
+                <div style="margin-left:52.4vw; margin-top:-14.4vh;" class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Need Repair</h4>
+                        <h2 class="card-text">0000</h2>
+                    </div>
+                </div>
+            </div>
+                <div style="margin-left:70.6vw; margin-top:-14.4vh;" class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Condemned</h4>
+                        <h2 class="card-text">0000</h2>
+                    </div>
+                </div>
+                
+                <!-- NO BORDER CARD -->
+                <div style="margin-left:19.5vw; margin-top:2.5vh; width:45.2vw;height:35vh;" class="cards">
+                    <div class="cards-body">
+                        <h4 class="cards-title"></h4>
+                        <h2 class="cards-text"></h2>
+                    </div>
+                </div>
+                <div style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
+                    <div class="cards-body">
+                        <h4 class="cards-title"></h4>
+                        <h2 class="cards-text"></h2>
+                    </div>
+                </div>
+                <div style="margin-left:19.4vw; margin-top:1vh; width:25vw;height:36vh;" class="cards">
+                    <div class="cards-body">
+                        <h4 class="cards-title"></h4>
+                        <h2 class="cards-text"></h2>
+                    </div>
+                </div>
+                <div style="margin-left:46vw; margin-top:-38.1vh; width:39.8vw;height:36vh;" class="cards">
+                    <div class="cards-body">
+                        <h4 class="cards-title"></h4>
+                        <h2 class="cards-text"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
   <!-- JS FILES -->
   <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
   <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>

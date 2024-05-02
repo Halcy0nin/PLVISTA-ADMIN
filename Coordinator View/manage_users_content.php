@@ -18,6 +18,7 @@ include "Processes/show_pending_requests.php";
   <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
   <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../Coordinator View/assets/css/manage_users_content.css" rel="stylesheet">
+  <link href="../Coordinator View/assets/css/modal.css" rel="stylesheet">
 
   <!-- bootstrap icons-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -111,9 +112,9 @@ include "Processes/show_pending_requests.php";
             <button class="nav-link" id="nav-deniedrequests-tab" data-bs-toggle="tab" data-bs-target="#nav-deniedrequests" type="button" role="tab" aria-controls="nav-deniedrequests" aria-selected="false">Denied Requests</button>
         </div>
         </nav>
+        
+        
         <div class="tab-content" id="nav-tabContent">
-
-
         <div class="tab-pane fade show active" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
              <!-- Table showing all user info in the database -->
          <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
@@ -124,7 +125,7 @@ include "Processes/show_pending_requests.php";
                 <th scope="col">Email</th>
                 <th scope="col">Contact No.</th>
                 <th scope="col">School</th>
-                <th scope="col">Action</th>
+                <th style= "width:5vw;" scope="col">Action</th>
             </tr>
         </thead>
     <!-- loops through all of the data in the table and displays it per row -->
@@ -346,7 +347,7 @@ include "Processes/show_pending_requests.php";
         </div>
 
         <div class = "container d-flex justify-content-end">
-                    <nav aria-label="Page navigation example">
+                    <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                             <li class="page-item"><a class="page-link" href="#">1</a></li>

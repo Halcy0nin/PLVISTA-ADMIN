@@ -133,7 +133,6 @@
   z-index: 0;
 }
 
-
 .navbar #sidebar-close {
   cursor: pointer;
 }
@@ -157,12 +156,7 @@
   background: #e7f2fd;
 }
 
-.content-container {
-  position: absolute;
-  top: 10%; /* Adjust as needed */
-  left: 20%; /* Adjust as needed */
-  right: 5%; /* Adjust as needed */
-  bottom: 0;
-  overflow: auto;
-  padding: 20px;
+.content {
+  padding: 6px;
+  margin-left: 15%;
 }

@@ -114,7 +114,7 @@
                                 
                                 <div class="col">
                                 
-                                    <button type="button" class="btn btn-default btn-block"
+                                    <button style="margin-left:-10vw;" type="button" class="btn btn-default btn-block"
                                     onclick="window.location.href='dashboard.php'">Cancel</button>
                                 
                                 </div>
