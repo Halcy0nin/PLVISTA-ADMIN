@@ -162,27 +162,21 @@
 .cards {
   border: 1px solid #888888;
   border-radius: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 1vw;
 }
 
 .cards-body {
-  position: relative;
+
   height: 100%;
   padding: 20px;
 }
 
 .cards-title {
-  position: absolute;
-  top: 10px;
-  left: 10px;
   font-size: 14px;
   font-weight: 700;
 }
 
 .cards-text {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
   font-size: 30px;
   font-weight: bold;
   color: #000000;
@@ -191,12 +185,14 @@
 
 
 /* Responsive Styles */
+/* Adjustments for laptop screens */
 @media screen and (max-width: 1200px) {
   .menu .main-menu {
-    width: 18vw;
+    width: 20vw;
   }
 }
 
+/* Responsive Styles */
 @media screen and (max-width: 992px) {
   .menu .main-menu {
     width: 25vw;
@@ -214,7 +210,6 @@
     width: 40vw;
   }
 }
-
 
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
   .menu .main-menu {
