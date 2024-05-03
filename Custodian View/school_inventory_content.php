@@ -77,8 +77,8 @@ if (isset($_GET["school_id"]))
      </nav>
 
  <!--search bar -->
- <div>
-            <input type = "text" id = "searchitemfield" name ="searchitem" placeholder= "Search"></input>
+        <div>
+            <input type = "text" id = "searchitemfield" name ="searchitem" placeholder= "Search"  style = "margin-left: 25vw; margin-top:13vh;"></input>
         </div>
 
         <div>
@@ -92,8 +92,8 @@ if (isset($_GET["school_id"]))
         <div id = "tablecontent">
             
             <!-- Table showing all inventory info per school in the database -->
-        <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
-        <thead class="thead-light">
+        <table style="width: 1200px; margin-left: 25vw;" class="table table-striped centerTable">
+        <thead class="thead-light"></thead>
             <tr>
                 <th scope="col">Item Code</th>
                 <th scope="col">Item Article</th>
@@ -107,7 +107,7 @@ if (isset($_GET["school_id"]))
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
-        </thead>
+
         <!--get array of inventory from inventoryid from schools page-->
         <?php if (is_array($schoolinventory))
     {
@@ -131,8 +131,7 @@ if (isset($_GET["school_id"]))
             <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
             <td><?php echo htmlspecialchars($item["item_date_input"]); ?></td>
             <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
-            </div>
-
+            
              <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#workingitem<?php echo $item["item_code"]; ?>">
             Working
             </button></td>
@@ -232,14 +231,12 @@ if (isset($_GET["school_id"]))
                             </div>
                         </div>
                         </div>
-
-
-          
-        </tr>
-        
+        </tr>  
+       
         <?php
         }
     }?>
+    </table> 
         </div>
 
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->
@@ -291,27 +288,26 @@ $(document).ready(function() {
 }
 ?>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="custodianinventory.php?school_id=<?php echo $schoolidtomatch; ?>&page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-        </li>
-
-        <?php for ($i = 1;$i <= $totalPages;$i++): ?>
-            <li class="page-item">
-                <a class="page-link" href="custodianinventory.php?school_id=<?php echo $schoolidtomatch; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-            </li>
-        <?php
-endfor; ?>
-
-        <li class="page-item">
-            <a class="page-link" href="custodianinventory.php?school_id=<?php echo $schoolidtomatch; ?>&page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-        </li>
-    </ul>
-</nav>
+<div style="position: fixed; bottom: 7vh; right: 12vw;" class="container d-flex justify-content-end">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="custodianinventory.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+                </li>
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="custodianinventory.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+                <?php endfor; ?>
+                <li class="page-item">
+                    <a class="page-link" href="custodianinventory.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
   <!-- JS FILES -->
   <script src="../Custodian View/assets/js/bootstrap.bundle.js"></script>
   <script src="../Custodian View/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="../Custodian View/assets/js/dashboard.js"></script>
+  <script src="../Custodian View/assets/js/school_inventory.js"></script>
 
 </body> 
