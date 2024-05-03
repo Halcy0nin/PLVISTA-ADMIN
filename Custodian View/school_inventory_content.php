@@ -308,6 +308,6 @@ $(document).ready(function() {
   <!-- JS FILES -->
   <script src="../Custodian View/assets/js/bootstrap.bundle.js"></script>
   <script src="../Custodian View/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="../Custodian View/assets/js/school_inventory.js"></script>
+  <script src="../Custodian View/assets/js/dashboard.js"></script>
 
 </body> 
