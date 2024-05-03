@@ -77,8 +77,11 @@ if (isset($_GET["school_id"]))
      </nav>
 
  <!--search bar -->
-        <div>
-            <input type = "text" id = "searchitemfield" name ="searchitem" placeholder= "Search"  style = "margin-left: 25vw; margin-top:13vh;"></input>
+        <div class="input-group rounded">
+            <input style = "margin-left: 25vw; margin-top:13vh;" type = "text" id = "searchitemfield" name ="searchitem" class="form-control rounded" placeholder= "Search"  aria-label="Search" aria-describedby="search-addon"></input>
+            <span style = "margin-left: 0vw;margin-right: 60vw; margin-top:13vh;"class="input-group-text border-0" id="search-addon">
+                <i class="bi bi-search"></i>
+            </span>
         </div>
 
         <div>
