@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 // Include the database connection file
 include "../Coordinator View/Processes/db_conn_high_school.php";
 

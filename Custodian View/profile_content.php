@@ -1,7 +1,12 @@
 <?php
+include "../Coordinator View/Processes/db_conn_high_school.php";
 
-session_start();
+// Check if school_id is present in the URL parameters
+if (isset($_GET["school_id"])) {
+    $schoolidtomatch = $_GET["school_id"];
 
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,15 +45,15 @@ session_start();
       <ul class="menu-items">
         <div class="menu-title">ICT Resource Management System</div>
         <li class="item">
-          <a href="school_inventory_content.php?school_id=<?php echo $_SESSION['school_id']; ?>">
+          <a href="school_inventory_content.php?school_id=<?php echo $schoolidtomatch; ?>">
           <i class="bi bi-archive-fill"></i>School Inventory</a>
         </li>
         <li class="item">
-          <a href="resource_allocation_content.php?school_id=<?php echo $_SESSION['school_id']; ?>">
+          <a href="resource_allocation_content.php?school_id=<?php echo $schoolidtomatch; ?>">
           <i class="bi bi-journal-bookmark-fill"></i>Report</a>
         </li>
         <li class="item">
-          <a href="profile_content.php?school_id=<?php echo $_SESSION['school_id']; ?>">
+          <a href="profile_content.php?school_id=<?php echo $schoolidtomatch; ?>">
           <i class="bi bi-person-circle"></i>Profile</a>
         </li>
         <li class="item">

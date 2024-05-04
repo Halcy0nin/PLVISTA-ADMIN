@@ -1,12 +1,11 @@
 <?php
 
-session_start();
-
 include "../Coordinator View/Processes/db_conn_high_school.php";
 
 if (isset($_GET["school_id"]))
 {
 
+    $schoolidtomatch = $_GET["school_id"];
     include "Processes/indiv_inventory_initialization.php";
 ?>
 
@@ -55,15 +54,15 @@ if (isset($_GET["school_id"]))
       <ul class="menu-items">
         <div class="menu-title">ICT Resource Management System</div>
         <li class="item">
-          <a href="school_inventory_content.php?school_id=<?php echo $_SESSION['school_id']; ?>">
+          <a href="school_inventory_content.php?school_id=<?php echo $schoolidtomatch; ?>">
           <i class="bi bi-archive-fill"></i>School Inventory</a>
         </li>
         <li class="item">
-          <a href="resource_allocation_content.php?school_id=<?php echo $_SESSION['school_id']; ?>">
+          <a href="resource_allocation_content.php?school_id=<?php echo $schoolidtomatch; ?>">
           <i class="bi bi-journal-bookmark-fill"></i>Report</a>
         </li>
         <li class="item">
-          <a href="profile_content.php?school_id=<?php echo $_SESSION['school_id']; ?>">
+          <a href="profile_content.php?school_id=<?php echo $schoolidtomatch; ?>">
           <i class="bi bi-person-circle"></i>Profile</a>
         </li>
         <li class="item">
@@ -83,6 +82,25 @@ if (isset($_GET["school_id"]))
                 <i class="bi bi-search"></i>
             </span>
         </div>
+
+<!--dropdown filter -->
+<div>
+            <div class="container d-flex">
+    <div class="dropdown">
+        <button style="margin-left: 6vw; margin-top: -6.4vh" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter
+        </button>
+        <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
+            <li><a class="dropdown-item" href="#" data-value="working">Working</a></li>
+            <li><a class="dropdown-item" href="#" data-value="needrepair">Need Repair</a></li>
+            <li><a class="dropdown-item" href="#" data-value="condemned">Condemned</a></li>
+            <form>
+            <input type='hidden' id='schoolidtomatch' value= "<?php echo $schoolidtomatch; ?>">
+            </form>
+        </ul>
+    </div>
+</div>
 
         <div>
         <a href = "../custodianpage/report.php?school_id=<?php echo $schoolidtomatch ?>">Report</a>
@@ -124,7 +142,7 @@ if (isset($_GET["school_id"]))
 ?>
         <!--display inventory info in tabular form-->
         <tr>
-            <td><?php echo htmlspecialchars($item["item_code"]); ?></td>
+            <td><?php echo "SDOVAL-" . htmlspecialchars($item["item_code"]); ?></td>
             <td><?php echo htmlspecialchars($item["item_article"]); ?></td>
             <td><?php echo htmlspecialchars($item["item_desc"]); ?></td>
             <td><?php echo htmlspecialchars($item["item_date_acquired"]); ?></td>
@@ -243,6 +261,7 @@ if (isset($_GET["school_id"]))
         </div>
 
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->
+<!-- Jquery script for detecting input in searchbar and displaying results on it -->
 <script type="text/javascript"> 
 $(document).ready(function() {
     var defaultTableContent = $("#tablecontent").html();
@@ -260,33 +279,59 @@ $(document).ready(function() {
         };
     };
 
-    var updateTableContent = debounceFunction(function() {
-        var searchitem = $("#searchitemfield").val();
-        if (searchitem !== "") {
-            $.ajax({
-                url: "search_item.php",
-                method: "POST",
-                data: {
-                    searchitem: searchitem,
-                    schoolid: schoolid
-                },
-                success: function(data) {
-                    $("#tablecontent").html(data);
+    var updateTableVisibility = debounceFunction(function() {
+        var searchitem = $("#searchitemfield").val().toLowerCase(); // Convert to lowercase for case-insensitive search
+        $("#tablecontent tr").each(function(index) {
+            if (index === 0) {
+                $(this).show(); // Show the header row
+            } else {
+                var rowText = $(this).text().toLowerCase(); // Convert row text to lowercase
+                if (rowText.includes(searchitem)) {
+                    $(this).show(); // Show the row if it contains the search string
+                } else {
+                    $(this).hide(); // Hide the row if it doesn't contain the search string
                 }
-            });
-        } else {
-            $("#tablecontent").html(defaultTableContent);
-        }
+            }
+        });
     }, 300); // Reduced delay to 300ms
 
-    $(document).on("keyup", "#searchitemfield", updateTableContent);
+    // Attach keyup event listener directly to the search input
+    $("#searchitemfield").on("keyup", updateTableVisibility);
 });
-
-
-
-
         </script>
         
+        <script>
+    $(document).ready(function() {
+        // Function to handle dropdown item selection
+        $(".dropdown-item").on("click", function() {
+            var selectedValue = $(this).data("value"); // Get the value from data-value attribute
+            var schoolidtomatch = $("#schoolidtomatch").val(); // Get the value of schoolidtomatch
+
+            // Hide the table while loading
+            $("#tablecontent").hide();
+
+            // Send AJAX request
+            $.ajax({
+                url: "Processes/filter_inventory.php", // Path to your PHP file
+                method: "POST",
+                data: {
+                    filterValue: selectedValue, // Filter value
+                    schoolidtomatch: schoolidtomatch // schoolidtomatch value
+                },
+                success: function(response) {
+                    // Handle success response
+                    $("#tablecontent").html(response); // Update table with filtered data
+                    $("#tablecontent").show(); // Show the table again
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 <?php
 }
 ?>
