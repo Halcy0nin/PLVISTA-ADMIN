@@ -174,7 +174,7 @@ if (isset($_GET["school_id"]))
                                 <h1 class="modal-title fs-5" id="workingitemLabel">Edit Status</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action = "edit_status.php" method ="POST">
+                            <form action = "Processes/edit_status.php" method ="POST">
                             <div class="modal-body">
                         <h4>Are you sure you want to change this item's status to 'Working'?</h4>
                     <div class="form-group mb-3"> 
@@ -203,9 +203,9 @@ if (isset($_GET["school_id"]))
                                 <h1 class="modal-title fs-5" id="repairitemLabel">Edit Status</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action = "edit_status.php" method ="POST">
+                            <form action = "Processes/edit_status.php" method ="POST">
                             <div class="modal-body">
-                        <h4>Are you sure you want to change this item's status to 'For Repair'?</h4>
+                        <h4>Are you sure you want to change this item's status to 'Need Repair'?</h4>
                     <div class="form-group mb-3"> 
                     </div>
                 </div>
@@ -215,7 +215,7 @@ if (isset($_GET["school_id"]))
                                 <!-- shows the current id of the row of data through an input field -->
                                 <input type = "hidden" name = "item_to_update" value = "<?php echo $item["item_code"]; ?>">
                                 <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                                <input type='hidden' name= 'itemstatus'  value = "For Repair">
+                                <input type='hidden' name= 'itemstatus'  value = "Need Repair">
                                 <button type="submit" name = "updateitem" class="btn btn-primary">Confirm</button>
                             </form>
                             </div>
@@ -233,7 +233,7 @@ if (isset($_GET["school_id"]))
                                 <h1 class="modal-title fs-5" id="condemneditemLabel">Edit Status</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action = "edit_status.php" method ="POST">
+                            <form action = "Processes/edit_status.php" method ="POST">
                             <div class="modal-body">
                         <h4>Are you sure you want to change this item's status to 'Condemned'?</h4>
                     <div class="form-group mb-3"> 
