@@ -1,3 +1,8 @@
+<?php
+
+include "Processes/db_conn_high_school.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,28 +99,97 @@
                 <div style="margin-left:3vw; margin-top:1vh;" class="card">
                     <div class="card-body">
                         <h4 class="card-title">Total No. of Equipment</h4>
-                        <h2 class="card-text">0000</h2>
+                        <?php
+                        $totalitemcount = 'SELECT COUNT(item_code) as total_count
+                                          FROM school_inventory';
+                        
+                        // Make query and get results using the parameters (connection to be used, query to be used)
+                        $result = mysqli_query($conn, $totalitemcount);
+                        
+                        // Fetch the result as an associative array
+                        $row = mysqli_fetch_assoc($result);
+                        
+                        // Store the total count in a variable
+                        $totalItemCount = $row['total_count'];
+                        
+                        // Release the result to avoid stacking up memory
+                        mysqli_free_result($result);
+                        
+                        ?>
+
+                        <h2 class="card-text"><?php echo $totalItemCount; ?></h2>
                     </div>
                 </div>
             </div>
                 <div style="margin-left:34.4vw; margin-top:-14.3vh;" class="card">
                     <div class="card-body">
                         <h4 class="card-title">Working</h4>
-                        <h2 class="card-text">0000</h2>
+                        <?php
+                        $totalworkingitemcount = 'SELECT COUNT(item_code) as total_count
+                                          FROM school_inventory WHERE item_status = "Working"';
+                        
+                        // Make query and get results using the parameters (connection to be used, query to be used)
+                        $result = mysqli_query($conn, $totalworkingitemcount);
+                        
+                        // Fetch the result as an associative array
+                        $row = mysqli_fetch_assoc($result);
+                        
+                        // Store the total count in a variable
+                        $totalWorkingItems = $row['total_count'];
+                        
+                        // Release the result to avoid stacking up memory
+                        mysqli_free_result($result);
+                        
+                        ?>
+                        <h2 class="card-text"><?php echo $totalWorkingItems; ?></h2>
                     </div>
                 </div>
             </div>
                 <div style="margin-left:52.4vw; margin-top:-14.4vh;" class="card">
                     <div class="card-body">
                         <h4 class="card-title">Need Repair</h4>
-                        <h2 class="card-text">0000</h2>
+                        <?php
+                        $totalneedrepairitemcount = 'SELECT COUNT(item_code) as total_count
+                                          FROM school_inventory WHERE item_status = "Need Repair"';
+                        
+                        // Make query and get results using the parameters (connection to be used, query to be used)
+                        $result = mysqli_query($conn, $totalneedrepairitemcount);
+                        
+                        // Fetch the result as an associative array
+                        $row = mysqli_fetch_assoc($result);
+                        
+                        // Store the total count in a variable
+                        $totalNeedRepairItems = $row['total_count'];
+                        
+                        // Release the result to avoid stacking up memory
+                        mysqli_free_result($result);
+                        
+                        ?>
+                        <h2 class="card-text"><?php echo $totalNeedRepairItems; ?></h2>
                     </div>
                 </div>
             </div>
                 <div style="margin-left:70.6vw; margin-top:-14.4vh;" class="card">
                     <div class="card-body">
                         <h4 class="card-title">Condemned</h4>
-                        <h2 class="card-text">0000</h2>
+                        <?php
+                        $totalcondemneditemcount = 'SELECT COUNT(item_code) as total_count
+                                          FROM school_inventory WHERE item_status = "Condemned"';
+                        
+                        // Make query and get results using the parameters (connection to be used, query to be used)
+                        $result = mysqli_query($conn, $totalcondemneditemcount);
+                        
+                        // Fetch the result as an associative array
+                        $row = mysqli_fetch_assoc($result);
+                        
+                        // Store the total count in a variable
+                        $totalCondemnedItems = $row['total_count'];
+                        
+                        // Release the result to avoid stacking up memory
+                        mysqli_free_result($result);
+                        
+                        ?>
+                         <h2 class="card-text"><?php echo $totalCondemnedItems; ?></h2>
                     </div>
                 </div>
                 
