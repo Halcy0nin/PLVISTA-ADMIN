@@ -18,7 +18,7 @@ if (!$conn) {
         $updateitem = "UPDATE school_inventory SET item_status = '$itemstatus' WHERE item_code = $item_to_update";
 
         if(mysqli_query($conn,$updateitem)){
-            $redirectURL = "school_inventory_content.php?school_id=" . urlencode($schoolid);
+            $redirectURL = "../school_inventory_content.php?school_id=" . urlencode($schoolid);
             header("Location: $redirectURL");
             exit();
             } else {

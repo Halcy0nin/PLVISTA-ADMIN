@@ -25,6 +25,9 @@ include "Processes/show_pending_requests.php";
 
    <!-- icon sa tab -->
   <link rel="icon" type="images/x-icon" href="sdo.png"/>
+
+  <!--Importing jquery-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -82,7 +85,7 @@ include "Processes/show_pending_requests.php";
             <!-- search bar -->
             <div class = "container d-flex">
                 <div style = "width:260px;" class="input-group rounded">
-                    <input  type="search" class="form-control rounded" placeholder="Search User" aria-label="Search" aria-describedby="search-addon" />
+                    <input type="text" id = "searchuser" name = "searchuser" class="form-control rounded" placeholder="Search User" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <i class="bi bi-search"></i>
                     </span>
@@ -254,7 +257,7 @@ include "Processes/show_pending_requests.php";
                                                         <h1 class="modal-title fs-5" id="deleteschoolLabel">Request Information</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form action = "request_verification.php" method ="POST">
+                                                    <form action = "Processes/request_verification.php" method ="POST">
                                                     <div class="modal-body">
                                                     
                                                     
@@ -359,6 +362,53 @@ include "Processes/show_pending_requests.php";
             </div>
         
         </div>
+
+
+<!-- Jquery script for detecting input in searchbar and displaying results on it -->
+<script type="text/javascript"> 
+$(document).ready(function() {
+    var defaultTableContents = {}; // Store the default table contents for each tab
+    
+    // Function to hide all rows in a table except the header row
+    var hideAllRows = function(tableId) {
+        $(tableId + " tr").not(":first").hide();
+    };
+
+    // Function to update table visibility based on search input
+    var updateTableVisibility = function(tableId, searchValue) {
+        $(tableId + " tr").each(function(index) {
+            if (index === 0) {
+                $(this).show(); // Show the header row
+            } else {
+                var rowText = $(this).text().toLowerCase(); // Convert row text to lowercase
+                if (rowText.includes(searchValue)) {
+                    $(this).show(); // Show the row if it contains the search string
+                } else {
+                    $(this).hide(); // Hide the row if it doesn't contain the search string
+                }
+            }
+        });
+    };
+
+    // Store the default contents of each table
+    $("#nav-tabContent .tab-pane").each(function() {
+        defaultTableContents["#" + $(this).attr("id")] = $(this).html();
+    });
+
+    // Attach keyup event listener directly to the search input
+    $("#searchuser").on("keyup", function() {
+        var searchValue = $(this).val().toLowerCase(); // Convert search input to lowercase
+        $("#nav-tabContent .tab-pane").each(function() {
+            var tableId = "#" + $(this).attr("id");
+            $(this).html(defaultTableContents[tableId]); // Reset table content to default
+            hideAllRows(tableId); // Hide all rows except the header row
+            updateTableVisibility(tableId, searchValue); // Update table visibility based on search input
+        });
+    });
+});
+
+
+        </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
