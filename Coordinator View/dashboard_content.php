@@ -241,7 +241,39 @@ include "Processes/db_conn_high_school.php";
 
                 <!-- STATUS  CARD -->
                 <div style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
-                    <div class="cards-body">
+                    <div class="circle">
+                        <span class="check-icon">&#10003;</span>
+                        <span class="x-icon">&#88;</span>
+                        <span class="exclamation-icon">&#33;</span>
+                        
+                        <script>
+                        // Function to update the transition based on the percentage
+                            function TransitionTrigger(percentage) {
+                                if (percentage < 50) {
+                                    document.querySelector('.check-icon').style.opacity = '0';
+                                    document.querySelector('.x-icon').style.opacity = '1';
+                                    document.querySelector('.exclamation-icon').style.opacity = '0'; 
+                                    document.querySelector('.circle').classList.add('x-mark');
+                                    document.querySelector('.circle').classList.remove('yellow-mark');
+                                } else if (percentage === 50) {
+                                    document.querySelector('.check-icon').style.opacity = '0';
+                                    document.querySelector('.x-icon').style.opacity = '0';
+                                    document.querySelector('.exclamation-icon').style.opacity = '1'; 
+                                    document.querySelector('.circle').classList.remove('x-mark');
+                                    document.querySelector('.circle').classList.add('yellow-mark');
+                                } else {
+                                    document.querySelector('.check-icon').style.opacity = '1';
+                                    document.querySelector('.check-icon').classList.remove('yellow-mark');
+                                    document.querySelector('.x-icon').style.opacity = '0';
+                                    document.querySelector('.exclamation-icon').style.opacity = '0';
+                                    document.querySelector('.circle').classList.remove('x-mark');
+                                    document.querySelector('.circle').classList.remove('yellow-mark');
+                                }
+                            }
+                        const dataFromDatabase = 49; // From database **PAPALITAN TO***
+                        TransitionTrigger(dataFromDatabase);
+                        </script>
+                        
                     </div>
                 </div>
 
@@ -335,5 +367,6 @@ include "Processes/db_conn_high_school.php";
   <!-- JS FILES -->
   <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
   <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
