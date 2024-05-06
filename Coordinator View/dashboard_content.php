@@ -22,6 +22,8 @@ include "Processes/db_conn_high_school.php";
   <!-- bootstrap icons-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+  <!--Charts.JS-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -193,29 +195,137 @@ include "Processes/db_conn_high_school.php";
                     </div>
                 </div>
                 
-                <!-- NO BORDER CARD -->
+                <!-- BAR CHART CARD -->
                 <div style="margin-left:19.5vw; margin-top:2.5vh; width:45.2vw;height:35vh;" class="cards">
                     <div class="cards-body">
-                        <h4 class="cards-title"></h4>
-                        <h2 class="cards-text"></h2>
+                        <canvas id="barChart"></canvas>
+
+                        <?php
+
+                        $query = 'SELECT item_article, COUNT(item_article) AS count FROM school_inventory GROUP BY item_article HAVING COUNT(item_article) > 0';
+                        $result = mysqli_query($conn, $query);
+
+                        $labels = [];
+                        $data = [];
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $labels[] = $row['item_article'];
+                            $data[] = $row['count'];
+                        }
+                        ?>
+                            <script>
+                                var labels = <?php echo json_encode($labels); ?>;
+                                var data = <?php echo json_encode($data); ?>;
+                    
+                                var config = {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'No. of Items',
+                                            axis: 'y',
+                                            data: data,
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        indexAxis: 'y'
+                                    }
+                                };
+                    
+                                var barChart = new Chart(document.getElementById('barChart'), config);
+
+                            </script>
                     </div>
                 </div>
+
+                <!-- STATUS  CARD -->
                 <div style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
                     <div class="cards-body">
-                        <h4 class="cards-title"></h4>
-                        <h2 class="cards-text"></h2>
                     </div>
                 </div>
+
+                <!-- PIE CHART CARD -->
                 <div style="margin-left:19.4vw; margin-top:1vh; width:25vw;height:36vh;" class="cards">
                     <div class="cards-body">
-                        <h4 class="cards-title"></h4>
-                        <h2 class="cards-text"></h2>
+                    <canvas id="pieChart"></canvas>
+
+                    <?php
+
+                    $query = 'SELECT item_article, COUNT(item_article) AS count FROM school_inventory GROUP BY item_article HAVING COUNT(item_article) > 0';
+                    $result = mysqli_query($conn, $query);
+
+                    $labels = [];
+                    $data = [];
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $labels[] = $row['item_article'];
+                        $data[] = $row['count'];
+                    }
+                    ?>
+                        <script>
+                            var labels = <?php echo json_encode($labels); ?>;
+                            var data = <?php echo json_encode($data); ?>;
+
+                            var config = {
+                                type: 'doughnut',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: 'No. of Items',
+                                        axis: 'y',
+                                        data: data,
+                                        hoverOffset: 4
+                                    }]
+                                },
+                                options: {
+                                }
+                            };
+
+                            var pieChart = new Chart(document.getElementById('pieChart'), config);
+
+                        </script>
                     </div>
                 </div>
+
+                <!-- LINE GRAPH CARD -->
                 <div style="margin-left:46vw; margin-top:-38.1vh; width:39.8vw;height:36vh;" class="cards">
                     <div class="cards-body">
-                        <h4 class="cards-title"></h4>
-                        <h2 class="cards-text"></h2>
+                    <canvas id="lineChart"></canvas>
+
+                        <?php
+                        $query = 'SELECT item_article, COUNT(item_article) AS count FROM school_inventory WHERE item_status = "Need Repair" OR item_status = "Condemned" GROUP BY item_article';
+                        $result = mysqli_query($conn, $query);
+
+                        $labels = [];
+                        $data = [];
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $labels[] = $row['item_article'];
+                            $data[] = $row['count'];
+                        }
+                        ?>
+                        <script>
+                            var labels = <?php echo json_encode($labels); ?>;
+                            var data = <?php echo json_encode($data); ?>;
+
+                            var config = {
+                                type: 'line',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: 'No. of Items',
+                                        data: data,
+                                        fill: false,
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        tension: 0.1
+                                    }]
+                                },
+                                options: {}
+                            };
+
+                            var lineChart = new Chart(document.getElementById('lineChart'), config);
+                        </script>
                     </div>
                 </div>
             </div>
