@@ -183,10 +183,28 @@
 }
 
 
+@keyframes circleAnimation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes iconAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .circle {
   width: 170px;
   height: 170px;
-  border: 3px solid #4bb71b;
+  border: 6px solid #4bb71b;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -194,9 +212,10 @@
   position: relative;
   margin-top: 8vh;
   margin-left: 4.75vw;
+  animation: circleAnimation 0.4s ease-in;
 }
 
-.check-icon, .x-icon, .exclamation-icon {
+.check-icon, .red-icon, .exclamation-icon {
   font-size: 60px;
   justify-content: center;
   align-items: center;
@@ -209,7 +228,7 @@
   color: #4bb71b;
 }
 
-.x-icon {
+.red-icon {
   color: red;
 }
 
@@ -217,7 +236,7 @@
   color: #ffbb00;
 }
 
-.circle.x-mark {
+.circle.red-mark {
   border-color: red;
 }
 
