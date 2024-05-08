@@ -242,26 +242,42 @@ include "Processes/db_conn_high_school.php";
                 <!-- STATUS  CARD -->
                 <div style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
                     <div class="circle">
+                    <?php
+                    // Query to get total count of working items
+                    $totalWorkingItemCountQuery = 'SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = "Working"';
+                    $resultWorking = mysqli_query($conn, $totalWorkingItemCountQuery);
+                    $rowWorking = mysqli_fetch_assoc($resultWorking);
+                    $totalWorkingItems = $rowWorking['total_count'];
+                    mysqli_free_result($resultWorking);
+
+                    // Query to get total count of items needing repair or condemned
+                    $totalNeedRepairOrCondemnedItemCountQuery = 'SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = "Need Repair" OR item_status = "Condemned"';
+                    $resultRepairOrCondemned = mysqli_query($conn, $totalNeedRepairOrCondemnedItemCountQuery);
+                    $rowRepairOrCondemned = mysqli_fetch_assoc($resultRepairOrCondemned);
+                    $totalRepairOrCondemnedItems = $rowRepairOrCondemned['total_count'];
+                    mysqli_free_result($resultRepairOrCondemned);
+                    ?>
+
                         <span class="check-icon">&#10003;</span>
                         <span class="red-icon">&#33;</span>
                         <span class="exclamation-icon">&#33;</span>
                         
                         <script>
                         // Function to update the transition based on the percentage
-                            function TransitionTrigger(percentage) {
-                                if (percentage < 50) {
+                            function TransitionTrigger() {
+                                if (<?php echo $totalWorkingItems; ?> < <?php echo $totalRepairOrCondemnedItems; ?>) {
                                     document.querySelector('.check-icon').style.opacity = '0';
                                     document.querySelector('.red-icon').style.opacity = '1';
                                     document.querySelector('.exclamation-icon').style.opacity = '0'; 
                                     document.querySelector('.circle').classList.add('red-mark');
                                     document.querySelector('.circle').classList.remove('yellow-mark');
-                                } else if (percentage === 50) {
+                                } else if (<?php echo $totalWorkingItems; ?> === <?php echo $totalRepairOrCondemnedItems; ?>) {
                                     document.querySelector('.check-icon').style.opacity = '0';
                                     document.querySelector('.red-icon').style.opacity = '0';
                                     document.querySelector('.exclamation-icon').style.opacity = '1'; 
                                     document.querySelector('.circle').classList.remove('red-mark');
                                     document.querySelector('.circle').classList.add('yellow-mark');
-                                } else {
+                                } else if (<?php echo $totalWorkingItems; ?> > <?php echo $totalRepairOrCondemnedItems; ?>) {
                                     document.querySelector('.check-icon').style.opacity = '1';
                                     document.querySelector('.check-icon').classList.remove('yellow-mark');
                                     document.querySelector('.red-icon').style.opacity = '0';
@@ -270,8 +286,7 @@ include "Processes/db_conn_high_school.php";
                                     document.querySelector('.circle').classList.remove('yellow-mark');
                                 }
                             }
-                        const dataFromDatabase = 55; // From database **PAPALITAN TO***
-                        TransitionTrigger(dataFromDatabase);
+                            TransitionTrigger();
                         </script>
                         
                     </div>
