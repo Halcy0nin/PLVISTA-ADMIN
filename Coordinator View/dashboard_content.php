@@ -1,6 +1,7 @@
 <?php
 
 include "Processes/db_conn_high_school.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +25,9 @@ include "Processes/db_conn_high_school.php";
 
   <!--Charts.JS-->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!--Importing jquery-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -84,14 +88,33 @@ include "Processes/db_conn_high_school.php";
                             </ul>
                         </div>
                     </div>
+
                     <div class="col">
                         <div style="margin-left:4vw; margin-top:0vh;" class="dropdown">
                             <button style="width: 10vw; margin-left: -23vw;" class="btn btn-outline-secondary dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButtonSchool" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span>School</span>
                             </button>
+                            <?php 
+                            $schoolQuery = "SELECT * FROM high_schools";
+                            $schoolResult = mysqli_query($conn, $schoolQuery);
+                            ?>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSchool">
-                                <!-- Dropdown items here -->
+                                <li><a class="dropdown-item filter-option" href="#" data-value="showAll">Show All</a></li>
+                                <?php
+                                // Check if there are any schools in the database
+                                if (mysqli_num_rows($schoolResult) > 0) {
+                                    // Loop through each row of school data
+                                    while ($row = mysqli_fetch_assoc($schoolResult)) {
+                                        // Output a dropdown item for each school
+                                        echo '<li><a class="dropdown-item filter-option" href="#" data-value="' . $row['school_name'] . '">' . $row['school_name'] . '</a></li>';
+                                    }
+                                } else {
+                                    // If no schools found, display a default message
+                                    echo '<li><a class="dropdown-item" href="#">No schools found</a></li>';
+                                }
+                                ?>
                             </ul>
+
                         </div>
                     </div>
                 </div>
@@ -99,7 +122,7 @@ include "Processes/db_conn_high_school.php";
         
             <div class="container">
                 <div style="margin-left:3vw; margin-top:1vh;" class="card">
-                    <div class="card-body">
+                    <div id="totalNumCard" class="card-body">
                         <h4 class="card-title">Total No. of Equipment</h4>
                         <?php
                         $totalitemcount = 'SELECT COUNT(item_code) as total_count
@@ -120,11 +143,19 @@ include "Processes/db_conn_high_school.php";
                         ?>
 
                         <h2 class="card-text"><?php echo $totalItemCount; ?></h2>
+                        <script>
+                            $('.filter-option').on('click', function(){
+                            var selectedValue = $(this).data('value');
+                            console.log("Selected value:", selectedValue);
+                            updateCardText(selectedValue);
+                        });
+                        </script>
                     </div>
                 </div>
             </div>
+
                 <div style="margin-left:34.4vw; margin-top:-14.3vh;" class="card">
-                    <div class="card-body">
+                    <div id="totalWorkingCard" class="card-body">
                         <h4 class="card-title">Working</h4>
                         <?php
                         $totalworkingitemcount = 'SELECT COUNT(item_code) as total_count
@@ -144,11 +175,19 @@ include "Processes/db_conn_high_school.php";
                         
                         ?>
                         <h2 class="card-text"><?php echo $totalWorkingItems; ?></h2>
+                        <script>
+                            $('.filter-option').on('click', function(){
+                            var selectedValue = $(this).data('value');
+                            console.log("Selected value:", selectedValue);
+                            updateCardText(selectedValue);
+                        });
+                        </script>
                     </div>
                 </div>
             </div>
+
                 <div style="margin-left:52.4vw; margin-top:-14.4vh;" class="card">
-                    <div class="card-body">
+                    <div id="totalRepairCard"class="card-body">
                         <h4 class="card-title">Need Repair</h4>
                         <?php
                         $totalneedrepairitemcount = 'SELECT COUNT(item_code) as total_count
@@ -168,11 +207,18 @@ include "Processes/db_conn_high_school.php";
                         
                         ?>
                         <h2 class="card-text"><?php echo $totalNeedRepairItems; ?></h2>
+                        <script>
+                            $('.filter-option').on('click', function(){
+                            var selectedValue = $(this).data('value');
+                            console.log("Selected value:", selectedValue);
+                            updateCardText(selectedValue);
+                        });
+                        </script>
                     </div>
                 </div>
             </div>
                 <div style="margin-left:70.6vw; margin-top:-14.4vh;" class="card">
-                    <div class="card-body">
+                    <div id="totalCondemnedCard" class="card-body">
                         <h4 class="card-title">Condemned</h4>
                         <?php
                         $totalcondemneditemcount = 'SELECT COUNT(item_code) as total_count
@@ -192,12 +238,19 @@ include "Processes/db_conn_high_school.php";
                         
                         ?>
                          <h2 class="card-text"><?php echo $totalCondemnedItems; ?></h2>
+                         <script>
+                            $('.filter-option').on('click', function(){
+                            var selectedValue = $(this).data('value');
+                            console.log("Selected value:", selectedValue);
+                            updateCardText(selectedValue);
+                        });
+                        </script>
                     </div>
                 </div>
                 
                 <!-- BAR CHART CARD -->
                 <div style="margin-left:19.5vw; margin-top:2.5vh; width:45.2vw;height:35vh;" class="cards">
-                    <div class="cards-body">
+                    <div id="barCard" class="cards-body">
                         <canvas id="barChart"></canvas>
 
                         <?php
@@ -235,12 +288,18 @@ include "Processes/db_conn_high_school.php";
                     
                                 var barChart = new Chart(document.getElementById('barChart'), config);
 
+                                $('.filter-option').on('click', function(){
+                                var selectedValue = $(this).data('value');
+                                console.log("Selected value:", selectedValue);
+                                updateBar(selectedValue);
+
+                                });
                             </script>
                     </div>
                 </div>
 
                 <!-- STATUS  CARD -->
-                <div style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
+                <div id="statusCard" style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
                     <div class="circle">
                     <?php
                     // Query to get total count of working items
@@ -287,6 +346,12 @@ include "Processes/db_conn_high_school.php";
                                 }
                             }
                             TransitionTrigger();
+                            $('.filter-option').on('click', function(){
+                                var selectedValue = $(this).data('value');
+                                console.log("Selected value:", selectedValue);
+                                updateStatus(selectedValue);
+                            });
+
                         </script>
                         
                     </div>
@@ -294,7 +359,7 @@ include "Processes/db_conn_high_school.php";
 
                 <!-- PIE CHART CARD -->
                 <div style="margin-left:19.4vw; margin-top:1vh; width:25vw;height:36vh;" class="cards">
-                    <div class="cards-body">
+                    <div id="pieCard" class="cards-body">
                     <canvas id="pieChart"></canvas>
 
                     <?php
@@ -331,27 +396,41 @@ include "Processes/db_conn_high_school.php";
 
                             var pieChart = new Chart(document.getElementById('pieChart'), config);
 
+                            $('.filter-option').on('click', function(){
+                                var selectedValue = $(this).data('value');
+                                console.log("Selected value:", selectedValue);
+                                updatePie(selectedValue);
+
+                                });
                         </script>
                     </div>
                 </div>
 
                 <!-- LINE GRAPH CARD -->
                 <div style="margin-left:46vw; margin-top:-38.1vh; width:39.8vw;height:36vh;" class="cards">
-                    <div class="cards-body">
+                    <div id="lineCard" class="cards-body">
                     <canvas id="lineChart"></canvas>
 
-                        <?php
-                        $query = 'SELECT item_article, COUNT(item_article) AS count FROM school_inventory WHERE item_status = "Need Repair" OR item_status = "Condemned" GROUP BY item_article';
-                        $result = mysqli_query($conn, $query);
+                    <?php
+                    $current_year = date('Y'); // Get the current year
+                    $query = "SELECT MONTH(item_date_acquired) AS month, COUNT(item_article) AS count 
+                            FROM school_inventory 
+                            WHERE item_date_acquired IS NOT NULL 
+                            AND YEAR(item_date_acquired) = $current_year
+                            GROUP BY MONTH(item_date_acquired)";
 
-                        $labels = [];
-                        $data = [];
+                    $result = mysqli_query($conn, $query);
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $labels[] = $row['item_article'];
-                            $data[] = $row['count'];
-                        }
-                        ?>
+                    $data = [];
+                    $labels = [];
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $labels[] = date('F', mktime(0, 0, 0, $row['month'], 1)); // Convert month number to month name
+                        $data[] = $row['count'];
+                    }
+                    ?>
+
+
                         <script>
                             var labels = <?php echo json_encode($labels); ?>;
                             var data = <?php echo json_encode($data); ?>;
@@ -361,7 +440,7 @@ include "Processes/db_conn_high_school.php";
                                 data: {
                                     labels: labels,
                                     datasets: [{
-                                        label: 'No. of Items',
+                                        label: 'Items obtained per month',
                                         data: data,
                                         fill: false,
                                         borderColor: 'rgb(75, 192, 192)',
@@ -372,6 +451,13 @@ include "Processes/db_conn_high_school.php";
                             };
 
                             var lineChart = new Chart(document.getElementById('lineChart'), config);
+
+                            $('.filter-option').on('click', function(){
+                                var selectedValue = $(this).data('value');
+                                console.log("Selected value:", selectedValue);
+                                updateLine(selectedValue);
+                            });
+
                         </script>
                     </div>
                 </div>
@@ -379,9 +465,133 @@ include "Processes/db_conn_high_school.php";
         </div>
     </div>
 
-  <!-- JS FILES -->
-  <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
-  <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
+<script>
+//ALL FUNCTIONS TO UPDATE CHARTS AND INFO
+
+function updateCardText(selectedValue) {
+    // Send AJAX request to the server
+    $.ajax({
+        url: 'Processes/filter_card_data.php', // URL to your PHP script
+        method: 'POST',
+        data: { selectedValue: selectedValue },
+        success: function(response) {
+            console.log("Response from server:", response); // Log the response
+            
+            // Parse the response JSON
+            var responseData = JSON.parse(response);
+            
+            // Check if the response contains data
+            if (responseData.totalCount !== undefined && responseData.workingCount !== undefined && responseData.repairCount !== undefined && responseData.condemnedCount !== undefined) {
+                // Update card text
+                $('#totalNumCard h2').text(responseData.totalCount);
+                $('#totalWorkingCard h2').text(responseData.workingCount);
+                $('#totalRepairCard h2').text(responseData.repairCount);
+                $('#totalCondemnedCard h2').text(responseData.condemnedCount);
+                console.log("Card text updated successfully.");
+            } else {
+                console.error("Incomplete data received from server.");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+
+function updateBar(selectedValue) {
+    // Send AJAX request to the server
+    $.ajax({
+        url: 'Processes/filter_barchart.php', // URL to your PHP script
+        method: 'POST',
+        data: { selectedValue: selectedValue },
+        success: function(response) {
+            console.log("Response from server:", response); // Log the response
+            
+            // Parse the response JSON
+            var responseData = JSON.parse(response);
+            
+            // Check if the response contains data
+            if (responseData.data) {
+                // Update chart data
+                barChart.data.labels = responseData.labels;
+                barChart.data.datasets[0].data = responseData.data;
+                barChart.update();
+                console.log("Chart data updated successfully.");
+            } else {
+                console.error("No data received from server.");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+function updatePie(selectedValue) {
+    // Send AJAX request to the server
+    $.ajax({
+        url: 'Processes/filter_piechart.php', // URL to your PHP script
+        method: 'POST',
+        data: { selectedValue: selectedValue },
+        success: function(response) {
+            console.log("Response from server:", response); // Log the response
+            
+            // Parse the response JSON
+            var responseData = JSON.parse(response);
+            
+            // Check if the response contains data
+            if (responseData.data) {
+                // Update chart data
+                pieChart.data.labels = responseData.labels;
+                pieChart.data.datasets[0].data = responseData.data;
+                pieChart.update();
+                console.log("Chart data updated successfully.");
+            } else {
+                console.error("No data received from server.");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+function updateLine(selectedValue) {
+    // Send AJAX request to the server
+    $.ajax({
+        url: 'Processes/filter_linechart.php', // URL to your PHP script
+        method: 'POST',
+        data: { selectedValue: selectedValue },
+        success: function(response) {
+            console.log("Response from server:", response); // Log the response
+            
+            // Parse the response JSON
+            var responseData = JSON.parse(response);
+            
+            // Check if the response contains data
+            if (responseData.data) {
+                // Update chart data
+                lineChart.data.datasets[0].data = responseData.data;
+                lineChart.update();
+                console.log("Chart data updated successfully.");
+            } else {
+                console.error("No data received from server.");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+</script>
+
+    <!-- JS FILES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
 
 
 </body>
