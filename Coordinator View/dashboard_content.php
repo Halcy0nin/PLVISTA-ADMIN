@@ -346,11 +346,6 @@ include "Processes/db_conn_high_school.php";
                                 }
                             }
                             TransitionTrigger();
-                            $('.filter-option').on('click', function(){
-                                var selectedValue = $(this).data('value');
-                                console.log("Selected value:", selectedValue);
-                                updateStatus(selectedValue);
-                            });
 
                         </script>
                         
