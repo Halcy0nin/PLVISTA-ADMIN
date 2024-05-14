@@ -79,14 +79,7 @@ include "Processes/db_conn_high_school.php";
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <div style="margin-left:3vw; margin-top:0vh;" class="dropdown">
-                            <button style="width: 10vw; margin-left: 14vw;" class="btn btn-outline-secondary dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButtonDate" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>Date</span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDate">
-                                <!-- Dropdown items here -->
-                            </ul>
-                        </div>
+                        
                     </div>
 
                     <div class="col">

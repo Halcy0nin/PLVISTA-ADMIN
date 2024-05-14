@@ -40,10 +40,10 @@ if(isset($_POST['submitImport'])) {
         $itemdesc = $row[1];
         $itemstatus = $row[2];
         $itemfundssource = $row[3];
-        $itemdateacquired = $row[4];
+        $itemdateacquired = formatExcelDate($row[4]); // Format date
         $itemunitvalue = $row[5];
         $itemquantity = $row[6];
-        $itemdateadded = $row[7];
+        $itemdateadded = formatExcelDate($row[7]); // Format date
 
         // Combine article and description to create a unique identifier for the item
         $itemIdentifier = $itemarticle . $itemdesc;
@@ -81,5 +81,25 @@ if(isset($_POST['submitImport'])) {
     $redirectURL = "../school_inventory.php?inventoryid=" . urlencode($schoolid) . "&inventoryname=" . urlencode($inventoryname);
     header("Location: $redirectURL");
     exit();
+}
+
+// Function to validate and format date from Excel
+function formatExcelDate($excelDate) {
+    // Check if the date is in a recognized format
+    $date = DateTime::createFromFormat('m/d/Y', $excelDate);
+    if ($date) {
+        // Return the date formatted as yyyy-MM-dd
+        return $date->format('Y-m-d');
+    } else {
+        // Handle date as text
+        $timestamp = strtotime($excelDate);
+        if ($timestamp === false) {
+            // Handle invalid date format
+            return null;
+        } else {
+            // Format date as yyyy-MM-dd
+            return date('Y-m-d', $timestamp);
+        }
+    }
 }
 ?>
