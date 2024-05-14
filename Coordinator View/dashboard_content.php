@@ -298,120 +298,59 @@ include "Processes/db_conn_high_school.php";
                     </div>
                 </div>
 
-<!-- STATUS CARD -->
-<div id="statusCard" style="margin-left: 66.7vw; margin-top: -37vh; width: 19vw; height: 35vh;" class="cards">
-    <div class="circle">
-        <span class="check-icon">&#10003;</span>
-        <span class="red-icon">&#33;</span>
-        <span class="exclamation-icon">&#33;</span>
+                <!-- STATUS  CARD -->
+                <div id="statusCard" style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
+                    <div class="circle">
+                    <?php
+                    // Query to get total count of working items
+                    $totalWorkingItemCountQuery = 'SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = "Working"';
+                    $resultWorking = mysqli_query($conn, $totalWorkingItemCountQuery);
+                    $rowWorking = mysqli_fetch_assoc($resultWorking);
+                    $totalWorkingItems = $rowWorking['total_count'];
+                    mysqli_free_result($resultWorking);
 
-        <?php
-        // Define MySQL queries to get counts
-        $totalWorkingQuery = "SELECT COUNT(item_code) AS total_count FROM school_inventory WHERE item_status = 'Working'";
-        $totalRepairQuery = "SELECT COUNT(item_code) AS total_count FROM school_inventory WHERE item_status = 'Need Repair'";
-        $totalCondemnedQuery = "SELECT COUNT(item_code) AS total_count FROM school_inventory WHERE item_status = 'Condemned'";
+                    // Query to get total count of items needing repair or condemned
+                    $totalNeedRepairOrCondemnedItemCountQuery = 'SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = "Need Repair" OR item_status = "Condemned"';
+                    $resultRepairOrCondemned = mysqli_query($conn, $totalNeedRepairOrCondemnedItemCountQuery);
+                    $rowRepairOrCondemned = mysqli_fetch_assoc($resultRepairOrCondemned);
+                    $totalRepairOrCondemnedItems = $rowRepairOrCondemned['total_count'];
+                    mysqli_free_result($resultRepairOrCondemned);
+                    ?>
 
-        // Execute the queries
-        $totalWorkingResult = mysqli_query($conn, $totalWorkingQuery);
-        $totalRepairResult = mysqli_query($conn, $totalRepairQuery);
-        $totalCondemnedResult = mysqli_query($conn, $totalCondemnedQuery);
-
-        // Fetch counts
-        $rowWorking = mysqli_fetch_assoc($totalWorkingResult);
-        $rowRepair = mysqli_fetch_assoc($totalRepairResult);
-        $rowCondemned = mysqli_fetch_assoc($totalCondemnedResult);
-
-        // Store counts in variables
-        $totalWorkingItems = $rowWorking['total_count'];
-        $totalRepairItems = $rowRepair['total_count'];
-        $totalCondemnedItems = $rowCondemned['total_count'];
-
-        // Free results
-        mysqli_free_result($totalWorkingResult);
-        mysqli_free_result($totalRepairResult);
-        mysqli_free_result($totalCondemnedResult);
-        ?>
-        <script>
-            var totalWorkingItems = <?php echo $totalWorkingItems; ?>;
-            var totalRepairOrCondemnedItems = <?php echo ($totalRepairItems + $totalCondemnedItems); ?>;
-
-            // Function to update the transition based on the percentage
-            function updateTotals(selectedValue) {
-                // Send AJAX request to the server
-                $.ajax({
-                    url: 'Processes/filter_status_card.php', // URL to your PHP script to fetch updated totals
-                    method: 'POST',
-                    data: { selectedValue: selectedValue },
-                    success: function(response) {
-                        console.log("Response from server:", response); // Log the response
-
-                        // Parse the response JSON
-                        var responseData = JSON.parse(response);
-
-                        // Check if the response contains data
-                        if (responseData.workingCount !== undefined && responseData.repairCount !== undefined && responseData.condemnedCount !== undefined) {
-                            // Update JavaScript variables
-                            totalWorkingItems = responseData.workingCount;
-                            totalRepairOrCondemnedItems = responseData.repairCount + responseData.condemnedCount;
-                            console.log("Totals updated successfully.");
-
-                            // Update card text and comparison
-                            $('#totalWorkingCard h2').text(totalWorkingItems);
-                            $('#totalRepairCard h2').text(totalRepairOrCondemnedItems);
-
-                            // Call the TransitionTrigger function to update the status
+                        <span class="check-icon">&#10003;</span>
+                        <span class="red-icon">&#33;</span>
+                        <span class="exclamation-icon">&#33;</span>
+                        
+                        <script>
+                        // Function to update the transition based on the percentage
+                            function TransitionTrigger() {
+                                if (<?php echo $totalWorkingItems; ?> < <?php echo $totalRepairOrCondemnedItems; ?>) {
+                                    document.querySelector('.check-icon').style.opacity = '0';
+                                    document.querySelector('.red-icon').style.opacity = '1';
+                                    document.querySelector('.exclamation-icon').style.opacity = '0'; 
+                                    document.querySelector('.circle').classList.add('red-mark');
+                                    document.querySelector('.circle').classList.remove('yellow-mark');
+                                } else if (<?php echo $totalWorkingItems; ?> === <?php echo $totalRepairOrCondemnedItems; ?>) {
+                                    document.querySelector('.check-icon').style.opacity = '0';
+                                    document.querySelector('.red-icon').style.opacity = '0';
+                                    document.querySelector('.exclamation-icon').style.opacity = '1'; 
+                                    document.querySelector('.circle').classList.remove('red-mark');
+                                    document.querySelector('.circle').classList.add('yellow-mark');
+                                } else if (<?php echo $totalWorkingItems; ?> > <?php echo $totalRepairOrCondemnedItems; ?>) {
+                                    document.querySelector('.check-icon').style.opacity = '1';
+                                    document.querySelector('.check-icon').classList.remove('yellow-mark');
+                                    document.querySelector('.red-icon').style.opacity = '0';
+                                    document.querySelector('.exclamation-icon').style.opacity = '0';
+                                    document.querySelector('.circle').classList.remove('red-mark');
+                                    document.querySelector('.circle').classList.remove('yellow-mark');
+                                }
+                            }
                             TransitionTrigger();
-                        } else {
-                            console.error("Incomplete data received from server.");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error:", error);
-                    }
-                });
-            }
 
-            function TransitionTrigger() {
-                if (totalWorkingItems < totalRepairOrCondemnedItems) {
-                    document.querySelector('.check-icon').style.opacity = '0';
-                    document.querySelector('.red-icon').style.opacity = '1';
-                    document.querySelector('.exclamation-icon').style.opacity = '0';
-                    document.querySelector('.circle').classList.add('red-mark');
-                    document.querySelector('.circle').classList.remove('yellow-mark');
-                } else if (totalWorkingItems === totalRepairOrCondemnedItems) {
-                    document.querySelector('.check-icon').style.opacity = '0';
-                    document.querySelector('.red-icon').style.opacity = '0';
-                    document.querySelector('.exclamation-icon').style.opacity = '1';
-                    document.querySelector('.circle').classList.remove('red-mark');
-                    document.querySelector('.circle').classList.add('yellow-mark');
-                } else if (totalWorkingItems > totalRepairOrCondemnedItems) {
-                    document.querySelector('.check-icon').style.opacity = '1';
-                    document.querySelector('.check-icon').classList.remove('yellow-mark');
-                    document.querySelector('.red-icon').style.opacity = '0';
-                    document.querySelector('.exclamation-icon').style.opacity = '0';
-                    document.querySelector('.circle').classList.remove('red-mark');
-                    document.querySelector('.circle').classList.remove('yellow-mark');
-                }
-            }
-
-            // Update the card text and comparison when dropdown option is changed
-            $('.filter-option').on('click', function() {
-                var selectedValue = $(this).data('value');
-                console.log("Selected value:", selectedValue);
-                updateTotals(selectedValue);
-            });
-
-            // Call the JavaScript function to update the totals initially
-            $(document).ready(function() {
-                // Get the initial selected value
-                var selectedValue = $('.filter-option:selected').data('value');
-                console.log("Initial selected value:", selectedValue);
-                updateTotals(selectedValue);
-            });
-        </script>
-
-    </div>
-</div>
+                        </script>
+                        
+                    </div>
+                </div>
 
                 <!-- PIE CHART CARD -->
                 <div style="margin-left:19.4vw; margin-top:1vh; width:25vw;height:36vh;" class="cards">
@@ -553,6 +492,7 @@ function updateCardText(selectedValue) {
         }
     });
 }
+
 
 function updateBar(selectedValue) {
     // Send AJAX request to the server

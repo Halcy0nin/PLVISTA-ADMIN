@@ -2,56 +2,43 @@
 // Include your database connection file
 include "db_conn_high_school.php";
 
-// Check if selectedValue is set and not empty
-if(isset($_POST['selectedValue']) && !empty($_POST['selectedValue'])) {
+// Check if the selectedSchool parameter is set in the POST request
+if(isset($_POST['selectedSchool'])) {
     // Sanitize the input to prevent SQL injection
-    $selectedValue = mysqli_real_escape_string($conn, $_POST['selectedValue']);
+    $selectedSchool = mysqli_real_escape_string($conn, $_POST['selectedSchool']);
     
-    if ($selectedValue === 'showAll') {
-    // Define the combined MySQL query
-    $query = "SELECT 
-                SUM(CASE WHEN item_status = 'Working' THEN 1 ELSE 0 END) AS working_count,
-                SUM(CASE WHEN item_status = 'Need Repair' THEN 1 ELSE 0 END) AS repair_count,
-                SUM(CASE WHEN item_status = 'Condemned' THEN 1 ELSE 0 END) AS condemned_count
-            FROM 
-                school_inventory";
-    } else {
-        $query = "SELECT 
-                SUM(CASE WHEN item_status = 'Working' THEN 1 ELSE 0 END) AS working_count,
-                SUM(CASE WHEN item_status = 'Need Repair' THEN 1 ELSE 0 END) AS repair_count,
-                SUM(CASE WHEN item_status = 'Condemned' THEN 1 ELSE 0 END) AS condemned_count
-                FROM school_inventory 
-            JOIN high_schools ON school_inventory.school_id = high_schools.school_id 
-            WHERE high_schools.school_name = '$selectedValue'";
-    }
-    // Execute the query
-    $result = mysqli_query($conn, $query);
+    // Initialize variables to store status counts
+    $totalWorkingItems = 0;
+    $totalRepairOrCondemnedItems = 0;
 
-    // Check if query executed successfully
-    if ($result) {
-        // Fetch the result as an associative array
-        $row = mysqli_fetch_assoc($result);
-        
-        // Prepare response data
-        $responseData = [
-            'workingCount' => $row['working_count'],
-            'repairCount' => $row['repair_count'],
-            'condemnedCount' => $row['condemned_count']
-        ];
-        
-        // Log the response data
-        error_log("Response data: " . json_encode($responseData));
-
-        // Send the response back to the frontend
-        echo json_encode($responseData);
-    } else {
-        // Handle query execution error
-        $response = ['error' => 'Query failed'];
-        echo json_encode($response);
+    // Query to get total count of working items for the selected school
+    $totalWorkingItemCountQuery = "SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = 'Working' AND school_name = '$selectedSchool'";
+    $resultWorking = mysqli_query($conn, $totalWorkingItemCountQuery);
+    if ($resultWorking) {
+        $rowWorking = mysqli_fetch_assoc($resultWorking);
+        $totalWorkingItems = $rowWorking['total_count'];
+        mysqli_free_result($resultWorking);
     }
+
+    // Query to get total count of items needing repair or condemned for the selected school
+    $totalNeedRepairOrCondemnedItemCountQuery = "SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = 'Need Repair' OR item_status = 'Condemned' AND school_name = '$selectedSchool'";
+    $resultRepairOrCondemned = mysqli_query($conn, $totalNeedRepairOrCondemnedItemCountQuery);
+    if ($resultRepairOrCondemned) {
+        $rowRepairOrCondemned = mysqli_fetch_assoc($resultRepairOrCondemned);
+        $totalRepairOrCondemnedItems = $rowRepairOrCondemned['total_count'];
+        mysqli_free_result($resultRepairOrCondemned);
+    }
+
+    // Create an array to store the status counts
+    $statusCounts = array(
+        'totalWorkingItems' => $totalWorkingItems,
+        'totalRepairOrCondemnedItems' => $totalRepairOrCondemnedItems
+    );
+
+    // Convert the array to JSON format and echo it as the response
+    echo json_encode($statusCounts);
 } else {
-    // Handle missing or empty selectedValue
-    $response = ['error' => 'Selected value is missing'];
-    echo json_encode($response);
+    // If the selectedSchool parameter is not set, return an error message
+    echo "Error: No school selected";
 }
 ?>
