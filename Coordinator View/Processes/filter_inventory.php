@@ -60,7 +60,7 @@ if (isset($_POST["filterValue"])) {
     <!--Importing jquery-->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-    <div id = "tablecontent">
+ <div id = "tablecontent">
              <!-- Table showing all inventory info per school in the database -->
         <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:auto;" class = "table table-striped centerTable">
         <thead class="thead-light">
@@ -73,12 +73,13 @@ if (isset($_POST["filterValue"])) {
                 <th scope="col">Date Acquired</th>
                 <th scope="col">Unit Value</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Active Items</th>
+                <th scope="col">Inactive Items</th>
                 <th scope="col">Total Value</th>
                 <th scope="col">Last Updated</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
-</div>
         <!--get array of inventory from inventoryid from schools page-->
         <?php if (is_array($filteredData))
     {
@@ -89,6 +90,17 @@ if (isset($_POST["filterValue"])) {
             $qty = $item["item_quantity"] * $item["item_unit_value"];
             //formats the answer above to a decimal
             $itemtotalvalue = number_format($qty, 2);
+            
+            $timestamp = strtotime($item["item_date_input"]);
+
+            // Format date in mm-dd-yyyy format
+            $date_formatted = date("m-d-Y", $timestamp);
+            
+            // Format time in 12-hour format
+            $time_formatted = date("g:i a", $timestamp);
+            
+            // Combine date and time
+            $itemdateadded = $date_formatted . ' ' . $time_formatted;
 ?>
 
 
@@ -99,11 +111,13 @@ if (isset($_POST["filterValue"])) {
     <td><?php echo htmlspecialchars($item["item_desc"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
-    <td><?php echo htmlspecialchars($item["item_date_acquired"]); ?></td>
+    <td><?php echo date("m/d/Y", strtotime(htmlspecialchars($item["item_date_acquired"])));?></td>
     <td><?php echo "PHP " . htmlspecialchars($item["item_unit_value"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_quantity"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_active"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_inactive"]); ?></td>
     <td><?php echo "PHP " . htmlspecialchars($itemtotalvalue); ?></td>
-    <td><?php echo htmlspecialchars($item["item_date_input"]); ?></td>
+    <td><?php echo htmlspecialchars($itemdateadded); ?></td>
     
     <td> 
         <button type="button" id="editbutton<?php echo $item["item_code"]; ?>" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateitem<?php echo $item["item_code"]; ?>">
@@ -146,6 +160,12 @@ if (isset($_POST["filterValue"])) {
                     </div>
                     <div class="form-group mb-3">
                         <input type = "text" name ="itemquantity" placeholder= "Quantity" value = "<?php echo $item["item_quantity"]; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" name="itemactive" placeholder="Active Items" value="<?php echo $item["item_active"]; ?>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" name="iteminactive" placeholder="Inactive Items" value="<?php echo $item["item_inactive"]; ?>">
                     </div>
                     <div class="form-group mb-3">
                         <input type = "text" name ="itemfundssource" placeholder= "Funds Source" value = "<?php echo $item["item_funds_source"]; ?>"></input>
@@ -200,31 +220,10 @@ if (isset($_POST["filterValue"])) {
                                     </div>
                                 </div>
                                 </div>
-                                <div style="position: fixed; bottom: 20px; right: 4vw;" class="container d-flex justify-content-end">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a class="page-link" href="school_inventory.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-                                            </li>
 
-                                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="school_inventory.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                                </li>
-                                            <?php endfor; ?>
+            <?php }
+    } else {
+        echo "<h3>No results found</h3>";
+    }
 
-                                            <li class="page-item">
-                                                <a class="page-link" href="school_inventory.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-
-
-                                <?php
-            }
-        }
-        else {
-            echo "<h3>No results found</h3>";
-        }
 ?>

@@ -17,6 +17,6 @@
     mysqli_free_result($result);
 
     //placeholders for variable input
-    $itemcode = $schoolid = $itemarticle = $itemdesc = $itemdateacquired = $itemdateadded = $itemunitvalue = $itemquantity = $itemtotalvalue = $itemfundssource = $itemstatus = "";
+    $itemcode = $schoolid = $itemarticle = $itemdesc = $itemdateacquired = $itemdateadded = $itemunitvalue = $itemquantity = $itemactive = $iteminactive = $itemtotalvalue = $itemfundssource = $itemstatus = "";
 
 ?>

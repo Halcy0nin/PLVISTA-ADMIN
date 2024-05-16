@@ -133,6 +133,12 @@ if (isset($_GET["inventoryid"]))
                         <input type = "text" name ="itemquantity" placeholder= "Quantity" value = "<?php echo $itemquantity; ?>"></input>
                     </div>
                     <div class="form-group mb-3">
+    <input type="text" name="itemactive" placeholder="Active Items" value="<?php echo $itemactive; ?>">
+</div>
+<div class="form-group mb-3">
+    <input type="text" name="iteminactive" placeholder="Inactive Items" value="<?php echo $iteminactive; ?>">
+</div>
+                    <div class="form-group mb-3">
                         <input type = "text" name ="itemfundssource" placeholder= "Funds Source" value = "<?php echo $itemfundssource; ?>"></input>
                     </div>
                     <div class="form-group mb-3">
@@ -203,6 +209,8 @@ if (isset($_GET["inventoryid"]))
                 <th scope="col">Date Acquired</th>
                 <th scope="col">Unit Value</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Active Items</th>
+                <th scope="col">Inactive Items</th>
                 <th scope="col">Total Value</th>
                 <th scope="col">Last Updated</th>
                 <th scope="col">Action</th>
@@ -242,6 +250,8 @@ if (isset($_GET["inventoryid"]))
     <td><?php echo date("m/d/Y", strtotime(htmlspecialchars($item["item_date_acquired"])));?></td>
     <td><?php echo "PHP " . htmlspecialchars($item["item_unit_value"]); ?></td>
     <td><?php echo htmlspecialchars($item["item_quantity"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_active"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_inactive"]); ?></td>
     <td><?php echo "PHP " . htmlspecialchars($itemtotalvalue); ?></td>
     <td><?php echo htmlspecialchars($itemdateadded); ?></td>
     
@@ -286,6 +296,12 @@ if (isset($_GET["inventoryid"]))
                     </div>
                     <div class="form-group mb-3">
                         <input type = "text" name ="itemquantity" placeholder= "Quantity" value = "<?php echo $item["item_quantity"]; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" name="itemactive" placeholder="Active Items" value="<?php echo $item["item_active"]; ?>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" name="iteminactive" placeholder="Inactive Items" value="<?php echo $item["item_inactive"]; ?>">
                     </div>
                     <div class="form-group mb-3">
                         <input type = "text" name ="itemfundssource" placeholder= "Funds Source" value = "<?php echo $item["item_funds_source"]; ?>"></input>

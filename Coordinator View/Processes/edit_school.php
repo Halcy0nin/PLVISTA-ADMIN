@@ -18,7 +18,7 @@
         ,school_email = '$schoolemail', school_district = '$schooldistrict' WHERE school_id = $id_to_update";
 
         if(mysqli_query($conn,$updateschool)){
-            header('Location: school_content.php');
+            header('Location: ../school_content.php');
             exit();
         } else {
             echo 'query error: '. mysqli_error($conn);
