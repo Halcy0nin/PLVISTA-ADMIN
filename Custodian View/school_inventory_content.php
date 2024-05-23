@@ -75,6 +75,8 @@ if (isset($_GET["school_id"]))
         </div>
      </nav>
 
+
+     
  <!--search bar -->
         <div class="input-group rounded">
             <input style = "margin-left: 25vw; margin-top:13vh;" type = "text" id = "searchitemfield" name ="searchitem" class="form-control rounded" placeholder= "Search"  aria-label="Search" aria-describedby="search-addon"></input>
@@ -102,6 +104,135 @@ if (isset($_GET["school_id"]))
     </div>
 </div>
 
+  <!-- Pop-up form for adding items -->
+  <div class="modal fade" id="addItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addItemLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addItemLabel">Add Item</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action = "Processes/add_item.php" method ="POST" >
+            <div class="modal-body">
+                
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemarticle" placeholder= "Article" value = "<?php echo $itemarticle; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemdesc" placeholder= "Description" value = "<?php echo $itemdesc; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type = "date" name ="itemdateacquired" placeholder= "Date Acquired (YYYY-MM-DD)" value = "<?php echo $itemdateacquired; ?>"></input>
+                  </div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemunitvalue" placeholder= "Unit Value" value = "<?php echo $itemunitvalue; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemquantity" placeholder= "Quantity" value = "<?php echo $itemquantity; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+    <input type="text" name="itemactive" placeholder="Active Items" value="<?php echo $itemactive; ?>">
+</div>
+<div class="form-group mb-3">
+    <input type="text" name="iteminactive" placeholder="Inactive Items" value="<?php echo $iteminactive; ?>">
+</div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemfundssource" placeholder= "Funds Source" value = "<?php echo $itemfundssource; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select name="itemstatus"  value = "<?php echo $itemstatus; ?>">
+                            <option> Working </option>
+                            <option> Need Repair</option>
+                            <option> Condemned</option>
+                        </select>
+                    </div>
+                </div>
+
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!--sends school id, current timestamp and inventory name to add_item.php-->
+                <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
+                <input type='hidden' name='itemdateadded' value= "<?php
+    date_default_timezone_set("Asia/Manila");
+    echo date("Y-m-d H:i:s");
+?>">
+                <input type='hidden' name='invenname' value= "<?php echo $inventoryname; ?>">
+                <button type="submit" name = "additem" class="btn btn-primary">Add Item</button>
+            </form>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+  <!-- import data button -->
+  <button style = "margin-left: 85.3vw; margin-top: -10.4vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
+            Import
+        </button>
+
+        <!-- modal before importing data -->
+        <div class="modal fade" id="importData" tabindex="-1" aria-labelledby="importDataLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importDataLabel">import Resource Allocation Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Upload the data to be imported here:
+                    <form action = "Processes/import_data.php" enctype = "multipart/form-data" method = "POST">
+                        <input type = "file" name = "importData">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" name = "submitImport" class="btn btn-primary">Import</button>
+                        <input type='hidden' name='inventoryid' value= "<?php echo $schoolidtomatch; ?>">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+<!-- export data button -->
+<button style = "margin-left: 90vw; margin-top: 9vh; margin-bottom:0%;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+            Export
+        </button>
+
+        <!-- modal before exporting data -->
+        <div class="modal fade" id="exportSchool" tabindex="-1" aria-labelledby="exportSchoolLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportSchoolLabel">Export Resource Allocation Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to export this data?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <form action = "Processes/export_inventory_excel.php" method = "POST">
+                        <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
+                        </form>
+                        <form action = "Processes/export_inventory_pdf.php" method = "POST">
+                        <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+          <!-- Button for add item -->
+          <button style = "margin-left: 79.7vw; margin-top: -7vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
+        Add Item
+        </button><br>
+
         <div>
         <a href = "../custodianpage/report.php?school_id=<?php echo $schoolidtomatch ?>">Report</a>
         </div>
@@ -113,22 +244,24 @@ if (isset($_GET["school_id"]))
         <div id = "tablecontent">
             
             <!-- Table showing all inventory info per school in the database -->
-        <table style="width: 1200px; margin-left: 25vw;" class="table table-striped centerTable">
-        <thead class="thead-light"></thead>
+            <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:auto;" class = "table table-striped centerTable">
+        <thead class="thead-light">
             <tr>
                 <th scope="col">Item Code</th>
                 <th scope="col">Item Article</th>
                 <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Source of Funds</th>
                 <th scope="col">Date Acquired</th>
                 <th scope="col">Unit Value</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Active Items</th>
+                <th scope="col">Inactive Items</th>
                 <th scope="col">Total Value</th>
-                <th scope="col">Source of Funds</th>
                 <th scope="col">Last Updated</th>
-                <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
-
+        </thead>
         <!--get array of inventory from inventoryid from schools page-->
         <?php if (is_array($schoolinventory))
     {
@@ -139,31 +272,46 @@ if (isset($_GET["school_id"]))
             $qty = $item["item_quantity"] * $item["item_unit_value"];
             //formats the answer above to a decimal
             $itemtotalvalue = number_format($qty, 2);
-?>
-        <!--display inventory info in tabular form-->
-        <tr>
-            <td><?php echo "SDOVAL-" . htmlspecialchars($item["item_code"]); ?></td>
-            <td><?php echo htmlspecialchars($item["item_article"]); ?></td>
-            <td><?php echo htmlspecialchars($item["item_desc"]); ?></td>
-            <td><?php echo htmlspecialchars($item["item_date_acquired"]); ?></td>
-            <td><?php echo "PHP " . htmlspecialchars($item["item_unit_value"]); ?></td>
-            <td><?php echo htmlspecialchars($item["item_quantity"]); ?></td>
-            <td><?php echo "PHP " . htmlspecialchars($itemtotalvalue); ?></td>
-            <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
-            <td><?php echo htmlspecialchars($item["item_date_input"]); ?></td>
-            <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
             
-             <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#workingitem<?php echo $item["item_code"]; ?>">
-            Working
-            </button></td>
+            $timestamp = strtotime($item["item_date_input"]);
 
-            <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#repairitem<?php echo $item["item_code"]; ?>">
-            Need Repair
-            </button></td>
+            // Format date in mm-dd-yyyy format
+            $date_formatted = date("m-d-Y", $timestamp);
+            
+            // Format time in 12-hour format
+            $time_formatted = date("g:i a", $timestamp);
+            
+            // Combine date and time
+            $itemdateadded = $date_formatted . ' ' . $time_formatted;
+?>
 
-            <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#condemneditem<?php echo $item["item_code"]; ?>">
-            Condemned
-            </button></td>
+
+        <!--display inventory info in tabular form-->
+    <tr>
+    <td><?php echo "SDOVAL-" , htmlspecialchars($item["item_code"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_article"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_desc"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_status"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_funds_source"]); ?></td>
+    <td><?php echo date("m/d/Y", strtotime(htmlspecialchars($item["item_date_acquired"])));?></td>
+    <td><?php echo "PHP " . htmlspecialchars($item["item_unit_value"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_quantity"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_active"]); ?></td>
+    <td><?php echo htmlspecialchars($item["item_inactive"]); ?></td>
+    <td><?php echo "PHP " . htmlspecialchars($itemtotalvalue); ?></td>
+    <td><?php echo htmlspecialchars($itemdateadded); ?></td>
+            
+            <td> 
+        <button type="button" id="editbutton<?php echo $item["item_code"]; ?>" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateitem<?php echo $item["item_code"]; ?>">
+            Edit Item
+        </button>
+    </td>
+    <td>
+        <button type="button" id="deletebutton<?php echo $item["item_code"]; ?>" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteitem<?php echo htmlspecialchars($item["item_code"]); ?>">
+            Delete Item
+        </button>
+    </td>
+</tr>
 
                 <!-- Pop-up form for working item -->
                 <!--get item no as reference to match in order to assign the respective item no to the item to be updated-->
@@ -224,19 +372,50 @@ if (isset($_GET["school_id"]))
                         </div>
 
 
-                        <!-- Pop-up form for condemned item -->
+                    <!-- Pop-up form for updating item -->
                 <!--get item no as reference to match in order to assign the respective item no to the item to be updated-->
-                <div class="modal fade" id="condemneditem<?php echo $item["item_code"]; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="condemneditemLabel" aria-hidden="true">
+                <div class="modal fade" id="updateitem<?php echo $item["item_code"]; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateitemLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="condemneditemLabel">Edit Status</h1>
+                                <h1 class="modal-title fs-5" id="updateitemLabel">Edit Item</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action = "Processes/edit_status.php" method ="POST">
+                            <form action = "Processes/edit_item.php" method ="POST">
                             <div class="modal-body">
-                        <h4>Are you sure you want to change this item's status to 'Condemned'?</h4>
-                    <div class="form-group mb-3"> 
+                    <!-- store last value stored in dropdown list -->
+                        <?php $laststatus = $item["item_status"]; ?>
+
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemarticle" placeholder= "Article" value = "<?php echo $item["item_article"]; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemdesc" placeholder= "Description" value = "<?php echo $item["item_desc"]; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type = "date" name ="itemdateacquired" placeholder= "Date Acquired (YYYY-MM-DD)" value = "<?php echo $item["item_date_acquired"]; ?>"></input>
+                  </div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemunitvalue" placeholder= "Unit Value" value = "<?php echo $item["item_unit_value"]; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemquantity" placeholder= "Quantity" value = "<?php echo $item["item_quantity"]; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" name="itemactive" placeholder="Active Items" value="<?php echo $item["item_active"]; ?>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" name="iteminactive" placeholder="Inactive Items" value="<?php echo $item["item_inactive"]; ?>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type = "text" name ="itemfundssource" placeholder= "Funds Source" value = "<?php echo $item["item_funds_source"]; ?>"></input>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select name="itemstatus">
+                            <option value="Working" <?php if ($laststatus === "Working") echo "selected"; ?>>Working</option>
+                            <option value="Need Repair" <?php if ($laststatus === "Need Repair") echo "selected"; ?>>Need Repair</option>
+                            <option value="Condemned" <?php if ($laststatus === "Condemned") echo "selected"; ?>>Condemned</option>
+                        </select>
                     </div>
                 </div>
 
@@ -245,14 +424,43 @@ if (isset($_GET["school_id"]))
                                 <!-- shows the current id of the row of data through an input field -->
                                 <input type = "hidden" name = "item_to_update" value = "<?php echo $item["item_code"]; ?>">
                                 <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                                <input type='hidden' name= 'itemstatus'  value = "Condemned">
-                                <button type="submit" name = "updateitem" class="btn btn-primary">Confirm</button>
+                                <input type='hidden' name='invenname' value= "<?php echo $inventoryname; ?>">
+                                <input type='hidden' name='itemdateadded' value= "<?php date_default_timezone_set("Asia/Manila"); echo date("Y-m-d H:i:s");?>">
+                                <button type="submit" name = "updateitem" class="btn btn-primary">Edit Item</button>
                             </form>
                             </div>
                             </div>
                         </div>
                         </div>
-        </tr>  
+                <!-- Modal for Delete Item -->
+                <div class="modal fade" id="deleteitem<?php echo htmlspecialchars($item["item_code"]); ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteschoolLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="deleteschoolLabel">Delete Item</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action = "Processes/delete_item.php" method ="POST">
+                                        <div class="modal-body">
+                                        <h4>Are you sure you want to delete this row?</h4>
+                                        <p>This action cannot be undone</p>
+                                        
+                                                <!-- shows the current id of the row of data through an input field -->
+                                                <input type = "hidden" name = "item_to_delete" value = "<?php echo htmlspecialchars($item["item_code"]); ?>">
+                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <!-- submits id of current row to POST array and sends it to delete_item.php -->
+                                                <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
+                                                <input type='hidden' name='invenname' value= "<?php echo $inventoryname; ?>">
+                                                <input type = "submit" name = "deleteitem" value = "Delete Item" class = "btn btn-primary">
+                                                
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+
        
         <?php
         }
