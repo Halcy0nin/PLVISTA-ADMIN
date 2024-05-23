@@ -214,12 +214,12 @@ if (isset($_GET["school_id"]))
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                         <form action = "Processes/export_inventory_excel.php" method = "POST">
                         <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $schoolname; ?>">
                         <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
                         </form>
                         <form action = "Processes/export_inventory_pdf.php" method = "POST">
                         <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $schoolname; ?>">
                         <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
                         </form>
                     </div>

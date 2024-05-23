@@ -1,6 +1,6 @@
-<?php 
-// Load the database configuration file 
-include '../../Coordinator View/Processes/db_conn_high_school.php';
+<?php
+// Load the database configuration file and Dompdf
+include_once '../../Coordinator View/Processes/db_conn_high_school.php';
 require_once '../../dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 extract($_POST);

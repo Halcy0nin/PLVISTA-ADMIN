@@ -65,15 +65,11 @@ if (isset($_GET["school_id"])) {
                 <div class="col-md-3"></div>
                 <div class="col-md-9">
                     <div class="container">
-                        <form action="Processes/edit_profile.php" method="POST">
+                        <form action="Processes/edit_profile.php" method="POST" id="profileForm">
                             <?php foreach ($details as $user) { ?>
                                 <div class="form-group">
                                     <label for="fullName">Full Name</label>
                                     <input type="text" class="form-control" name="newusername" id="fullName" value="<?php echo $user["user_name"]; ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="newemail" id="email" value="<?php echo $user["user_email"]; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="pass">Password</label>
@@ -93,11 +89,27 @@ if (isset($_GET["school_id"])) {
                                         <input type="hidden" name="user_to_update" value="<?php echo $user["user_id"]; ?>">
                                         <input type="hidden" name="schoolid" value="<?php echo $user["school_id"]; ?>">
                                         <!-- Save Changes button -->
-                                        <button type="submit" name="requestedit" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                    <div class="col">
-                                        <!-- Cancel button -->
-                                        <button type="button" class="btn btn-default btn-block" onclick="window.location.href='dashboard.php'">Cancel</button>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editprofile">Save Changes</button>
+
+                                         <!-- modal before publishing changes -->
+                                         <div class="modal fade" id="editprofile" tabindex="-1" aria-labelledby="editprofilelabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editprofilelabel">Edit Custodian Information</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to request these changes?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" name="requestedit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             <?php } ?>
