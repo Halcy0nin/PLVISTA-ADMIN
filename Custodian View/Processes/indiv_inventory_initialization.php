@@ -4,11 +4,6 @@
 
     include "pagination.php";
 
-    // Fetch the school name
-    $schoolNameQuery = "SELECT school_name FROM high_schools WHERE school_id = $schoolidtomatch";
-    $schoolNameResult = mysqli_query($conn, $schoolNameQuery);
-    $schoolNameRow = mysqli_fetch_assoc($schoolNameResult);
-    $schoolname = $schoolNameRow['school_name'];
     //make query and get results using the parameters (connection to be used, query to be used)
     $result = mysqli_query($conn, $selectinventoryinfo);
 
