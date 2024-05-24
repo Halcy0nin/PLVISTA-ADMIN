@@ -116,9 +116,138 @@
   margin-right: 10px;
 }
 
+h3 {
+  position: fixed;
+  left: 16vw;
+  top: 7vh;
+}
+
+.notification {
+  position: absolute;
+  top: 28vh;
+  right: 2.5vw;
+  background-color: red;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .content {
   flex: 1;
   padding: 20px; /* Adjust padding as needed */
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: .3s;
+  border: 1px solid #747474;;
+  background-color: #ffffff;
+}
+
+.bell {
+  width: 16px;
+  fill: #747474;
+}
+
+.button:hover .bell {
+  animation: bellRing 0.9s both;
+}
+
+.notification-container {
+  display: none;
+  width: 500px;
+  height: 200px;
+  position: fixed;
+  left: 36vw;
+  top: 19vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+  z-index: 2;
+}
+.notification-header {
+  background-color: #1F4699;
+  color: white;
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.notification-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+.notification-item {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.notification-item .notification-details .time {
+  color: gray;
+}
+.notification-footer {
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #e9ecef;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.notification-footer a {
+  margin: 0 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+.notification-footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* bell ringing animation keyframes*/
+@keyframes bellRing {
+  0%,
+  100% {
+    transform-origin: top;
+  }
+
+  15% {
+    transform: rotateZ(10deg);
+  }
+
+  30% {
+    transform: rotateZ(-10deg);
+  }
+
+  45% {
+    transform: rotateZ(5deg);
+  }
+
+  60% {
+    transform: rotateZ(-5deg);
+  }
+
+  75% {
+    transform: rotateZ(2deg);
+  }
+}
+
+.button:active {
+  transform: scale(0.8);
 }
 
 /* Responsive Styles */
