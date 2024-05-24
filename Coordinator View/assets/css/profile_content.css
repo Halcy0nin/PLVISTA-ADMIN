@@ -171,6 +171,20 @@ form .btn {
 .submenu .menu-title i {
     margin-right: 10px;
 }
+.notification {
+    position: absolute;
+    top: 28vh;
+    right: 2.5vw;
+    background-color: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 .content {
     padding: 60px;
