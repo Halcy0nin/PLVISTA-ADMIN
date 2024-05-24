@@ -50,8 +50,14 @@ include "Processes/show_pending_requests.php";
           <i class="bi bi-bar-chart-fill"></i>Dashboard</a>
         </li>
         <li class="item">
-          <a href="resource_allocation_content.php">
-          <i class="bi bi-pie-chart-fill"></i>Resource Allocation</a>
+        <a href="resource_allocation_content.php">
+            <i class="bi bi-pie-chart-fill"></i>Resource Allocation
+            <div class="notification" id="notificationCount"></div>
+        </a>
+        </li>
+        <li class="item">
+          <a href="notification.php">
+          <i class="bi bi-bell-fill"></i>Notifications</a>
         </li>
         <li class="item">
           <a href="school_content.php">

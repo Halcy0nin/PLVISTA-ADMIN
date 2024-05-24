@@ -52,6 +52,10 @@ include "Processes/resource_allocation_info.php";
           <i class="bi bi-pie-chart-fill"></i>Resource Allocation</a>
         </li>
         <li class="item">
+          <a href="notification.php">
+          <i class="bi bi-bell-fill"></i>Notifications</a>
+        </li>
+        <li class="item">
           <a href="school_content.php">
           <i class="bi bi-building-fill"></i>Schools</a>
         </li>
@@ -211,6 +215,7 @@ include "Processes/resource_allocation_info.php";
         });
     });
 </script>
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
