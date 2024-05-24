@@ -23,6 +23,8 @@ if (isset($_GET["school_id"]))
   <link href="../Custodian View/assets/css/bootstrap.css" rel="stylesheet">
   <link href="../Custodian View/assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../Custodian View/assets/css/dashboard.css" rel="stylesheet">
+  <link href="../Custodian View/assets/css/modal.css" rel="stylesheet">
+
 
   <!-- bootstrap icons-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -58,6 +60,10 @@ if (isset($_GET["school_id"]))
           <i class="bi bi-archive-fill"></i>School Inventory</a>
         </li>
         <li class="item">
+          <a href="notification.php?school_id=<?php echo $schoolidtomatch; ?>">
+          <i class="bi bi-bell-fill"></i>Notifications</a>
+        </li>
+        <li class="item">
           <a href="resource_allocation_content.php?school_id=<?php echo $schoolidtomatch; ?>">
           <i class="bi bi-journal-bookmark-fill"></i>Report</a>
         </li>
@@ -74,11 +80,12 @@ if (isset($_GET["school_id"]))
           </div>
         </div>
      </nav>
-
-
      
+     <div class="content">
+        <h3 class = "mx-3">School Inventory</h3>
+
  <!--search bar -->
-        <div class="input-group rounded">
+        <div style="margin-left: -9.3vw;" class="input-group rounded">
             <input style = "margin-left: 25vw; margin-top:13vh;" type = "text" id = "searchitemfield" name ="searchitem" class="form-control rounded" placeholder= "Search"  aria-label="Search" aria-describedby="search-addon"></input>
             <span style = "margin-left: 0vw;margin-right: 60vw; margin-top:13vh;"class="input-group-text border-0" id="search-addon">
                 <i class="bi bi-search"></i>
@@ -89,7 +96,7 @@ if (isset($_GET["school_id"]))
 <div>
             <div class="container d-flex">
     <div class="dropdown">
-        <button style="margin-left: 6vw; margin-top: -6.4vh" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        <button style="margin-left: 14vw; margin-top: -7vh" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             Filter
         </button>
         <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
@@ -101,8 +108,25 @@ if (isset($_GET["school_id"]))
             <input type='hidden' id='schoolidtomatch' value= "<?php echo $schoolidtomatch; ?>">
             </form>
         </ul>
+        <button id="notification-button" style="margin-left: 19vw; margin-top: -6.5vh; margin-bottom: 0vh;" class="button">
+                                <svg viewBox="0 0 448 512" class="bell"><path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path></svg>
+                            </button>
     </div>
 </div>
+<div id = "popup-container" class="notification-container">
+                <div class="notification-header">
+                    <h2>Notifications</h2>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-details">
+                        <p class="time">11:26 AM on 04/15/2020</p>
+                        <p>Xandrex Aquinde requested chuchu</p>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <a href="#"onclick="hidePopup()">Dismiss</a> | <a href="notification.php?school_id=<?php echo $schoolidtomatch; ?>">All Notifications</a>
+                </div>
+            </div>
 
   <!-- Pop-up form for adding items -->
   <div class="modal fade" id="addItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addItemLabel" aria-hidden="true">
@@ -167,7 +191,7 @@ if (isset($_GET["school_id"]))
 
 
   <!-- import data button -->
-  <button style = "margin-left: 85.3vw; margin-top: -10.4vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
+  <button style = "margin-left: 85.3vw; margin-top: 0; margin-bottom:4vh;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
             Import
         </button>
 
@@ -195,7 +219,7 @@ if (isset($_GET["school_id"]))
         </div>
         </div>
 <!-- export data button -->
-<button style = "margin-left: 90vw; margin-top: 9vh; margin-bottom:0%;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+<button style = "margin-left: 90vw; margin-top: -15vh;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
             Export
         </button>
 
@@ -214,12 +238,12 @@ if (isset($_GET["school_id"]))
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                         <form action = "Processes/export_inventory_excel.php" method = "POST">
                         <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                        <input type='hidden' name='schoolname' value= "<?php echo $schoolname; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
                         <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
                         </form>
                         <form action = "Processes/export_inventory_pdf.php" method = "POST">
                         <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                        <input type='hidden' name='schoolname' value= "<?php echo $schoolname; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
                         <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
                         </form>
                     </div>
@@ -229,7 +253,7 @@ if (isset($_GET["school_id"]))
 
 
           <!-- Button for add item -->
-          <button style = "margin-left: 79.7vw; margin-top: -7vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
+          <button style = "margin-left: 79.7vw; margin-top: -20vh;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
         Add Item
         </button><br>
 
@@ -244,7 +268,7 @@ if (isset($_GET["school_id"]))
         <div id = "tablecontent">
             
             <!-- Table showing all inventory info per school in the database -->
-            <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:auto;" class = "table table-striped centerTable">
+            <table style="width:85%; margin-left: 15vw; margin-right: auto; margin-top:-5vw;" class = "table table-striped centerTable">
         <thead class="thead-light">
             <tr>
                 <th scope="col">Item Code</th>
@@ -467,6 +491,7 @@ if (isset($_GET["school_id"]))
     }?>
     </table> 
         </div>
+        </body>
 
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->
@@ -561,6 +586,20 @@ $(document).ready(function() {
             </ul>
         </nav>
     </div>
+    <script>
+    document.getElementById('notification-button').addEventListener('click', function() {
+        const popup = document.getElementById('popup-container');
+        if (popup.style.display === 'none' || popup.style.display === '') {
+            popup.style.display = 'block';
+        } else {
+            popup.style.display = 'none';
+        }
+    });
+
+    function hidePopup() {
+        document.getElementById('popup-container').style.display = 'none';
+    }
+</script>
   <!-- JS FILES -->
   <script src="../Custodian View/assets/js/bootstrap.bundle.js"></script>
   <script src="../Custodian View/assets/js/bootstrap.bundle.min.js"></script>

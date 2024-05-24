@@ -19,6 +19,7 @@ if (isset($_GET["school_id"])) {
     <link href="../Custodian View/assets/css/bootstrap.css" rel="stylesheet">
     <link href="../Custodian View/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Custodian View/assets/css/profile_content.css" rel="stylesheet">
+    <link href="../Custodian View/assets/css/password.css" rel="stylesheet">
     <!-- bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- icon sa tab -->
@@ -31,26 +32,35 @@ if (isset($_GET["school_id"])) {
         <div class="menu">
             <div class="main-menu">
                 <div class="logo">
-                    <a href="#" class="SDOlogo"><img src="sdo.png"></a>
+                    <a href="#" class="SDOlogo"><img src="sdo.png" alt="SDO Logo"></a>
                 </div>
                 <div class="menu-content">
                     <ul class="menu-items">
                         <div class="menu-title">ICT Resource Management System</div>
                         <li class="item">
                             <a href="school_inventory_content.php?school_id=<?php echo $schoolidtomatch; ?>">
-                            <i class="bi bi-archive-fill"></i>School Inventory</a>
+                                <i class="bi bi-archive-fill"></i>School Inventory
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="notification.php?school_id=<?php echo $schoolidtomatch; ?>">
+                                <i class="bi bi-bell-fill"></i>Notifications
+                            </a>
                         </li>
                         <li class="item">
                             <a href="resource_allocation_content.php?school_id=<?php echo $schoolidtomatch; ?>">
-                            <i class="bi bi-journal-bookmark-fill"></i>Report</a>
+                                <i class="bi bi-journal-bookmark-fill"></i>Report
+                            </a>
                         </li>
                         <li class="item">
                             <a href="profile_content.php?school_id=<?php echo $schoolidtomatch; ?>">
-                            <i class="bi bi-person-circle"></i>Profile</a>
+                                <i class="bi bi-person-circle"></i>Profile
+                            </a>
                         </li>
                         <li class="item">
                             <a href="login.php">
-                            <i class="bi bi-box-arrow-in-left"></i>Logout</a>
+                                <i class="bi bi-box-arrow-in-left"></i>Logout
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -65,17 +75,26 @@ if (isset($_GET["school_id"])) {
                 <div class="col-md-3"></div>
                 <div class="col-md-9">
                     <div class="container">
-                        <form action="Processes/edit_profile.php" method="POST" id="profileForm">
+                        <form action="Processes/edit_profile.php" method="POST">
                             <?php foreach ($details as $user) { ?>
                                 <div class="form-group">
                                     <label for="fullName">Full Name</label>
                                     <input type="text" class="form-control" name="newusername" id="fullName" value="<?php echo $user["user_name"]; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pass">Password</label>
-                                    <input type="password" class="form-control" name="newpassword" id="pass" value="<?php echo $user["user_pass"]; ?>">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="newemail" id="email" value="<?php echo $user["user_email"]; ?>">
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group">
+                                    <label for="pass">Password</label>
+                                    <div class="input-group">
+                                    <input type="password" class="form-control" name="newpassword" id="pass" value="<?php echo $user["user_pass"]; ?>">
+                                    <div class="input-group-text eye-icon eye-icon-hidden" onclick="togglePasswordVisibility()">
+                                        <i class="bi bi-eye-slash" id="togglePasswordIcon"></i>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="contact">Contact No.</label>
                                     <input type="text" class="form-control" name="newcontact" id="contact" value="<?php echo $user["user_contact"]; ?>">
                                 </div>
@@ -89,27 +108,11 @@ if (isset($_GET["school_id"])) {
                                         <input type="hidden" name="user_to_update" value="<?php echo $user["user_id"]; ?>">
                                         <input type="hidden" name="schoolid" value="<?php echo $user["school_id"]; ?>">
                                         <!-- Save Changes button -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editprofile">Save Changes</button>
-
-                                         <!-- modal before publishing changes -->
-                                         <div class="modal fade" id="editprofile" tabindex="-1" aria-labelledby="editprofilelabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="editprofilelabel">Edit Custodian Information</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you sure you want to request these changes?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="submit" name="requestedit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        <button type="submit" name="requestedit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                    <div class="col">
+                                        <!-- Cancel button -->
+                                        <button type="button" class="btn btn-default btn-block" onclick="window.location.href='dashboard.php'">Cancel</button>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -119,5 +122,22 @@ if (isset($_GET["school_id"])) {
             </div>
         </div>
     </div>
+
+    <script>
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('pass');
+        const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+        const eyeIconContainer = togglePasswordIcon.parentElement;
+
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+
+        eyeIconContainer.classList.toggle('eye-icon-visible');
+        eyeIconContainer.classList.toggle('eye-icon-hidden');
+
+        togglePasswordIcon.classList.toggle('bi-eye');
+        togglePasswordIcon.classList.toggle('bi-eye-slash');
+    }
+</script>
 </body>
 </html>
