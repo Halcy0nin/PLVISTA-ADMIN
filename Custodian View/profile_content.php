@@ -82,10 +82,6 @@ if (isset($_GET["school_id"])) {
                                     <input type="text" class="form-control" name="newusername" id="fullName" value="<?php echo $user["user_name"]; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="newemail" id="email" value="<?php echo $user["user_email"]; ?>">
-                                </div>
-                                <div class="form-group">
                                     <label for="pass">Password</label>
                                     <div class="input-group">
                                     <input type="password" class="form-control" name="newpassword" id="pass" value="<?php echo $user["user_pass"]; ?>">

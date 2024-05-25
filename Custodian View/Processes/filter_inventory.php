@@ -1,6 +1,5 @@
 <?php
-    // Connect to database (using the parameters localhost, username, password, and database to be used)
-    $conn = mysqli_connect('localhost','root','', 'sdo_high_schools_ict_equipment');
+include '../../Coordinator View/Processes/db_conn_high_school.php';
 
     // Check connection
     if (!$conn) {
@@ -46,6 +45,10 @@
         $result = mysqli_query($conn, $filterQuery);
         $filteredData = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+        // Check if data is found
+        if (!$filteredData) {
+            echo "<h3>No results found</h3>";
+        }
     }
 ?>
 
@@ -59,7 +62,7 @@
 <div id = "tablecontent">
             
             <!-- Table showing all inventory info per school in the database -->
-            <table style="width:85%; margin-left: 15vw; margin-right: auto; margin-top:-5vw;" class = "table table-striped centerTable">
+            <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:auto;" class = "table table-striped centerTable">
         <thead class="thead-light">
             <tr>
                 <th scope="col">Item Code</th>

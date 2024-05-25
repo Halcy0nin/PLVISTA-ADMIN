@@ -19,7 +19,7 @@
 
         $updateitem = "UPDATE school_inventory SET item_article = '$itemarticle'
         ,item_desc = '$itemdesc',item_date_acquired = '$itemdateacquired',item_unit_value = $itemunitvalue,item_quantity = $itemquantity
-        ,item_funds_source = '$itemfundssource', item_status = '$itemstatus', item_date_input = '$itemdateadded', item_active = $itemactive, item_inactive = $iteminactive WHERE item_code = $item_to_update";
+        ,item_funds_source = '$itemfundssource', item_status = '$itemstatus', item_date_input = '$itemdateadded', item_active = $itemactive, item_inactive = $iteminactive, is_visible = TRUE WHERE item_code = $item_to_update";
 
         if(mysqli_query($conn, $updateitem)){
             $redirectURL = "../school_inventory_content.php?school_id=" . urlencode($schoolid);

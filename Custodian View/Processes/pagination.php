@@ -14,10 +14,12 @@
     // Calculate the offset based on the current page number
     $offset = max(0, ($current_page - 1) * $itemsPerPage);
 
-    $selectinventoryinfo = "SELECT *
+    $selectinventoryinfo = "SELECT school_inventory.*, high_schools.school_name
         FROM school_inventory 
         JOIN users ON school_inventory.school_id = users.school_id
-        WHERE users.school_id = $schoolidtomatch LIMIT $offset, $itemsPerPage";
+        JOIN high_schools ON school_inventory.school_id = high_schools.school_id
+        WHERE school_inventory.school_id = $schoolidtomatch 
+        LIMIT $offset, $itemsPerPage";
 
     $totalRowsQuery = "SELECT COUNT(item_code) as total_count
         FROM school_inventory 

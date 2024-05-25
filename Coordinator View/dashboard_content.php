@@ -292,13 +292,13 @@ include "Processes/db_conn_high_school.php";
                                         labels: labels,
                                         datasets: [{
                                             label: 'No. of Items',
-                                            axis: 'y',
+                                            axis: 'x',
                                             data: data,
                                             borderWidth: 1
                                         }]
                                     },
                                     options: {
-                                        indexAxis: 'y'
+                                        indexAxis: 'x'
                                     }
                                 };
                     
