@@ -2,7 +2,7 @@
 
 include('db_conn_high_school.php');
 
-    $selectuserinfo = 'SELECT * FROM users ORDER BY user_id LIMIT 10';
+    $selectuserinfo = 'SELECT * FROM formatted_users ORDER BY user_id LIMIT 10';
 
     //make query and get results using the parameters (connection to be used, query to be used)
     $result = mysqli_query($conn, $selectuserinfo);
