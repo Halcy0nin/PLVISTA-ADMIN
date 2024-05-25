@@ -34,7 +34,7 @@
                     <input id="password" type="password" placeholder="Password" name="password" required />
                     <label></label>
                 </div>
-                <a href="#" class="forgot">Forgot your password?</a> 
+                <a href="forgot_password.php" class="forgot">Forgot your password?</a> 
                 <button type="submit" >Sign In</button> 
             </form>
             <script>
