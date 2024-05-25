@@ -73,7 +73,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                     <input id="password" type="password" placeholder="Password" name="password" required />
                     <label></label>
                 </div>
-                <a href="forgot_password.php" class="forgot">Forgot your password?</a> 
+                <a href="#" class="forgot">Forgot your password?</a>
                 <button type="submit">Sign In</button>
             </form>
         </div>

@@ -112,68 +112,7 @@ include "Processes/show_pending_requests.php";
             </div>
             </div>
     </div>
-
-        <!-- Button for add users -->
-<button style = "margin-right: 1vw; margin-bottom: 0px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
-        Add User
-        </button><br>
-
-<!-- Pop-up form for adding users -->
-<div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addUserLabel">Add User</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form name="addUser" action="../Coordinator View/Processes/add_user.php" method="POST" onsubmit="return validateForm()">
-                <div class="modal-body">
-                    <?php 
-                        $schoolQuery = "SELECT * FROM high_schools";
-                        $schoolResult = mysqli_query($conn, $schoolQuery);
-                    ?>
-                    <div class="form-group mb-3">
-                        <input type="text" name="username" placeholder="Username" value="">
-                    </div>
-                    <div class="form-group mb-3">
-                        <input type="text" name="useremail" placeholder="Email" value="">
-                    </div>
-                    <div class="form-group mb-3">
-                        <input type="text" name="userpass" placeholder="Password" value="">
-                    </div>
-                    <div class="form-group mb-3">
-                        <input type="text" name="usercontact" placeholder="User Contact Number" value="">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label> School </label> <br>
-                        <select name="school">
-                            <option value="" disabled selected>Select a school</option>
-                            <?php
-                                // Check if there are any schools in the database
-                                if (mysqli_num_rows($schoolResult) > 0) {
-                                    // Loop through each row of school data
-                                    while ($row = mysqli_fetch_assoc($schoolResult)) {
-                                        // Output a dropdown item for each school
-                                        echo '<option>' . $row['school_name'] . '</option>';
-                                    }
-                                } else {
-                                    // If no schools found, display a default message
-                                    echo '<option>No schools found</option>';
-                                }
-                            ?>
-                        </select>
-                    </div>
-                </div> <!-- End of modal-body -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="adduser" class="btn btn-primary">Add User</button>
-                </div> <!-- End of modal-footer -->
-            </form>
-        </div> <!-- End of modal-content -->
-    </div> <!-- End of modal-dialog -->
-</div> <!-- End of modal -->
-
-
+        
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="true">Users</button>
@@ -238,11 +177,11 @@ include "Processes/show_pending_requests.php";
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type = "text" name ="userpass" placeholder= "Password" value = "<?php echo $user["user_pass"]; ?>"></input>
+                                <input type = "text" name ="useremail" placeholder= "User Email" value = "<?php echo $user["user_email"]; ?>"></input>
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type = "text" name ="usercontact" placeholder= "Contact No." value = "<?php echo $user["user_contact"]; ?>"></input>
+                                <input type = "text" name ="usercontact" placeholder= "User Email" value = "<?php echo $user["user_contact"]; ?>"></input>
                             </div>
 
                             </div>
@@ -476,23 +415,6 @@ $(document).ready(function() {
 
 
         </script>
-
-<script>
-    function validateForm() {
-        // Get the value of the email input field
-        var email = document.forms["addUser"]["useremail"].value;
-
-        // Regular expression pattern to match email format
-        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        // Check if the email matches the pattern
-        if (!emailPattern.test(email)) {
-            // If it doesn't match, show an alert and return false to prevent form submission
-            alert("Please enter a valid email address.");
-            return false;
-        }
-    }
-</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
