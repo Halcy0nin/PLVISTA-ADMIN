@@ -1,7 +1,7 @@
 <?php
 
 include "../Coordinator View/Processes/db_conn_high_school.php";
-
+include "../Coordinator View/Processes/show_notif_info.php";
 if (isset($_GET["school_id"]))
 {
 
@@ -41,8 +41,6 @@ if (isset($_GET["school_id"]))
 
 <!--Importing bootstrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-
 <nav class="sidebar">
     <div class="menu">
   
@@ -108,23 +106,28 @@ if (isset($_GET["school_id"]))
             <input type='hidden' id='schoolidtomatch' value= "<?php echo $schoolidtomatch; ?>">
             </form>
         </ul>
-        <button id="notification-button" style="margin-left: 19vw; margin-top: -6.5vh; margin-bottom: 0vh;" class="button">
+        <button id="notification-button" style="margin-left: -12vw; margin-top: -4vh;" class="button">
                                 <svg viewBox="0 0 448 512" class="bell"><path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path></svg>
                             </button>
-    </div>
-</div>
-<div id = "popup-container" class="notification-container">
+                        </div>
+            <div id = "popup-container" class="notification-container">
                 <div class="notification-header">
                     <h2>Notifications</h2>
                 </div>
                 <div class="notification-item">
-                    <div class="notification-details">
-                        <p class="time">11:26 AM on 04/15/2020</p>
-                        <p>Xandrex Aquinde requested chuchu</p>
-                    </div>
-                </div>
+    <?php foreach ($notifications as $index => $notif) { ?>
+        <div class="notification-details <?php if($index !== 0) echo 'mt-3'; ?>">
+            <p>From: SDO VALENZUELA</p>
+            <p class="time"><?php echo htmlspecialchars($notif["notification_date"]); ?></p>
+            <p><?php echo htmlspecialchars($notif["notification_message"]);?></p>
+        </div>
+        <?php if($index !== count($notifications) - 1) { ?>
+            <hr class="my-2">
+        <?php } ?>
+    <?php } ?>
+</div>
                 <div class="notification-footer">
-                    <a href="#"onclick="hidePopup()">Dismiss</a> | <a href="notification.php?school_id=<?php echo $schoolidtomatch; ?>">All Notifications</a>
+                    <a href="#"onclick="hidePopup()">Dismiss</a> | <a href="notification.php?school_id=<?php echo $schoolidtomatch ?>">All Notifications</a>
                 </div>
             </div>
 
@@ -194,7 +197,6 @@ if (isset($_GET["school_id"]))
   <button style = "margin-left: 85.3vw; margin-top: 0; margin-bottom:4vh;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
             Import
         </button>
-
         <!-- modal before importing data -->
         <div class="modal fade" id="importData" tabindex="-1" aria-labelledby="importDataLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -601,8 +603,9 @@ $(document).ready(function() {
     }
 </script>
   <!-- JS FILES -->
-  <script src="../Custodian View/assets/js/bootstrap.bundle.js"></script>
-  <script src="../Custodian View/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="../Custodian View/assets/js/dashboard.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.js"></script>
+    <script src="../Coordinator View/assets/js/bootstrap.bundle.min.js"></script>
 
 </body> 

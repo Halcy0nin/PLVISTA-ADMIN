@@ -4,30 +4,33 @@ include "db_conn_high_school.php";
 // Check if filter value is set
 if (isset($_POST["filterValue"])) {
     $filter = $_POST["filterValue"];
-
+    $schoolidtomatch = $_POST["schoolidtomatch"];
     // Construct the query based on the selected filter
     switch ($filter) {
         case "needrepair":
-            $filterQuery = "SELECT high_schools.school_name, school_inventory.item_code, school_inventory.item_article, school_inventory.item_status, school_inventory.item_date_acquired
+            $filterQuery = "SELECT item_code, item_article, item_status, item_date_acquired
             FROM school_inventory 
-            JOIN high_schools ON school_inventory.school_id = high_schools.school_id WHERE school_inventory.item_status = 'Need Repair'";
+            JOIN users ON school_inventory.school_id = users.school_id
+            WHERE users.school_id = $schoolidtomatch AND item_status = 'Need Repair' AND school_inventory.is_visible = TRUE";
             break;
         case "condemned":
-            $filterQuery = "SELECT high_schools.school_name, school_inventory.item_code, school_inventory.item_article, school_inventory.item_status, school_inventory.item_date_acquired
+            $filterQuery = "SELECT item_code, item_article, item_status, item_date_acquired
             FROM school_inventory 
-            JOIN high_schools ON school_inventory.school_id = high_schools.school_id WHERE school_inventory.item_status = 'Condemned'";
+            JOIN users ON school_inventory.school_id = users.school_id
+            WHERE users.school_id = $schoolidtomatch AND item_status = 'Condemned' AND school_inventory.is_visible = TRUE";
             break;
         case "all":
-            $filterQuery = "SELECT high_schools.school_name, school_inventory.item_code, school_inventory.item_article, school_inventory.item_status, school_inventory.item_date_acquired
+            $filterQuery = "SELECT item_code, item_article, item_status, item_date_acquired
             FROM school_inventory 
-            JOIN high_schools ON school_inventory.school_id = high_schools.school_id
-            WHERE (school_inventory.item_status = 'Need Repair' OR school_inventory.item_status = 'Condemned')";
+            JOIN users ON school_inventory.school_id = users.school_id
+            WHERE users.school_id = $schoolidtomatch AND (item_status = 'Need Repair' OR item_status = 'Condemned') AND school_inventory.is_visible = TRUE";
             break;
         default:
             // Default case if no specific filter is selected
             $filterQuery = "SELECT * FROM school_inventory";
             break;
     }
+
 
     
     // Execute the query

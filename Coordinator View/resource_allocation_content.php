@@ -2,6 +2,7 @@
 include "Processes/db_conn_high_school.php";
 include "Processes/resource_allocation_info.php";
 
+
 ?>
 
 <!DOCTYPE html>
@@ -93,6 +94,9 @@ include "Processes/resource_allocation_info.php";
             <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
             <li><a class="dropdown-item" href="#" data-value="needrepair">Need Repair</a></li>
             <li><a class="dropdown-item" href="#" data-value="condemned">Condemned</a></li>
+            <form>
+            <input type='hidden' id='schoolidtomatch' value= "<?php echo $schoolidtomatch; ?>">
+            </form>
         </ul>
     </div>
 </div>
@@ -156,9 +160,42 @@ include "Processes/resource_allocation_info.php";
                 <td scope="col"><?php echo htmlspecialchars($report["item_status"]); ?></td>
                 <td scope="col"><?php echo htmlspecialchars($report["item_date_acquired"]); ?></td>
                 <td>
-                    <button type="button" id="deletereport" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteitem<?php echo htmlspecialchars($item["item_code"]); ?>">
-                        Reject
-                    </button>
+                <button type="button" id="deletebutton<?php echo $report["item_code"]; ?>" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletereport<?php echo htmlspecialchars($report["item_code"]); ?>">
+            Reject
+        </button>
+
+                    <!-- Modal for Delete Item -->
+                <div class="modal fade" id="deletereport<?php echo htmlspecialchars($report["item_code"]); ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteschoolLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="deletereportLabel">Reject Report</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action = "Processes/delete_report.php" method ="POST">
+                                        <div class="modal-body">
+                                        <h4>Reason for Rejection</h4>
+
+                                            <p>
+                                            <label for="from">Reason:</label>
+                                            <br />
+                                            <textarea name="deletereason" id="deletereason"  rows="7" cols="50" style="resize:none" placeholder = "Write Here..."></textarea>
+                                            </p>   
+                                        
+                                                <!-- shows the current id of the row of data through an input field -->
+                                                <input type = "hidden" name = "reporttodelete" value = "<?php echo htmlspecialchars($report["item_code"]); ?>">
+                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <!-- submits id of current row to POST array and sends it to delete_item.php -->
+                                                <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
+                                                <input type = "submit" name = "deletereport" value = "Submit" class = "btn btn-primary">
+                                                
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
                 </td>
             </tr>
     <?php } ?>

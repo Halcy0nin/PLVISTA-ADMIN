@@ -17,14 +17,12 @@
     $selectreportinfo = "SELECT high_schools.school_name, school_inventory.item_code, school_inventory.item_article, school_inventory.item_status, school_inventory.item_date_acquired
     FROM school_inventory 
     JOIN high_schools ON school_inventory.school_id = high_schools.school_id
-    WHERE (school_inventory.item_status = 'Need Repair' OR school_inventory.item_status = 'Condemned')
+    WHERE (item_status = 'Need Repair' OR item_status = 'Condemned') AND school_inventory.is_visible = TRUE
     LIMIT $offset, $itemsPerPage";
     
-
-
     $totalRowsQuery = "SELECT COUNT(item_code) as total_count
         FROM school_inventory 
-        WHERE item_status = 'Need Repair' OR 'Condemned' ";
+        WHERE  (item_status = 'Need Repair' OR item_status = 'Condemned') AND school_inventory.is_visible = TRUE";
 
     $totalRowsResult = mysqli_query($conn, $totalRowsQuery);
 

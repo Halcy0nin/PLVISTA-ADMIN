@@ -1,7 +1,7 @@
 <?php
 
 include "Processes/db_conn_high_school.php";
-
+include "Processes/show_notif_info.php";
 ?>
 
 <!DOCTYPE html>
@@ -120,20 +120,19 @@ include "Processes/db_conn_high_school.php";
                     </div>
                 </div>
             </div>
-            <div id = "popup-container" class="notification-container">
-                <div class="notification-header">
-                    <h2>Notifications</h2>
-                </div>
-                <div class="notification-item">
-                    <div class="notification-details">
-                        <p class="time">11:26 AM on 04/15/2020</p>
-                        <p>Xandrex Aquinde requested chuchu</p>
-                    </div>
-                </div>
-                <div class="notification-footer">
-                    <a href="#"onclick="hidePopup()">Dismiss</a> | <a href="notification.php">All Notifications</a>
-                </div>
-            </div>
+            <div id="popup-container" class="notification-container">
+    <div class="notification-header">
+        <h2>Notifications</h2>
+    </div>
+    <div id="notificationPopup">
+        <p>New items have been added to the inventory:</p>
+        <ul id="newItemsList"></ul>
+    </div>
+    <div class="notification-footer">
+        <a href="#" onclick="hidePopup()">Dismiss</a> | <a href="notification.php">All Notifications</a>
+    </div>
+</div>
+
         
             <div class="container">
                 <div style="margin-left:3vw; margin-top:1vh;" class="card">
@@ -614,7 +613,39 @@ function updateLine(selectedValue) {
         document.getElementById('popup-container').style.display = 'none';
     }
 </script>
+<script>
+    function checkForNewItems() {
+        $.ajax({
+            url: 'check_new_items.php',
+            method: 'GET',
+            success: function(response) {
+                var newItems = JSON.parse(response);
+                if (newItems.length > 0) {
+                    var itemsList = $('#newItemsList');
+                    itemsList.empty(); // Clear the list before adding new items
+                    newItems.forEach(function(item) {
+                        var listItem = $('<li></li>').text('Code: ' + item.item_code + ', Article: ' + item.item_article + ', Status: ' + item.item_status + ', Acquired: ' + item.item_date_acquired);
+                        itemsList.append(listItem);
+                    });
+                    $('#notificationPopup').show();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
 
+    $(document).ready(function() {
+        // Poll for new items every 30 seconds
+        setInterval(checkForNewItems, 30000);
+
+        // Close the notification
+        $('#closeNotification').on('click', function() {
+            $('#notificationPopup').hide();
+        });
+    });
+    </script>
 
     <!-- JS FILES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
