@@ -2,16 +2,27 @@
 
 include('db_conn_high_school.php');
 
-    $selectapproved = "SELECT * FROM profile_edit_requests WHERE request_status = 'Approved' ORDER BY request_id LIMIT 10";
+// Number of items per page
+$itemsPerPage = 5;
 
-    //make query and get results using the parameters (connection to be used, query to be used)
-    $result = mysqli_query($conn, $selectapproved);
+$approved_current_page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
-    //fetch resulting rows as an array using the parameters (array to be used, MYSQLI_ASSOC)
-    $approvedrequests = mysqli_fetch_all($result, MYSQLI_ASSOC);
+// Calculate the offset for the SQL query
+$offset = ($approved_current_page - 1) * $itemsPerPage;
 
-    //releases results to avoid stacking up memory
-    mysqli_free_result($result);
+// Query to get total number of approved requests
+$totalRequestsQuery = "SELECT COUNT(*) AS total FROM profile_edit_requests WHERE request_status = 'Approved'";
+$totalRequestsResult = mysqli_query($conn, $totalRequestsQuery);
+$totalRequests = mysqli_fetch_assoc($totalRequestsResult)['total'];
+
+// Calculate total pages
+$totalPages = ceil($totalRequests / $itemsPerPage);
+
+// Query to fetch approved requests with pagination
+$selectapproved = "SELECT * FROM profile_edit_requests WHERE request_status = 'Approved' ORDER BY request_id LIMIT $offset, $itemsPerPage";
+$result = mysqli_query($conn, $selectapproved);
+$approvedrequests = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_free_result($result);
 
 
 ?>

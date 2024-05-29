@@ -52,7 +52,6 @@ include "Processes/show_pending_requests.php";
         <li class="item">
         <a href="resource_allocation_content.php">
             <i class="bi bi-pie-chart-fill"></i>Resource Allocation
-            <div class="notification" id="notificationCount"></div>
         </a>
         </li>
         <li class="item">
@@ -68,10 +67,6 @@ include "Processes/show_pending_requests.php";
           <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
         </li>
         <li class="item">
-          <a href="profile_content.php">
-          <i class="bi bi-person-circle"></i>Profile</a>
-        </li>
-        <li class="item">
           <a href="login.php">
           <i class="bi bi-box-arrow-in-left"></i>Log Out</a>
         </li>
@@ -85,7 +80,7 @@ include "Processes/show_pending_requests.php";
         <div class = "containers">
         <h3 class = "mx-3">Manage Users</h3>
         <br>
-
+        <?php echo $pendingTotalPages; ?>
         <div class = "row">
             <div class = "col">
             <!-- search bar -->
@@ -100,21 +95,13 @@ include "Processes/show_pending_requests.php";
 
             <!-- Dropdown filter for role -->
             <div class="container d-flex justify-content-center">
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    Select Role</button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
+
             </div>
             </div>
     </div>
 
         <!-- Button for add users -->
-<button style = "margin-right: 1vw; margin-bottom: 0px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
+<button style = "margin-left: 54vw; margin-top: -7vh;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
         Add User
         </button><br>
 
@@ -208,14 +195,18 @@ include "Processes/show_pending_requests.php";
             <td><?php echo htmlspecialchars($user["school_name"]);?></td>
 
             <td> 
-                <button type="button" id="edituser<?php echo $user["user_id"]; ?>" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#edituser<?php echo $user["user_id"]; ?>">
-                    Edit User
+                <button id="edituser<?php echo $user["user_id"]; ?>" class="edit-button" data-bs-toggle="modal" data-bs-target="#edituser<?php echo $user["user_id"]; ?>">
+                <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                </svg>
                 </button>
             </td>
 
             <td>
-                <button type="button" id="deleteuser<?php echo $user["user_id"]; ?>" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteuser<?php echo htmlspecialchars($user["user_id"]); ?>">
-                    Delete User
+                <button style="margin-left:-1vw;" id="deleteuser<?php echo $user["user_id"]; ?>" class="delete-button" data-bs-toggle="modal" data-bs-target="#deleteuser<?php echo htmlspecialchars($user["user_id"]); ?>">
+                <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                    <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                </svg>
                 </button>
             </td>
 
@@ -285,6 +276,25 @@ include "Processes/show_pending_requests.php";
                                 </div>
                                 </div>
                                 <?php } ?>
+                                <div class = "container d-flex justify-content-end">
+                                <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo max($users_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
+            </li>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="manage_users_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo min($users_current_page + 1, $totalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
+            </li>
+        </ul>
+    </nav>
+            </div>
     </table>
         </div>
 
@@ -310,60 +320,68 @@ include "Processes/show_pending_requests.php";
 
 
                 <td>
-                    <button type="button" id="viewrequest<?php echo $request["request_id"]; ?>" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#viewrequest<?php echo $request["request_id"]; ?>">
-                        View Request
+                    <button style="margin-right:1vw;" id="viewrequest<?php echo $request["request_id"]; ?>" class="view-button" data-bs-toggle="modal" data-bs-target="#viewrequest<?php echo $request["request_id"]; ?>">
+                    <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"> <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" fill="white"></path> <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="white"></path> </svg>
                     </button>
                 </td>
         </tr>
         <?php foreach ($users as $user) { ?>
-            <!-- Modal for viewing request -->
-            <div class="modal fade" id="viewrequest<?php echo htmlspecialchars($request["request_id"]); ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteschoolLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="deleteschoolLabel">Request Information</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <form action = "Processes/request_verification.php" method ="POST">
-                                                    <div class="modal-body">
-                                                    
-                                                    
-                                                    <h5>Previous Custodian Name</h5>
-                                                    <p><?php echo htmlspecialchars($user["user_name"]); ?></p>
-                                                    <input type = "hidden" name = "requestname" value = "<?php echo htmlspecialchars($user["user_name"]); ?>">
+    <!-- Modal for viewing request -->
+    <div class="modal fade" id="viewrequest<?php echo htmlspecialchars($request["request_id"]); ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteschoolLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteschoolLabel">Request Information</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="Processes/request_verification.php" method="POST">
+                    <div class="modal-body">
+                        <h5>Previous Custodian Name</h5>
+                        <p><?php echo htmlspecialchars($user["user_name"]); ?></p>
+                        <input type="hidden" name="requestname" value="<?php echo htmlspecialchars($user["user_name"]); ?>">
 
-                                                    <h5>New Custodian Name</h5>
-                                                    <p><?php echo htmlspecialchars($request["new_username"]); ?></p>
-                                                    <input type = "hidden" name = "newusername" value = "<?php echo htmlspecialchars($request["new_username"]); ?>">
+                        <h5>New Custodian Name</h5>
+                        <p><?php echo htmlspecialchars($request["new_username"]); ?></p>
+                        <input type="hidden" name="newusername" value="<?php echo htmlspecialchars($request["new_username"]); ?>">
 
-                                                    <h5>Old Email</h5>
-                                                    <p><?php echo htmlspecialchars($user["user_email"]); ?></p>
+                        <h5>Old Password</h5>
+                        <p><?php echo htmlspecialchars($user["user_pass"]); ?></p>
 
-                                                    <h5>New Email</h5>
-                                                    <p><?php echo htmlspecialchars($request["new_email"]); ?></p>
-                                                    <input type = "hidden" name = "newemail" value = "<?php echo htmlspecialchars($request["new_email"]); ?>">
-                                                    
-                                                    <h5>Old Contact No.</h5>
-                                                    <p><?php echo htmlspecialchars($user["user_contact"]); ?></p>
-                                                    
-                                                    <h5>New Contact No.</h5>
-                                                    <p><?php echo htmlspecialchars($request["new_contact"]); ?></p>
-                                                    <input type = "hidden" name = "newcontact" value = "<?php echo htmlspecialchars($request["new_contact"]); ?>">
+                        <h5>New Password</h5>
+                        <p><?php echo htmlspecialchars($request["new_pass"]); ?></p>
+                        <input type="hidden" name="newpass" value="<?php echo htmlspecialchars($request["new_pass"]); ?>">
 
-                                                    <input type = "hidden" name = "user_to_request" value = "<?php echo htmlspecialchars($user["user_id"]); ?>">
-                                                        </div>
-                                                    <div class="modal-footer">
-                                                            
-                                                            <input type = "submit" name = "denyrequest" value = "Deny" class = "btn btn-primary">
-                                                            <input type = "submit" name = "approverequest" value = "Approve" class = "btn btn-primary">
-                                                            
-                                                    </form>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            </div>
+                        <input type="hidden" name="user_to_request" value="<?php echo htmlspecialchars($user["user_id"]); ?>">
+                        <input type="hidden" name="request_id" value="<?php echo htmlspecialchars($request["request_id"]); ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" name="denyrequest" value="Deny" class="btn btn-primary">
+                        <input type="submit" name="approverequest" value="Approve" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php } }?>
+<div class = "container d-flex justify-content-end">
+<nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo max($pending_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
+            </li>
 
-        <?php } }?>
+            <?php for ($i = 1; $i <= $pendingTotalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="manage_users_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo min($pending_current_page + 1, $pendingTotalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
+            </li>
+        </ul>
+    </nav>
+            </div>
         </table>
         
         </div>
@@ -376,7 +394,6 @@ include "Processes/show_pending_requests.php";
                     <th scope="col">Request ID</th>
                     <th scope="col">Requester</th>
                     <th scope="col">Date Requested</th>
-                    <th scope="col">Action</th>
                 </tr>
             </thead>
         <!-- loops through all of the data in the table and displays it per row -->
@@ -388,6 +405,24 @@ include "Processes/show_pending_requests.php";
         </tr>
 
         <?php } ?>
+        <div class = "container d-flex justify-content-end">
+        <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo max($approved_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
+            </li>
+
+            <?php for ($i = 1; $i <= $userTotalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="manage_users_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo min($approved_current_page + 1, $userTotalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
+            </li>
+        </ul>
+    </nav>
+            </div>
         </table>
         </div>
 
@@ -400,7 +435,6 @@ include "Processes/show_pending_requests.php";
                     <th scope="col">Request ID</th>
                     <th scope="col">Requester</th>
                     <th scope="col">Date Requested</th>
-                    <th scope="col">Action</th>
                 </tr>
             </thead>
         <!-- loops through all of the data in the table and displays it per row -->
@@ -413,20 +447,27 @@ include "Processes/show_pending_requests.php";
         </tr>
 
         <?php } ?>
+        <div class = "container d-flex justify-content-end">
+        <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo max($denied_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
+            </li>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="manage_users_content.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <li class="page-item">
+                <a class="page-link" href="manage_users_content.php?page=<?php echo min($denied_current_page + 1, $totalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
+            </li>
+        </ul>
+    </nav>
+            </div>
         </table>
         </div>
-
-        <div class = "container d-flex justify-content-end">
-                    <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
-            </div>
         
         </div>
 

@@ -2,22 +2,22 @@
 
 include('db_conn_high_school.php');
 
- if(isset($_POST['approverequest'])){
+if (isset($_POST['approverequest'])) {
     $user_to_request = mysqli_real_escape_string($conn, $_POST['user_to_request']);
     $newusername_request = mysqli_real_escape_string($conn, $_POST['newusername']);
-    $newemail_request = mysqli_real_escape_string($conn, $_POST['newemail']);
-    $newcontact_request = mysqli_real_escape_string($conn, $_POST['newcontact']);
+    $newpassword_request = mysqli_real_escape_string($conn, $_POST['newpass']);
+    $request_id = mysqli_real_escape_string($conn, $_POST['request_id']);
 
-    $dorequest = "UPDATE users SET user_name = '$newusername_request', user_email = '$newemail_request', user_contact = '$newcontact_request'
-    WHERE user_id = '$user_to_request'";
+    $dorequest = "UPDATE users SET user_name = '$newusername_request', user_pass = '$newpassword_request'
+                  WHERE user_id = '$user_to_request'";
 
     $approverequest = "UPDATE profile_edit_requests SET request_status = 'Approved'
-    WHERE  request_name = '$newusername_request'";
+                       WHERE request_id = '$request_id'";
 
-    if(mysqli_query($conn, $dorequest)){
+    if (mysqli_query($conn, $dorequest)) {
         // Execute the second query
-        if(mysqli_query($conn, $approverequest)){
-            $redirectURL = "user_management.php";
+        if (mysqli_query($conn, $approverequest)) {
+            $redirectURL = "../manage_users_content.php";
             header("Location: $redirectURL");
             exit();
         } else {
@@ -28,21 +28,18 @@ include('db_conn_high_school.php');
     }
 }
 
-if (isset($_POST['denyrequest'])){
-    $user_to_request = mysqli_real_escape_string($conn, $_POST['user_to_request']);
-    $newusername_request = mysqli_real_escape_string($conn, $_POST['newusername']);
+if (isset($_POST['denyrequest'])) {
+    $request_id = mysqli_real_escape_string($conn, $_POST['request_id']);
 
     $denyrequest = "UPDATE profile_edit_requests SET request_status = 'Denied'
-    WHERE  request_name = '$newusername_request'";
+                    WHERE request_id = '$request_id'";
 
-
-    if(mysqli_query($conn,$denyrequest)){
-            $redirectURL = "../manage_users_content.php";
-            header("Location: $redirectURL");
-            exit();
-        } else {
-            echo 'query error: '. mysqli_error($conn);
-        }
+    if (mysqli_query($conn, $denyrequest)) {
+        $redirectURL = "../manage_users_content.php";
+        header("Location: $redirectURL");
+        exit();
+    } else {
+        echo 'Query error: ' . mysqli_error($conn);
+    }
 }
-
 ?>

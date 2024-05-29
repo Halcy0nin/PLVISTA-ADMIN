@@ -20,8 +20,8 @@ if (isset($_POST['requestedit'])) {
 
         // SQL query to insert into profile_edit_requests table
         $addrequest = "INSERT INTO profile_edit_requests 
-        (request_name, request_date, request_status, new_username, new_email, new_contact) 
-        VALUES ('$requestname','$requestdate','$requeststatus','$newusername','$newemail','$newcontact')";
+        (request_name, request_date, request_status, new_username, new_pass, new_contact) 
+        VALUES ('$requestname','$requestdate','$requeststatus','$newusername','$newpassword','$newcontact')";
 
         // Execute the query
         if(mysqli_query($conn, $addrequest)){

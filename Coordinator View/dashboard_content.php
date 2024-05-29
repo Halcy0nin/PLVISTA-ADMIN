@@ -1,7 +1,7 @@
 <?php
 
 include "Processes/db_conn_high_school.php";
-include "Processes/show_notif_info.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +50,6 @@ include "Processes/show_notif_info.php";
         <li class="item">
         <a href="resource_allocation_content.php">
             <i class="bi bi-pie-chart-fill"></i>Resource Allocation
-            <div class="notification" id="notificationCount"></div>
         </a>
         </li>
         <li class="item">
@@ -64,10 +63,6 @@ include "Processes/show_notif_info.php";
         <li class="item">
           <a href="manage_users_content.php">
           <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
-        </li>
-        <li class="item">
-          <a href="profile_content.php">
-          <i class="bi bi-person-circle"></i>Profile</a>
         </li>
         <li class="item">
           <a href="login.php">
@@ -90,7 +85,7 @@ include "Processes/show_notif_info.php";
 
                     <div class="col">
                         <div style="margin-left:4vw; margin-top:0vh;" class="dropdown">
-                            <button style="width: 10vw; margin-left: -23vw;" class="btn btn-outline-secondary dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButtonSchool" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button style="width: 10vw; margin-left: -34vw;" class="btn btn-outline-secondary dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButtonSchool" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span>School</span>
                             </button>
                             <?php 
@@ -113,29 +108,13 @@ include "Processes/show_notif_info.php";
                                 }
                                 ?>
                             </ul>
-                            <button id="notification-button" style="margin-left: -12vw; margin-top: -4vh;" class="button">
-                                <svg viewBox="0 0 448 512" class="bell"><path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path></svg>
-                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="popup-container" class="notification-container">
-    <div class="notification-header">
-        <h2>Notifications</h2>
-    </div>
-    <div id="notificationPopup">
-        <p>New items have been added to the inventory:</p>
-        <ul id="newItemsList"></ul>
-    </div>
-    <div class="notification-footer">
-        <a href="#" onclick="hidePopup()">Dismiss</a> | <a href="notification.php">All Notifications</a>
-    </div>
-</div>
-
         
             <div class="container">
-                <div style="margin-left:3vw; margin-top:1vh;" class="card">
+                <div style="margin-left:3vw; margin-top:-1vh;" class="card">
                     <div id="totalNumCard" class="card-body">
                         <h1 class="card-title">Total No. of Equipment</h1>
                         <?php
@@ -168,7 +147,7 @@ include "Processes/show_notif_info.php";
                 </div>
             </div>
 
-                <div style="margin-left:34.4vw; margin-top:-14.3vh;" class="card">
+                <div style="margin-left:34.4vw; margin-top:-17vh;" class="card">
                     <div id="totalWorkingCard" class="card-body">
                         <h4 class="card-title">Working</h4>
                         <?php
@@ -200,7 +179,7 @@ include "Processes/show_notif_info.php";
                 </div>
             </div>
 
-                <div style="margin-left:52.4vw; margin-top:-14.4vh;" class="card">
+                <div style="margin-left:52.4vw; margin-top:-17.1vh;" class="card">
                     <div id="totalRepairCard"class="card-body">
                         <h4 class="card-title">Need Repair</h4>
                         <?php
@@ -231,7 +210,7 @@ include "Processes/show_notif_info.php";
                     </div>
                 </div>
             </div>
-                <div style="margin-left:70.6vw; margin-top:-14.4vh;" class="card">
+                <div style="margin-left:70.6vw; margin-top:-17.1vh;" class="card">
                     <div id="totalCondemnedCard" class="card-body">
                         <h4 class="card-title">Condemned</h4>
                         <?php
@@ -263,10 +242,10 @@ include "Processes/show_notif_info.php";
                 </div>
                 
                 <!-- BAR CHART CARD -->
-                <div style="margin-left:19.5vw; margin-top:2.5vh; width:45.2vw;height:35vh;" class="cards">
+                <div style="margin-left:19.5vw; margin-top:3vh; width:45.2vw;height:35vh;" class="cards">
                     <div id="barCard" class="cards-body">
                         <h3>No. of Equipment per type</h3>
-                        <canvas id="barChart"></canvas>
+                        <canvas style="margin-top:-2vh;" id="barChart"></canvas>
 
                         <?php
 
@@ -313,66 +292,124 @@ include "Processes/show_notif_info.php";
                     </div>
                 </div>
 
-                <!-- STATUS  CARD -->
-                <div id="statusCard" style="margin-left:66.7vw; margin-top:-37vh; width:19vw;height:35vh;" class="cards">
-                <h6 style="margin-left:6.3vw; margin-top:2vh; margin-bottom:-3vh;">Equipment Status</h6>
-                    <div class="circle">
-                    <?php
-                    // Query to get total count of working items
-                    $totalWorkingItemCountQuery = 'SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = "Working"';
-                    $resultWorking = mysqli_query($conn, $totalWorkingItemCountQuery);
-                    $rowWorking = mysqli_fetch_assoc($resultWorking);
-                    $totalWorkingItems = $rowWorking['total_count'];
-                    mysqli_free_result($resultWorking);
+               <!-- STATUS CARD -->
+<div id="statusCard" style="margin-left: 66.7vw; margin-top: -37vh; width: 19vw; height: 35vh;" class="cards">
+    <div class="circle">
+        <span class="check-icon">&#10003;</span>
+        <span class="red-icon">&#33;</span>
+        <span class="exclamation-icon">&#33;</span>
 
-                    // Query to get total count of items needing repair or condemned
-                    $totalNeedRepairOrCondemnedItemCountQuery = 'SELECT COUNT(item_article) as total_count FROM school_inventory WHERE item_status = "Need Repair" OR item_status = "Condemned"';
-                    $resultRepairOrCondemned = mysqli_query($conn, $totalNeedRepairOrCondemnedItemCountQuery);
-                    $rowRepairOrCondemned = mysqli_fetch_assoc($resultRepairOrCondemned);
-                    $totalRepairOrCondemnedItems = $rowRepairOrCondemned['total_count'];
-                    mysqli_free_result($resultRepairOrCondemned);
-                    ?>
+        <?php
+        // Define MySQL queries to get counts
+        $totalWorkingQuery = "SELECT COUNT(item_code) AS total_count FROM school_inventory WHERE item_status = 'Working'";
+        $totalRepairQuery = "SELECT COUNT(item_code) AS total_count FROM school_inventory WHERE item_status = 'Need Repair'";
+        $totalCondemnedQuery = "SELECT COUNT(item_code) AS total_count FROM school_inventory WHERE item_status = 'Condemned'";
 
-                        <span class="check-icon">&#10003;</span>
-                        <span class="red-icon">&#33;</span>
-                        <span class="exclamation-icon">&#33;</span>
-                        
-                        <script>
-                        // Function to update the transition based on the percentage
-                            function TransitionTrigger() {
-                                if (<?php echo $totalWorkingItems; ?> < <?php echo $totalRepairOrCondemnedItems; ?>) {
-                                    document.querySelector('.check-icon').style.opacity = '0';
-                                    document.querySelector('.red-icon').style.opacity = '1';
-                                    document.querySelector('.exclamation-icon').style.opacity = '0'; 
-                                    document.querySelector('.circle').classList.add('red-mark');
-                                    document.querySelector('.circle').classList.remove('yellow-mark');
-                                } else if (<?php echo $totalWorkingItems; ?> === <?php echo $totalRepairOrCondemnedItems; ?>) {
-                                    document.querySelector('.check-icon').style.opacity = '0';
-                                    document.querySelector('.red-icon').style.opacity = '0';
-                                    document.querySelector('.exclamation-icon').style.opacity = '1'; 
-                                    document.querySelector('.circle').classList.remove('red-mark');
-                                    document.querySelector('.circle').classList.add('yellow-mark');
-                                } else if (<?php echo $totalWorkingItems; ?> > <?php echo $totalRepairOrCondemnedItems; ?>) {
-                                    document.querySelector('.check-icon').style.opacity = '1';
-                                    document.querySelector('.check-icon').classList.remove('yellow-mark');
-                                    document.querySelector('.red-icon').style.opacity = '0';
-                                    document.querySelector('.exclamation-icon').style.opacity = '0';
-                                    document.querySelector('.circle').classList.remove('red-mark');
-                                    document.querySelector('.circle').classList.remove('yellow-mark');
-                                }
-                            }
+        // Execute the queries
+        $totalWorkingResult = mysqli_query($conn, $totalWorkingQuery);
+        $totalRepairResult = mysqli_query($conn, $totalRepairQuery);
+        $totalCondemnedResult = mysqli_query($conn, $totalCondemnedQuery);
+
+        // Fetch counts
+        $rowWorking = mysqli_fetch_assoc($totalWorkingResult);
+        $rowRepair = mysqli_fetch_assoc($totalRepairResult);
+        $rowCondemned = mysqli_fetch_assoc($totalCondemnedResult);
+
+        // Store counts in variables
+        $totalWorkingItems = $rowWorking['total_count'];
+        $totalRepairItems = $rowRepair['total_count'];
+        $totalCondemnedItems = $rowCondemned['total_count'];
+
+        // Free results
+        mysqli_free_result($totalWorkingResult);
+        mysqli_free_result($totalRepairResult);
+        mysqli_free_result($totalCondemnedResult);
+        ?>
+        <script>
+            var totalWorkingItems = <?php echo $totalWorkingItems; ?>;
+            var totalRepairOrCondemnedItems = <?php echo ($totalRepairItems + $totalCondemnedItems); ?>;
+
+            // Function to update the transition based on the percentage
+            function updateTotals(selectedValue) {
+                // Send AJAX request to the server
+                $.ajax({
+                    url: 'Processes/filter_status_card.php', // URL to your PHP script to fetch updated totals
+                    method: 'POST',
+                    data: { selectedValue: selectedValue },
+                    success: function(response) {
+                        console.log("Response from server:", response); // Log the response
+
+                        // Parse the response JSON
+                        var responseData = JSON.parse(response);
+
+                        // Check if the response contains data
+                        if (responseData.workingCount !== undefined && responseData.repairCount !== undefined && responseData.condemnedCount !== undefined) {
+                            // Update JavaScript variables
+                            totalWorkingItems = responseData.workingCount;
+                            totalRepairOrCondemnedItems = responseData.repairCount + responseData.condemnedCount;
+                            console.log("Totals updated successfully.");
+
+                            // Call the TransitionTrigger function to update the status
                             TransitionTrigger();
+                        } else {
+                            console.error("Incomplete data received from server.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error:", error);
+                    }
+                });
+            }
 
-                        </script>
-                        
-                    </div>
-                </div>
+            function TransitionTrigger() {
+    if (totalWorkingItems < totalRepairOrCondemnedItems) {
+        document.querySelector('.check-icon').style.opacity = '0';
+        document.querySelector('.red-icon').style.opacity = '1';
+        document.querySelector('.exclamation-icon').style.opacity = '0';
+        document.querySelector('.circle').classList.add('red-mark');
+        document.querySelector('.circle').classList.remove('yellow-mark');
+    } else if (totalWorkingItems > totalRepairOrCondemnedItems) {
+        document.querySelector('.check-icon').style.opacity = '1';
+        document.querySelector('.check-icon').classList.remove('yellow-mark');
+        document.querySelector('.red-icon').style.opacity = '0';
+        document.querySelector('.exclamation-icon').style.opacity = '0';
+        document.querySelector('.circle').classList.remove('red-mark');
+        document.querySelector('.circle').classList.remove('yellow-mark');
+    } else 
+    {
+    document.querySelector('.check-icon').style.opacity = '0';
+        document.querySelector('.red-icon').style.opacity = '0';
+        document.querySelector('.exclamation-icon').style.opacity = '1';
+        document.querySelector('.circle').classList.remove('red-mark');
+        document.querySelector('.circle').classList.add('yellow-mark');
+    }
+}
+
+
+            // Update the card text and comparison when dropdown option is changed
+            $('.filter-option').on('click', function() {
+                var selectedValue = $(this).data('value');
+                console.log("Selected value:", selectedValue);
+                updateTotals(selectedValue);
+            });
+
+            // Call the JavaScript function to update the totals initially
+            $(document).ready(function() {
+                // Get the initial selected value
+                var selectedValue = "showAll";
+                console.log("Initial selected value:", selectedValue);
+                updateTotals(selectedValue);
+            });
+        </script>
+
+    </div>
+</div>
 
                 <!-- PIE CHART CARD -->
                 <div style="margin-left:19.4vw; margin-top:1vh; width:25vw;height:38vh;" class="cards">
                     <div id="pieCard" class="cards-body">
                     <h6>Item Ratio of Inventory</h6>
-                    <canvas id="pieChart"></canvas>
+                    <canvas style="margin-top:-2vh;" id="pieChart"></canvas>
 
                     <?php
 
@@ -422,7 +459,7 @@ include "Processes/show_notif_info.php";
                 <div style="margin-left:46vw; margin-top:-40.1vh; width:39.8vw;height:38vh;" class="cards">
                     <div id="lineCard" class="cards-body">
                     <h5>Monthly Inventory Stock Status</h5>
-                    <canvas id="lineChart"></canvas>
+                    <canvas style="margin-top:-2vh;" id="lineChart"></canvas>
 
                     <?php
                     $current_year = date('Y'); // Get the current year
@@ -599,53 +636,7 @@ function updateLine(selectedValue) {
 }
 
 </script>
-<script>
-    document.getElementById('notification-button').addEventListener('click', function() {
-        const popup = document.getElementById('popup-container');
-        if (popup.style.display === 'none' || popup.style.display === '') {
-            popup.style.display = 'block';
-        } else {
-            popup.style.display = 'none';
-        }
-    });
 
-    function hidePopup() {
-        document.getElementById('popup-container').style.display = 'none';
-    }
-</script>
-<script>
-    function checkForNewItems() {
-        $.ajax({
-            url: 'check_new_items.php',
-            method: 'GET',
-            success: function(response) {
-                var newItems = JSON.parse(response);
-                if (newItems.length > 0) {
-                    var itemsList = $('#newItemsList');
-                    itemsList.empty(); // Clear the list before adding new items
-                    newItems.forEach(function(item) {
-                        var listItem = $('<li></li>').text('Code: ' + item.item_code + ', Article: ' + item.item_article + ', Status: ' + item.item_status + ', Acquired: ' + item.item_date_acquired);
-                        itemsList.append(listItem);
-                    });
-                    $('#notificationPopup').show();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        // Poll for new items every 30 seconds
-        setInterval(checkForNewItems, 30000);
-
-        // Close the notification
-        $('#closeNotification').on('click', function() {
-            $('#notificationPopup').hide();
-        });
-    });
-    </script>
 
     <!-- JS FILES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>

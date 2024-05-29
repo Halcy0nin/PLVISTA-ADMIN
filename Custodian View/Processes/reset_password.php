@@ -45,9 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reset Password</title>
     <!-- CSS FILES -->
-    <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../Coordinator View/assets/css/login.css" rel="stylesheet">
+    <link href="../Custodian View/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../Custodian View/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Custodian View/assets/css/login.css" rel="stylesheet">
+    <link href="../Custodian View/assets/css/forgot_password.css" rel="stylesheet">
     <!-- bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- icon sa tab -->
@@ -56,6 +57,116 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
   <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0vh;
+    margin: 0vh;
+    box-sizing: border-box;
+}
+
+:root {
+    --linear-grad: linear-gradient(#363f44, #1f4699);
+    --grad-clr1: black;
+    --grad-clr2: #1f4699;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(#fffcf9, #1f4699);
+    display: grid;
+    place-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    position:relative;
+    width: 60vh;
+    height: 35vh;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 2.57vh 3.09vh 5.67vh #5557;
+    border-radius: 13px;
+    overflow: hidden;
+}
+.form-container{
+    position: relative;
+    width: 55vh;
+    height: 60vh;
+    padding: 0vh 4vh;
+}
+
+.infieldone {
+    position: absolute;
+    top: 8vh;
+    margin: 0.82vh 3vh;
+    width: 45vh;
+}
+.infieldtwo {
+    position: absolute;
+    top: 14vh;
+    margin: 8px 3vh;
+    width: 45vh;
+}
+input {
+    position: relative;
+    top: 0vh;
+    width: 100%;
+    padding: 1.25vh 0.83vh;
+    background-color: #f3f3f3;
+    border:none;
+    outline: none;
+}
+label {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 0.20vh;
+    background: var(--linear-grad);
+    transition: 0.4s;
+}
+input:focus ~ label {
+    width: 100%;
+}
+a {
+    position:absolute;
+    top: 30.95vh;
+    color: #333;
+    font-size: 1.46vh;
+    text-decoration: none;
+    margin: 1.57vh 0vh;
+}
+a.forgot {
+    padding-bottom: 0.31vh;
+    border-bottom: 0.20vh solid rgb(204, 204, 204);
+}
+button {
+    top: 40.62vh;
+    margin-top:17vh;
+    margin-left:8vw;
+    border-radius: 2.09vh;
+    border: 0.10vh solid var(--grad-clr2);
+    background: var(--grad-clr2);
+    color: #fff;
+    font-size: 1.25vh;
+    font-weight: bold;
+    padding: 1.25vh 4.72vh;
+    letter-spacing: 0.10vh;
+    text-transform: uppercase;
+}
+.form-container button {
+    transition: 80ms ease-in;
+}
+.form-container button:hover {
+    background: #FFF;
+    color: var(--grad-clr1)
+}
+h1 {
+    margin-top: 3vh;
+    margin-left: 5vw;
+}
         .error {
             color: red;
         }
@@ -135,20 +246,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             <?php endif; ?>
 
-            <form id="resetForm" action="process_reset_password.php" method="POST">
-                <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+            <div class="form-container reset-password-container">
+                <form id="resetForm" action="process_reset_password.php" method="POST">
 
-                <input type="password" placeholder="New Password" name="newpass" id="newpass" required>
-                <br>
-
-                <input type="password" placeholder="Confirm Password" name="confirmpass" id="confirmpass" required>
-                <br>
-
-                <input type="submit" name="resetpass" value="Reset Password">
-            </form>
+                    <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+                    <h1>Reset Password</h1>
+                <div class="infieldone">
+                    <input type="password" placeholder="New Password" name="newpass" id="newpass" required>
+                    <label></label><br>
+                </div>
+                <div class="infieldtwo">
+                    <input type="password" placeholder="Confirm Password">
+                    <label></label><br>
+                </div>
+                    <button type="submit" name="resetpass" value="Reset Password">Reset </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+        
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

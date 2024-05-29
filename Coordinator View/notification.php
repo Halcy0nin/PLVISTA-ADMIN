@@ -49,7 +49,6 @@ include "Processes/db_conn_high_school.php";
         <li class="item">
         <a href="resource_allocation_content.php">
             <i class="bi bi-pie-chart-fill"></i>Resource Allocation
-            <div class="notification" id="notificationCount"></div>
         </a>
         </li>
         <li class="item">
@@ -63,10 +62,6 @@ include "Processes/db_conn_high_school.php";
         <li class="item">
           <a href="manage_users_content.php">
           <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
-        </li>
-        <li class="item">
-          <a href="profile_content.php">
-          <i class="bi bi-person-circle"></i>Profile</a>
         </li>
         <li class="item">
           <a href="login.php">

@@ -65,10 +65,6 @@ include "Processes/resource_allocation_info.php";
           <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
         </li>
         <li class="item">
-          <a href="profile_content.php">
-          <i class="bi bi-person-circle"></i>Profile</a>
-        </li>
-        <li class="item">
           <a href="login.php">
           <i class="bi bi-box-arrow-in-left"></i>Log Out</a>
         </li>
@@ -94,9 +90,6 @@ include "Processes/resource_allocation_info.php";
             <li><a class="dropdown-item" href="#" data-value="all">Show All</a></li>
             <li><a class="dropdown-item" href="#" data-value="needrepair">Need Repair</a></li>
             <li><a class="dropdown-item" href="#" data-value="condemned">Condemned</a></li>
-            <form>
-            <input type='hidden' id='schoolidtomatch' value= "<?php echo $schoolidtomatch; ?>">
-            </form>
         </ul>
     </div>
 </div>

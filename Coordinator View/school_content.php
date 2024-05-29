@@ -49,7 +49,6 @@ include "Processes/school_info.php";
         <li class="item">
         <a href="resource_allocation_content.php">
             <i class="bi bi-pie-chart-fill"></i>Resource Allocation
-            <div class="notification" id="notificationCount"></div>
         </a>
         </li>
         <li class="item">
@@ -63,10 +62,6 @@ include "Processes/school_info.php";
         <li class="item">
           <a href="manage_users_content.php">
           <i class="bi bi-person-vcard-fill"></i>Manage Users</a>
-        </li>
-        <li class="item">
-          <a href="profile_content.php">
-          <i class="bi bi-person-circle"></i>Profile</a>
         </li>
         <li class="item">
           <a href="login.php">
@@ -84,7 +79,7 @@ include "Processes/school_info.php";
             <div class = "col">
             <!-- search bar -->
             <div class = "container d-flex">
-                <div style = "width:260px; margin-left: -1.5vw;" class="input-group rounded">
+                <div style = "width:260px; margin-left: -10vw;" class="input-group rounded">
                     <input  type="text" id = "searchschool" name = "searchschool" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <i class="bi bi-search"></i>
@@ -176,7 +171,7 @@ include "Processes/school_info.php";
         </div>
         </div>
             <!-- export data button -->
-        <button style = "margin-right: 6vw; margin-bottom: 0px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+        <button style = "margin-right: -2vw; margin-bottom: 0px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
             Export
         </button>
 
@@ -211,7 +206,7 @@ include "Processes/school_info.php";
 </div>
 <div id="schooltable" class="container mt-5">
     <!-- Table showing all school info in the database -->
-    <table style="width: 1300px; margin-left: -6vw;" class="table table-striped centerTable">
+    <table style="width: 1200px; margin-left: -12vw;" class="table table-striped centerTable">
         <thead class="thead-light">
             <tr class="text-center">
                 <th style="width: 10%;" scope="col">School Name</th>

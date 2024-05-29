@@ -2,16 +2,25 @@
 
 include('db_conn_high_school.php');
 
-    $selectuserinfo = 'SELECT * FROM formatted_users ORDER BY user_id LIMIT 10';
+// Number of items per page
+$itemsPerPage = 10;
 
-    //make query and get results using the parameters (connection to be used, query to be used)
-    $result = mysqli_query($conn, $selectuserinfo);
+// Current page number, default to 1 if not set
+$users_current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-    //fetch resulting rows as an array using the parameters (array to be used, MYSQLI_ASSOC)
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+// Calculate the offset for the SQL query
+$offset = ($users_current_page  - 1) * $itemsPerPage;
 
-    //releases results to avoid stacking up memory
-    mysqli_free_result($result);
+// Query to get total number of rows
+$totalRowsQuery = 'SELECT COUNT(*) AS total FROM formatted_users';
+$totalRowsResult = mysqli_query($conn, $totalRowsQuery);
+$totalRows = mysqli_fetch_assoc($totalRowsResult)['total'];
 
+// Calculate total pages
+$userTotalPages = ceil($totalRows / $itemsPerPage);
 
-?>
+// Query to fetch data with pagination
+$selectuserinfo = "SELECT * FROM formatted_users ORDER BY user_id LIMIT $offset, $itemsPerPage";
+$result = mysqli_query($conn, $selectuserinfo);
+$users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_free_result($result);

@@ -422,27 +422,29 @@ $(document).ready(function() {
 
         </script>
 
-<?php }
-?>
+
                 <div style="position: fixed; bottom: 20px; right: 4vw;" class="container d-flex justify-content-end">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="school_inventory.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-                            </li>
+                <nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="school_inventory.php?inventoryid=<?php echo $schoolidtomatch; ?>&inventoryname=<?php echo urlencode($inventoryname); ?>&page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+        </li>
 
-                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                                <li class="page-item">
-                                    <a class="page-link" href="school_inventory.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
-                            <?php endfor; ?>
-                                <li class="page-item">
-                                    <a class="page-link" href="school_inventory.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-                                </li>
-                         </ul>
-                    </nav>
+        <?php for ($i = 1;$i <= $totalPages;$i++): ?>
+            <li class="page-item">
+                <a class="page-link" href="school_inventory.php?inventoryid=<?php echo $schoolidtomatch; ?>&inventoryname=<?php echo urlencode($inventoryname); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            </li>
+        <?php
+endfor; ?>
+
+        <li class="page-item">
+            <a class="page-link" href="school_inventory.php?inventoryid=<?php echo $schoolidtomatch; ?>&inventoryname=<?php echo urlencode($inventoryname); ?>&page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+        </li>
+    </ul>
+</nav>
                 </div>
-
+                <?php }
+?>
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -461,24 +463,26 @@ $(document).ready(function() {
         };
     };
 
-    var updateTableVisibility = debounceFunction(function() {
-        var searchitem = $("#searchitemfield").val().toLowerCase(); // Convert to lowercase for case-insensitive search
-        $("#tablecontent tr").each(function(index) {
-            if (index === 0) {
-                $(this).show(); // Show the header row
-            } else {
-                var rowText = $(this).text().toLowerCase(); // Convert row text to lowercase
-                if (rowText.includes(searchitem)) {
-                    $(this).show(); // Show the row if it contains the search string
-                } else {
-                    $(this).hide(); // Hide the row if it doesn't contain the search string
+    var updateTableContent = debounceFunction(function() {
+        var searchitem = $("#searchitemfield").val();
+        if (searchitem !== "") {
+            $.ajax({
+                url: "search_item.php",
+                method: "POST",
+                data: {
+                    searchitem: searchitem,
+                    schoolid: schoolid
+                },
+                success: function(data) {
+                    $("#tablecontent").html(data);
                 }
-            }
-        });
+            });
+        } else {
+            $("#tablecontent").html(defaultTableContent);
+        }
     }, 300); // Reduced delay to 300ms
 
-    // Attach keyup event listener directly to the search input
-    $("#searchitemfield").on("keyup", updateTableVisibility);
+    $(document).on("keyup", "#searchitemfield", updateTableContent);
 });
         </script>
 

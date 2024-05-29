@@ -40,7 +40,6 @@
         <li class="item">
         <a href="resource_allocation_content.php">
             <i class="bi bi-pie-chart-fill"></i>Resource Allocation
-            <div class="notification" id="notificationCount"></div>
         </a>
         </li>
         <li class="item">
@@ -101,12 +100,6 @@
 
                                 <label for=pass>Password</label>
                                 <input type="password" class="form-control" id="pass">
-
-                            </div>
-                            <div class="form-group ">
-
-                                <label for=birthday>Birthday</label>
-                                <input type="date" class="form-control" id="birthday">
 
                             </div>
                             
