@@ -1,19 +1,4 @@
 <?php
-
-// Determine which tab is active
-$active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'users';
-
-// Set different pagination parameters based on the active tab
-if ($active_tab === 'users') {
-    $pagination_param = 'page'; // Use 'page' for users tab
-} elseif ($active_tab === 'pendingrequests') {
-    $pagination_param = 'pending_page'; // Use 'pending_page' for pending requests tab
-} elseif ($active_tab === 'approvedrequests') {
-    $pagination_param = 'approved_page'; // Use 'approved_page' for approved requests tab
-} elseif ($active_tab === 'deniedrequests') {
-    $pagination_param = 'denied_page'; // Use 'denied_page' for denied requests tab
-}
-
 include "Processes/users_info.php";
 include "Processes/show_approved_requests.php";
 include "Processes/show_denied_requests.php";
@@ -182,7 +167,8 @@ include "Processes/show_pending_requests.php";
         
         <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
-             <!-- Table showing all user info in the database -->
+        <div style="height: 300px; overflow-y: auto;">     
+        <!-- Table showing all user info in the database -->
          <table style="width:90%; margin-left: auto; margin-right: auto;margin-top:-3vh;" class = "table table-striped centerTable">
         <thead class="thead-light">
             <tr>
@@ -284,32 +270,16 @@ include "Processes/show_pending_requests.php";
                                     </div>
                                 </div>
                                 </div>
+
                                 <?php } ?>
-                                <div class = "container d-flex justify-content-end">
-                                <nav style="position: fixed; bottom: 7vh; right: 19.5vw;"aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo max($users_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
-            </li>
-
-            <?php for ($i = 1; $i <= $userTotalPages; $i++) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo min($users_current_page + 1, $userTotalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
-            </li>
-        </ul>
-    </nav>
-            </div>
     </table>
+        </div>
         </div>
 
 
         <div class="tab-pane fade" id="nav-pendingrequests" role="tabpanel" aria-labelledby="nav-pendingrequests-tab" tabindex="0">
-            <!-- Table showing all user info in the database -->
+        <div style="height: 300px; overflow-y: auto;">    
+        <!-- Table showing all user info in the database -->
     <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:-3vh;" class = "table table-striped centerTable">
             <thead class="thead-light">
                 <tr>
@@ -372,31 +342,13 @@ include "Processes/show_pending_requests.php";
         </div>
     </div>
 <?php } }?>
-<div class = "container d-flex justify-content-end">
-<nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo max($pending_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
-            </li>
-
-            <?php for ($i = 1; $i <= $pendingTotalPages; $i++) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo min($pending_current_page + 1, $pendingTotalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
-            </li>
-        </ul>
-    </nav>
-            </div>
         </table>
-        
+        </div>
         </div>
 
         <div class="tab-pane fade" id="nav-approvedrequests" role="tabpanel" aria-labelledby="nav-approvedrequests-tab" tabindex="0">
-            <!-- Table showing all user info in the database -->
+        <div style="height: 300px; overflow-y: auto;">    
+        <!-- Table showing all user info in the database -->
     <table style="width:90%; margin-left: auto; margin-right: auto;margin-top:-3vh;" class = "table table-striped centerTable">
             <thead class="thead-light">
                 <tr>
@@ -414,31 +366,15 @@ include "Processes/show_pending_requests.php";
         </tr>
 
         <?php } ?>
-        <div class = "container d-flex justify-content-end">
-        <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo max($approved_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
-            </li>
-
-            <?php for ($i = 1; $i <= $approvedTotalPages; $i++) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo min($approved_current_page + 1, $approvedTotalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
-            </li>
-        </ul>
-    </nav>
-            </div>
+    
         </table>
+        </div>
         </div>
 
 
         <div class="tab-pane fade" id="nav-deniedrequests" role="tabpanel" aria-labelledby="nav-deniedrequests-tab" tabindex="0">
-            <!-- Table showing all user info in the database -->
+        <div style="height: 300px; overflow-y: auto;">    
+        <!-- Table showing all user info in the database -->
     <table style="width:90%; margin-left: auto; margin-right: auto;margin-top:-3vh;" class = "table table-striped centerTable">
             <thead class="thead-light">
                 <tr>
@@ -457,28 +393,9 @@ include "Processes/show_pending_requests.php";
         </tr>
 
         <?php } ?>
-        <div class = "container d-flex justify-content-end">
-        <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo max($denied_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
-            </li>
-
-            <?php for ($i = 1; $i <= $deniedTotalPages; $i++) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <li class="page-item">
-                <a class="page-link" href="manage_users_content.php?tab=<?php echo $active_tab; ?>&<?php echo min($denied_current_page + 1, $deniedTotalPages); ?>" style="border-left: 1px solid #dee2e6;">Next</a>
-            </li>
-        </ul>
-            </nav>
-            </div>
         </table>
         </div>
-        
+        </div>
         </div>
 
 
