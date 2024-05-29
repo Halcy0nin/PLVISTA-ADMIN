@@ -16,7 +16,7 @@ $totalRequestsResult = mysqli_query($conn, $totalRequestsQuery);
 $totalRequests = mysqli_fetch_assoc($totalRequestsResult)['total'];
 
 // Calculate total pages
-$totalPages = ceil($totalRequests / $itemsPerPage);
+$approvedTotalPages = ceil($totalRequests / $itemsPerPage);
 
 // Query to fetch approved requests with pagination
 $selectapproved = "SELECT * FROM profile_edit_requests WHERE request_status = 'Approved' ORDER BY request_id LIMIT $offset, $itemsPerPage";

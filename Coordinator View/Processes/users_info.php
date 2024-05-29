@@ -3,7 +3,7 @@
 include('db_conn_high_school.php');
 
 // Number of items per page
-$itemsPerPage = 10;
+$itemsPerPage = 5;
 
 // Current page number, default to 1 if not set
 $users_current_page = isset($_GET['page']) ? $_GET['page'] : 1;
