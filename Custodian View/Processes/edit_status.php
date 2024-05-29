@@ -1,7 +1,7 @@
 <?php
 
 // Connect to database (using the parameters localhost, username, password, and database to be used)
-$conn = mysqli_connect('localhost','root','', 'sdo_high_schools_ict_equipment');
+include '../../Coordinator View/Processes/db_conn_high_school.php';
 
 // Check connection
 if (!$conn) {

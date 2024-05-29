@@ -225,12 +225,12 @@ if (isset($_GET["school_id"]))
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                         <form action = "Processes/export_inventory_excel.php" method = "POST">
                         <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $schoolname; ?>">
                         <button type="submit" name = "exportExcel" class="btn btn-primary">Save as spreadsheet</button>
                         </form>
                         <form action = "Processes/export_inventory_pdf.php" method = "POST">
                         <input type='hidden' name='schoolid' value= "<?php echo $schoolidtomatch; ?>">
-                        <input type='hidden' name='schoolname' value= "<?php echo $inventoryname; ?>">
+                        <input type='hidden' name='schoolname' value= "<?php echo $schoolname; ?>">
                         <button type="submit" name = "exportPDF" class="btn btn-primary">Save as PDF</button>
                         </form>
                     </div>
@@ -483,7 +483,6 @@ if (isset($_GET["school_id"]))
         </body>
 
 <!-- Jquery script for detecting input in searchbar and displaying results on it -->
-<!-- Jquery script for detecting input in searchbar and displaying results on it -->
 <script type="text/javascript"> 
 $(document).ready(function() {
     var defaultTableContent = $("#tablecontent").html();
@@ -501,24 +500,26 @@ $(document).ready(function() {
         };
     };
 
-    var updateTableVisibility = debounceFunction(function() {
-        var searchitem = $("#searchitemfield").val().toLowerCase(); // Convert to lowercase for case-insensitive search
-        $("#tablecontent tr").each(function(index) {
-            if (index === 0) {
-                $(this).show(); // Show the header row
-            } else {
-                var rowText = $(this).text().toLowerCase(); // Convert row text to lowercase
-                if (rowText.includes(searchitem)) {
-                    $(this).show(); // Show the row if it contains the search string
-                } else {
-                    $(this).hide(); // Hide the row if it doesn't contain the search string
+    var updateTableContent = debounceFunction(function() {
+        var searchitem = $("#searchitemfield").val();
+        if (searchitem !== "") {
+            $.ajax({
+                url: "Processes/search_inventory.php",
+                method: "POST",
+                data: {
+                    searchitem: searchitem,
+                    schoolid: schoolid
+                },
+                success: function(data) {
+                    $("#tablecontent").html(data);
                 }
-            }
-        });
+            });
+        } else {
+            $("#tablecontent").html(defaultTableContent);
+        }
     }, 300); // Reduced delay to 300ms
 
-    // Attach keyup event listener directly to the search input
-    $("#searchitemfield").on("keyup", updateTableVisibility);
+    $(document).on("keyup", "#searchitemfield", updateTableContent);
 });
         </script>
         
@@ -559,36 +560,23 @@ $(document).ready(function() {
 ?>
 
 <div style="position: fixed; bottom: 1vh; right: 1vw;" class="container d-flex justify-content-end">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="custodianinventory.php?page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
-                </li>
-                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="custodianinventory.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-                <?php endfor; ?>
-                <li class="page-item">
-                    <a class="page-link" href="custodianinventory.php?page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <script>
-    document.getElementById('notification-button').addEventListener('click', function() {
-        const popup = document.getElementById('popup-container');
-        if (popup.style.display === 'none' || popup.style.display === '') {
-            popup.style.display = 'block';
-        } else {
-            popup.style.display = 'none';
-        }
-    });
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="school_inventory_content.php?school_id=<?php echo urlencode($schoolid); ?>&page=<?php echo max($current_page - 1, 1); ?>">Previous</a>
+            </li>
+            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+            <li class="page-item">
+                <a class="page-link" href="school_inventory_content.php?school_id=<?php echo urlencode($schoolid); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            </li>
+            <?php endfor; ?>
+            <li class="page-item">
+                <a class="page-link" href="school_inventory_content.php?school_id=<?php echo urlencode($schoolid); ?>&page=<?php echo min($current_page + 1, $totalPages); ?>">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
-    function hidePopup() {
-        document.getElementById('popup-container').style.display = 'none';
-    }
-</script>
   <!-- JS FILES -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
