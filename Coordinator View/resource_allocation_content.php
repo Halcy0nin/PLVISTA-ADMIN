@@ -20,7 +20,8 @@ include "Processes/resource_allocation_info.php";
     <link href="../Coordinator View/assets/css/resource_allocation.css" rel="stylesheet">
     <link href="../Coordinator View/assets/css/modal.css" rel="stylesheet">
 
-
+       <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
 
   <!-- bootstrap icons-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

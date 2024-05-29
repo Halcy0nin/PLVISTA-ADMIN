@@ -27,7 +27,7 @@ if ($stmt->affected_rows) {
     $mail->addAddress($email);
     $mail->Subject = "Password Reset";
     $mail->Body = <<<END
-Click <a href = "http://localhost/sdovalenzuelainventory/SDO-Val-Inventory-Management/Custodian%20View/Processes/reset_password.php?token=$token">here</a>
+Click <a href = "http://localhost/SDO-Val-Inventory-Management-main/Custodian%20View/Processes/reset_password.php?token=$token">here</a>
 to reset your password
 END;
     try {
@@ -86,7 +86,7 @@ body {
     padding: 0vh 4vh;
 }
 button {
-    margin-left: 6.5vw;
+    margin-left: 7.5vw;
     margin-bottom: -5vh;
     border-radius: 2.09vh;
     border: 0.10vh solid var(--grad-clr2);
@@ -98,6 +98,7 @@ button {
     letter-spacing: 0.10vh;
     text-transform: uppercase;
     text-decoration:none;
+    z-index: 2;
 }
 
 button a {
@@ -114,7 +115,8 @@ button a {
 }
 h1 {
             text-align: center;
-            margin-top: 4vh;
+            font-size: 26px;
+            margin-top: 5vh;
             margin-left: 0vw;
         }
     </style>

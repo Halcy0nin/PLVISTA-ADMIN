@@ -17,6 +17,8 @@ include "Processes/db_conn_high_school.php";
     <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Coordinator View/assets/css/resource_allocation.css" rel="stylesheet">
     <link href="../Coordinator View/assets/css/modal.css" rel="stylesheet">
+       <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
 
 
 

@@ -13,6 +13,8 @@
   <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../Coordinator View/assets/css/login.css" rel="stylesheet">
   <link href="../Coordinator View/assets/css/forgot_password.css" rel="stylesheet">
+     <!-- icon sa tab -->
+     <link rel="icon" type="images/x-icon" href="sdo.png"/>
 
   <!-- bootstrap icons-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

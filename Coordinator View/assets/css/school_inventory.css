@@ -13,14 +13,14 @@
 
 .navbar {
   position: fixed;
-  top: 0%;
-  margin-top: -1vh;
+  top: 1%;
+  margin-top: -2vh;
   margin-bottom: -10vh;
   z-index: -1;
 }
 .menu .main-menu {
     width: 100vw;
-    height: 10vh;
+    height: 12vh;
     background-color: #303952;
     position: sticky;
     z-index: -1;

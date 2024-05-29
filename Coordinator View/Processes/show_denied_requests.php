@@ -2,7 +2,7 @@
 
 include('db_conn_high_school.php');
 
-    $selectdenied = "SELECT * FROM profile_edit_requests WHERE request_status = 'Denied' ORDER BY request_id LIMIT 10";
+    $selectdenied = "SELECT * FROM profile_edit_requests WHERE request_status = 'Denied' ORDER BY request_id LIMIT 5";
 
     //make query and get results using the parameters (connection to be used, query to be used)
     $result = mysqli_query($conn, $selectdenied);

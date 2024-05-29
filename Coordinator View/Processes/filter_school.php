@@ -69,7 +69,7 @@ if (isset($_POST["filterValue"])) {
 
     <div id="schooltable" class="container mt-5">
     <!-- Table showing all school info in the database -->
-    <table style="width: 1300px; margin-left: -6.5vw;" class="table table-striped centerTable">
+    <table style="width: 1200px; margin-left: -12.9vw;" class="table table-striped centerTable">
         <thead class="thead-light">
             <tr class="text-center">
                 <th style="width: 10%;" scope="col">School Name</th>

@@ -17,6 +17,8 @@ include "Processes/db_conn_high_school.php";
     <link href="../Coordinator View/assets/css/bootstrap.css" rel="stylesheet">
     <link href="../Coordinator View/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Coordinator View/assets/css/dashboard.css" rel="stylesheet">
+       <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
 
 
 
@@ -114,7 +116,7 @@ include "Processes/db_conn_high_school.php";
             </div>
         
             <div class="container">
-                <div style="margin-left:3vw; margin-top:-1vh;" class="card">
+                <div style="margin-left:3vw; margin-bottom:7vh; height: 11vh;" class="card">
                     <div id="totalNumCard" class="card-body">
                         <h1 class="card-title">Total No. of Equipment</h1>
                         <?php
@@ -147,7 +149,7 @@ include "Processes/db_conn_high_school.php";
                 </div>
             </div>
 
-                <div style="margin-left:34.4vw; margin-top:-17vh;" class="card">
+                <div style="margin-left:34.4vw; margin-top:-20.7vh; height: 11vh;" class="card">
                     <div id="totalWorkingCard" class="card-body">
                         <h4 class="card-title">Working</h4>
                         <?php
@@ -179,7 +181,7 @@ include "Processes/db_conn_high_school.php";
                 </div>
             </div>
 
-                <div style="margin-left:52.4vw; margin-top:-17.1vh;" class="card">
+                <div style="margin-left:52.4vw; margin-top:-16.5vh; height: 11vh;" class="card">
                     <div id="totalRepairCard"class="card-body">
                         <h4 class="card-title">Need Repair</h4>
                         <?php
@@ -210,7 +212,7 @@ include "Processes/db_conn_high_school.php";
                     </div>
                 </div>
             </div>
-                <div style="margin-left:70.6vw; margin-top:-17.1vh;" class="card">
+                <div style="margin-left:70.6vw; margin-top:-16.5vh;height: 11vh;" class="card">
                     <div id="totalCondemnedCard" class="card-body">
                         <h4 class="card-title">Condemned</h4>
                         <?php
@@ -242,7 +244,7 @@ include "Processes/db_conn_high_school.php";
                 </div>
                 
                 <!-- BAR CHART CARD -->
-                <div style="margin-left:19.5vw; margin-top:3vh; width:45.2vw;height:35vh;" class="cards">
+                <div style="margin-left:19.5vw; margin-top:4vh; width:45.2vw;height:35vh;" class="cards">
                     <div id="barCard" class="cards-body">
                         <h3>No. of Equipment per type</h3>
                         <canvas style="margin-top:-2vh;" id="barChart"></canvas>
@@ -294,7 +296,8 @@ include "Processes/db_conn_high_school.php";
 
                <!-- STATUS CARD -->
 <div id="statusCard" style="margin-left: 66.7vw; margin-top: -37vh; width: 19vw; height: 35vh;" class="cards">
-    <div class="circle">
+<h4 style="  font-size: 14px; margin-left: 4.5vw; margin-top: 3vh;" class="card-title">Total No. of Equipment</h4>
+    <div style="margin-left: 4vw; margin-top: 3vh;"class="circle">
         <span class="check-icon">&#10003;</span>
         <span class="red-icon">&#33;</span>
         <span class="exclamation-icon">&#33;</span>

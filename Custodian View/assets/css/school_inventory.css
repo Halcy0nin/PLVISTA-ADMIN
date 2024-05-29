@@ -120,6 +120,105 @@
   flex: 1;
   padding: 20px; /* Adjust padding as needed */
 }
+.edit-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color:#198754;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.edit-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.edit-svgIcon path {
+  fill: white;
+}
+
+.edit-button:hover {
+  border-radius: 50px;
+  background-color: #157347; /* Slightly darker green */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.delete-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color:#DC3545;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.delete-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.delete-svgIcon path {
+  fill: white;
+}
+
+.delete-button:hover {
+  border-radius: 50px;
+  background-color: #c82333; /* Slightly darker red */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.view-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color:#0D6EFD;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.view-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.view-svgIcon path {
+  fill: white;
+}
+
+.view-button:hover {
+  border-radius: 50px;
+  background-color: #0b5ed7; /* Slightly darker blue */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
 
 /* Responsive Styles */
 @media screen and (max-width: 1200px) {

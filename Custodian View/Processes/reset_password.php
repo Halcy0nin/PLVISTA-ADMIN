@@ -145,7 +145,7 @@ a.forgot {
 button {
     top: 40.62vh;
     margin-top:17vh;
-    margin-left:8vw;
+    margin-left:8.5vw;
     border-radius: 2.09vh;
     border: 0.10vh solid var(--grad-clr2);
     background: var(--grad-clr2);
@@ -155,6 +155,7 @@ button {
     padding: 1.25vh 4.72vh;
     letter-spacing: 0.10vh;
     text-transform: uppercase;
+    font-size: 13px;
 }
 .form-container button {
     transition: 80ms ease-in;
@@ -165,7 +166,8 @@ button {
 }
 h1 {
     margin-top: 3vh;
-    margin-left: 5vw;
+    margin-left: 4vw;
+    font-size: 32px;
 }
         .error {
             color: red;

@@ -20,14 +20,11 @@ if (isset($_GET["inventoryid"]))
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+       <!-- icon sa tab -->
+  <link rel="icon" type="images/x-icon" href="sdo.png"/>
     
     <!--Importing jquery-->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
-
-
-
-
 </head>
 <body>
 <nav class="navbar"> 
@@ -47,12 +44,12 @@ if (isset($_GET["inventoryid"]))
         <?php if (isset($_GET["inventoryname"]))
     {
         $inventoryname = $_GET["inventoryname"];
-        echo '<h1 style="margin-left: 5vw; margin-bottom: -2vh;color:white;">' . $inventoryname . "'s Inventory</h1>";
+        echo '<h1 style="margin-left: 5vw; margin-top: -1vh;color:white;">' . $inventoryname . "'s Inventory</h1>";
     } ?>
     </div>
             
  <!-- export data button -->
- <button style = "margin-left: 90vw; margin-top: 9vh; margin-bottom:0%;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
+ <button style = "margin-left: 90vw; margin-top: 9vh; margin-bottom:-1vh;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportSchool">
             Export
         </button>
 
@@ -85,7 +82,7 @@ if (isset($_GET["inventoryid"]))
         </div>
 
           <!-- Button for add item -->
-          <button style = "margin-left: 79.7vw; margin-top: -7vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
+          <button style = "margin-left: 77vw; margin-top: -7vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">
         Add Item
         </button><br>
 
@@ -103,7 +100,7 @@ if (isset($_GET["inventoryid"]))
         <div>
             <div class="container d-flex">
                 <div class="dropdown">
-                    <button style="margin-left: 3vw; margin-top: -6.4vh" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button style="margin-left: 15vw; margin-top: -9.4vh" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Filter
                 </button>
         <ul class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton">
@@ -181,7 +178,7 @@ if (isset($_GET["inventoryid"]))
         </div>
 
          <!-- import data button -->
-        <button style = "margin-left: 85.3vw; margin-top: -10.4vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
+        <button style = "margin-left: 84vw; margin-top: -15.8vh; margin-bottom:0%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importData">
             Import
         </button>
 

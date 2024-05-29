@@ -80,7 +80,6 @@ include "Processes/show_pending_requests.php";
         <div class = "containers">
         <h3 class = "mx-3">Manage Users</h3>
         <br>
-        <?php echo $pendingTotalPages; ?>
         <div class = "row">
             <div class = "col">
             <!-- search bar -->
@@ -92,11 +91,6 @@ include "Processes/show_pending_requests.php";
                     </span>
                 </div>
             <div>
-
-            <!-- Dropdown filter for role -->
-            <div class="container d-flex justify-content-center">
-
-            </div>
             </div>
     </div>
 
@@ -162,7 +156,7 @@ include "Processes/show_pending_requests.php";
 
 
     <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <div style="margin-top:-2vh;" class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="true">Users</button>
             <button class="nav-link" id="nav-pendingrequests-tab" data-bs-toggle="tab" data-bs-target="#nav-pendingrequests" type="button" role="tab" aria-controls="nav-pendingrequests" aria-selected="false">Pending Requests</button>
             <button class="nav-link" id="nav-approvedrequests-tab" data-bs-toggle="tab" data-bs-target="#nav-approvedrequests" type="button" role="tab" aria-controls="nav-approvedrequests" aria-selected="false">Approved Requests</button>
@@ -174,7 +168,7 @@ include "Processes/show_pending_requests.php";
         <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
              <!-- Table showing all user info in the database -->
-         <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
+         <table style="width:90%; margin-left: auto; margin-right: auto;margin-top:-3vh;" class = "table table-striped centerTable">
         <thead class="thead-light">
             <tr>
                 <th scope="col">User ID</th>
@@ -277,7 +271,7 @@ include "Processes/show_pending_requests.php";
                                 </div>
                                 <?php } ?>
                                 <div class = "container d-flex justify-content-end">
-                                <nav style="position: fixed; bottom: 7vh; right: 19.5vw;" aria-label="Page navigation example">
+                                <nav style="position: fixed; bottom: 7vh; right: 19.5vw;"aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link" href="manage_users_content.php?page=<?php echo max($users_current_page - 1, 1); ?>" style="border-right: 1px solid #dee2e6;">Previous</a>
@@ -301,7 +295,7 @@ include "Processes/show_pending_requests.php";
 
         <div class="tab-pane fade" id="nav-pendingrequests" role="tabpanel" aria-labelledby="nav-pendingrequests-tab" tabindex="0">
             <!-- Table showing all user info in the database -->
-    <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
+    <table style="width:90%; margin-left: auto; margin-right: auto; margin-top:-3vh;" class = "table table-striped centerTable">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Request ID</th>
@@ -388,7 +382,7 @@ include "Processes/show_pending_requests.php";
 
         <div class="tab-pane fade" id="nav-approvedrequests" role="tabpanel" aria-labelledby="nav-approvedrequests-tab" tabindex="0">
             <!-- Table showing all user info in the database -->
-    <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
+    <table style="width:90%; margin-left: auto; margin-right: auto;margin-top:-3vh;" class = "table table-striped centerTable">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Request ID</th>
@@ -429,7 +423,7 @@ include "Processes/show_pending_requests.php";
 
         <div class="tab-pane fade" id="nav-deniedrequests" role="tabpanel" aria-labelledby="nav-deniedrequests-tab" tabindex="0">
             <!-- Table showing all user info in the database -->
-    <table style="width:90%; margin-left: auto; margin-right: auto;" class = "table table-striped centerTable">
+    <table style="width:90%; margin-left: auto; margin-right: auto;margin-top:-3vh;" class = "table table-striped centerTable">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Request ID</th>
