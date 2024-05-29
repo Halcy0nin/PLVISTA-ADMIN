@@ -429,26 +429,26 @@ $(document).ready(function() {
         };
     };
 
-    var updateTableVisibility = debounceFunction(function() {
-        var searchschool = $("#searchschool").val().toLowerCase(); // Convert to lowercase for case-insensitive search
-        $("#schooltable tr").each(function(index) {
-            if (index === 0) {
-                $(this).show(); // Show the header row
-            } else {
-                var rowText = $(this).text().toLowerCase(); // Convert row text to lowercase
-                if (rowText.includes(searchschool)) {
-                    $(this).show(); // Show the row if it contains the search string
-                } else {
-                    $(this).hide(); // Hide the row if it doesn't contain the search string
+    var updateTableContent = debounceFunction(function() {
+        var searchschool = $("#searchschool").val();
+        if (searchschool !== "") {
+            $.ajax({
+                url: "Processes/search_school.php",
+                method: "POST",
+                data: {
+                    searchschool: searchschool
+                },
+                success: function(data) {
+                    $("#schooltable").html(data);
                 }
-            }
-        });
+            });
+        } else {
+            $("#schooltable").html(defaultTableContent);
+        }
     }, 300); // Reduced delay to 300ms
 
-    // Attach keyup event listener directly to the search input
-    $("#searchschool").on("keyup", updateTableVisibility);
+    $(document).on("keyup", "#searchschool", updateTableContent);
 });
-
         </script>
 
 <script>

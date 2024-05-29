@@ -447,6 +447,7 @@ endfor; ?>
 $(document).ready(function() {
     var defaultTableContent = $("#tablecontent").html();
     var schoolid = "<?php echo $schoolidtomatch; ?>";
+    var inventoryname = "<?php echo $inventoryname?>";
 
     var debounceFunction = function(func, delay) {
         var timeout;
@@ -464,11 +465,12 @@ $(document).ready(function() {
         var searchitem = $("#searchitemfield").val();
         if (searchitem !== "") {
             $.ajax({
-                url: "search_item.php",
+                url: "Processes/search_school_inventory.php",
                 method: "POST",
                 data: {
                     searchitem: searchitem,
-                    schoolid: schoolid
+                    schoolid: schoolid,
+                    inventoryname: inventoryname
                 },
                 success: function(data) {
                     $("#tablecontent").html(data);
@@ -489,6 +491,7 @@ $(document).ready(function() {
         $(".dropdown-item").on("click", function() {
             var selectedValue = $(this).data("value"); // Get the value from data-value attribute
             var schoolidtomatch = $("#schoolidtomatch").val(); // Get the value of schoolidtomatch
+            var inventoryname = "<?php echo $inventoryname?>";
 
             // Hide the table while loading
             $("#tablecontent").hide();
@@ -499,7 +502,8 @@ $(document).ready(function() {
                 method: "POST",
                 data: {
                     filterValue: selectedValue, // Filter value
-                    schoolidtomatch: schoolidtomatch // schoolidtomatch value
+                    schoolidtomatch: schoolidtomatch,
+                    inventoryname: inventoryname // schoolidtomatch value
                 },
                 success: function(response) {
                     // Handle success response
