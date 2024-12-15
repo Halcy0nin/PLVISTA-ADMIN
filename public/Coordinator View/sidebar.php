@@ -25,7 +25,7 @@
             <i class="bi bi-bar-chart-steps"></i>Activity Log</a>
         </li>
         <li class="item">
-          <a href="login.php">
+          <a href="../index.php">
           <i class="bi bi-box-arrow-in-left"></i>Log Out</a>
         </li>
       </ul>
