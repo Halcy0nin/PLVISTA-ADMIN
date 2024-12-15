@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.content {
+  padding: 60px; /* Adjust padding as needed */
+  margin-left: 15%; /* Ensure content starts after the sidebar */
+}
+
+.nav-tabs {
+  padding: 2%;
+  margin-left: 0vw;
+}
+
+.tab-content {
+  padding: 2%;
+  margin-left: -3vw;
+}
+.notification {
+  position: absolute;
+  top: 28vh;
+  right: 2.5vw;
+  background-color: red;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.edit-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color:#198754;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.edit-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.edit-svgIcon path {
+  fill: white;
+}
+
+.edit-button:hover {
+  border-radius: 50px;
+  background-color: #157347; /* Slightly darker green */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.delete-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color:#DC3545;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.delete-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.delete-svgIcon path {
+  fill: white;
+}
+
+.delete-button:hover {
+  border-radius: 50px;
+  background-color: #c82333; /* Slightly darker red */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+.view-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color:#0D6EFD;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.view-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.view-svgIcon path {
+  fill: white;
+}
+
+.view-button:hover {
+  border-radius: 50px;
+  background-color: #0b5ed7; /* Slightly darker blue */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1200px) {
+  .menu .main-menu {
+    width: 18vw;
+  }
+
+  .content {
+    padding: 50px;
+    margin-left: 18vw;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .menu .main-menu {
+    width: 25vw;
+  }
+
+  .content {
+    padding: 40px;
+    margin-left: 25vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .menu .main-menu {
+    width: 30vw;
+  }
+
+  .content {
+    padding: 30px;
+    margin-left: 30vw;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .menu .main-menu {
+    width: 40vw;
+  }
+
+  .content {
+    padding: 20px;
+    margin-left: 40vw;
+  }
+}

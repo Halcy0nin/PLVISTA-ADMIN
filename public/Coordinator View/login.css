@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0vh;
+    margin: 0vh;
+    box-sizing: border-box;
+}
+
+:root {
+    --linear-grad: linear-gradient(#363f44, #2d8ac4);
+    --grad-clr1: black;
+    --grad-clr2: #2d8ac4;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(#fffcf9, #2d8ac4);
+    display: grid;
+    place-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    position:relative;
+    width: 95vh;
+    height: 50vh;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 2.57vh 3.09vh 5.67vh #5557;
+    border-radius: 13px;
+    overflow: hidden;
+}
+.form-container{
+    position: relative;
+    width: 55vh;
+    height: 60vh;
+    padding: 0vh 4vh;
+}
+.sign-in-container{
+    z-index: 2;
+}
+form {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0vh 23vh;
+}
+h1 {
+    color: black;
+    font-size: 2.94vh;
+    font-weight: bold;
+    position: absolute;
+    top: 10.49vh;
+    left: 22.03vh;
+}
+h3 {
+    color: #fff;
+    font-size: 4.19vh;
+    font-weight: bold;
+    position: absolute;
+    top: 12.59vh;
+}
+.infieldone {
+    position: absolute;
+    top: 17vh;
+    margin: 0.82vh 0vh;
+    width: 45vh;
+}
+.infieldtwo {
+    position: absolute;
+    top: 23vh;
+    margin: 8px 0vh;
+    width: 45vh;
+}
+input {
+    position: relative;
+    top: 0vh;
+    width: 100%;
+    padding: 1.25vh 0.83vh;
+    background-color: #f3f3f3;
+    border:none;
+    outline: none;
+}
+label {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 0.20vh;
+    background: var(--linear-grad);
+    transition: 0.4s;
+}
+input:focus ~ label {
+    width: 100%;
+}
+a {
+    position:absolute;
+    top: 30.95vh;
+    color: #333;
+    font-size: 1.46vh;
+    text-decoration: none;
+    margin: 1.57vh 0vh;
+}
+a.forgot {
+    padding-bottom: 0.31vh;
+    border-bottom: 0.20vh solid rgb(204, 204, 204);
+}
+button {
+    position:absolute;
+    top: 34.62vh;
+    border-radius: 2.09vh;
+    border: 0.10vh solid var(--grad-clr2);
+    background: var(--grad-clr2);
+    color: #fff;
+    font-size: 1.25vh;
+    font-weight: bold;
+    padding: 1.25vh 4.72vh;
+    letter-spacing: 0.10vh;
+    text-transform: uppercase;
+}
+.form-container button {
+    margin-top: 1.78vh;
+    transition: 80ms ease-in;
+}
+.form-container button:hover {
+    background: #FFF;
+    color: var(--grad-clr1)
+}
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+}
+.overlay {
+    position: relative;
+    background: var(--linear-grad);
+    color: #fff;
+    left: -150%;
+    height: 100%;
+    width: 250%;
+}
+.overlay-panel {
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0vh 0vh;
+    text-align: center;
+    height: 100%;
+    width: 35.67vh;
+}
+.overlay-right {
+    right: 0;
+    transform: translateX(0%);
+}
+p {
+    position: absolute;
+    top: 27.28vh;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 2.09vh;
+    letter-spacing: 0.05vh;
+    margin: 2.62vh 0vh 3.67vh;
+}
+
+.password-toggle {
+    margin-top: 31.47vh;
+}
+
+@keyframes show {
+    0%, 50% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50.1%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+.btnScaled {
+    animation: scaleBtn 0.6s;
+}
+@keyframes scaleBtn {
+    0% {
+        width: 15.07vh;
+    }
+    50% {
+        width: 26.23vh;
+    }
+    100% {
+        width: 15.07vh;
+    }
+}
