@@ -238,17 +238,67 @@ include "Processes/show_announcements.php";
                         </div>
 
                         <div style="margin-left: 19.4vw; margin-top: 1vh; width: 65vw; height: auto; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
-                            <div style="text-align:right; margin-bottom: 15px;">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h6 style="font-weight: bold; font-size: 1.5em; color: #343a40;">Announcements and Events</h6>
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" id="announcementActions" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="announcementActions">
+                                        <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createAnnouncementModal">Create Announcement</button></li>
+                                    </ul>
+                                </div>
                             </div>
                             <div id="announcements" class="cards-body" style="overflow-y: auto; max-height: 30vh; border: 1px solid #dee2e6; border-radius: 5px; background-color: #ffffff; padding: 10px;">
                                 <?php foreach ($announcements as $announcement) { ?>
                                     <div style="position: relative; margin-bottom: 10px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px; background-color: #f1f1f1;">
-                                        <h6 style="margin: 0; font-size: 1.2em; color: #495057;"><?php echo $announcement['title']; ?></h6>
-                                        <p style="margin: 5px 0; color: #6c757d;"><?php echo $announcement['content']; ?></p>
+                                        <h6 style="margin: 0; font-size: 1.2em; color: #495057;"><?php echo htmlspecialchars($announcement['title']); ?></h6>
+                                        <p style="margin: 5px 0; color: #6c757d;"><?php echo htmlspecialchars($announcement['content']); ?></p>
                                         <span style="position: absolute; top: 10px; right: 10px; font-size: 0.9em; color: #6c757d;"><?php echo date('F j, Y', strtotime($announcement['start_date'])); ?></span>
                                     </div>
                                 <?php } ?>
+                            </div>
+                        </div>
+
+                        <!-- Modal for Creating Announcement -->
+                        <div class="modal fade" id="createAnnouncementModal" tabindex="-1" aria-labelledby="createAnnouncementLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="Processes/create_announcement.php" method="POST">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="announcementTitle" class="form-label">Title</label>
+                                                <input type="text" class="form-control" id="announcementTitle" name="title" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="announcementContent" class="form-label">Content</label>
+                                                <textarea class="form-control" id="announcementContent" name="content" rows="3" required></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="startDate" class="form-label">Start Date</label>
+                                                <input type="date" class="form-control" id="startDate" name="start_date" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="enddate" class="form-label">End Date</label>
+                                                <input type="date" class="form-control" id="enddate" name="end_date" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="category" class="form-label">Category</label><br>
+                                                <select id="category" name="category">
+                                                    <option value="General"> General </option>
+                                                    <option value="Event"> Event</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Create</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
             </div>

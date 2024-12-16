@@ -20,7 +20,7 @@ $totalRows = mysqli_fetch_assoc($totalRowsResult)['total'];
 $userTotalPages = ceil($totalRows / $itemsPerPage);
 
 // Query to fetch data with pagination
-$selectuserinfo = "SELECT * FROM users WHERE student_id IS NOT NULL ORDER BY created_at LIMIT $offset, $itemsPerPage";
+$selectuserinfo = "SELECT * FROM users WHERE student_id IS NOT NULL AND is_archived = 0 ORDER BY created_at LIMIT $offset, $itemsPerPage";
 $result = mysqli_query($conn, $selectuserinfo);
 $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);

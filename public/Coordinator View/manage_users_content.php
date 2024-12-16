@@ -78,66 +78,70 @@ include "Processes/users_info.php";
         <!-- Pop-up form for updating user -->
                 <!--get user no as reference to match in order to assign the respective user no to the item to be updated-->
                 <div class="modal fade" id="edituser<?php echo $user["student_id"]; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateitemLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="updateitemLabel">Edit User</h1>
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success text-white">
+                                <h5 class="modal-title" id="updateitemLabel"><i class="bi bi-pencil-square"></i> Edit User</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action = "Processes/edit_user.php" method ="POST">
-                            <div class="modal-body">
-
-                            <div class="form-group mb-3">
-                                <input type = "text" name ="username" placeholder= "Username" value = "<?php echo $user["user_name"]; ?>"></input>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <input type = "text" name ="userpass" placeholder= "Password" value = "<?php echo $user["user_pass"]; ?>"></input>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <input type = "text" name ="usercontact" placeholder= "Contact No." value = "<?php echo $user["user_contact"]; ?>"></input>
-                            </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <!-- shows the current id of the row of data through an input field -->
-                                <input type = "hidden" name = "user_to_update" value = "<?php echo $user["student_id"]; ?>">
-                                <button type="submit" name = "edituser" class="btn btn-primary">Confirm</button>
+                            <form action="Processes/edit_user.php" method="POST">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="username<?php echo $user["student_id"]; ?>" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username<?php echo $user["student_id"]; ?>" name="username" placeholder="Enter username" value="<?php echo htmlspecialchars($user["name"]); ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="userpass<?php echo $user["student_id"]; ?>" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="userpass<?php echo $user["student_id"]; ?>" name="userpass" placeholder="Enter password">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="usercontact<?php echo $user["student_id"]; ?>" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="usercontact<?php echo $user["student_id"]; ?>" name="usercontact" placeholder="Enter email address" value="<?php echo htmlspecialchars($user["email"]); ?>">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="user_to_update" value="<?php echo $user["student_id"]; ?>">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="edituser" class="btn btn-success">Confirm</button>
+                                </div>
                             </form>
-                            </div>
-                            </div>
                         </div>
-                        </div>
+                    </div>
+                </div>
+
 
 
                 <!-- Modal for Delete User -->
-                <div class="modal fade" id="deleteuser<?php echo htmlspecialchars($user["student_id"]); ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteschoolLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="deleteschoolLabel">Delete User</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form action = "Processes/delete_user.php" method ="POST">
-                                        <div class="modal-body">
-                                        <h4>Are you sure you want to delete user, <?php echo $user["user_name"]?>?</h4>
-                                        <p>This action cannot be undone</p>
-                                        
-                                                <!-- shows the current id of the row of data through an input field -->
-                                                <input type = "hidden" name = "user_to_delete" value = "<?php echo htmlspecialchars($user["student_id"]); ?>">
-                                            </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <input type = "submit" name = "deleteuser" value = "Delete User" class = "btn btn-primary">
-                                                
-                                        </form>
+                <div class="modal fade" id="deleteuser<?php echo htmlspecialchars($user['student_id']); ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="deleteUserLabel">
+                                    <i class="bi bi-trash"></i> Archive User
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="Processes/delete_user.php" method="POST">
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <h4 class="text-danger">Are you sure?</h4>
+                                        <p class="mb-4">You are about to archive user <strong><?php echo htmlspecialchars($user['name']); ?></strong>. This action cannot be undone.</p>
                                     </div>
-                                    </div>
+                                    <input type="hidden" name="user_to_delete" value="<?php echo htmlspecialchars($user['student_id']); ?>">
                                 </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </button>
+                                    <button type="submit" name="deleteuser" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i> Archive
+                                    </button>
                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
 
                                 <?php } ?>
     </table>

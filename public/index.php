@@ -6,7 +6,7 @@
 
   <title>Sign In</title>
   <link href="../Coordinator View/assets/css/login.css" rel="stylesheet">
-
+  <link rel="icon" type="images/x-icon" href="Coordinator View/PLVISTA Logo.png"/>
 </head>
 
 <body>
