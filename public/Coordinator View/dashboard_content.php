@@ -41,16 +41,10 @@ include "Processes/show_announcements.php";
             <div class="container">
                 <div style="margin-left:3vw; margin-bottom:7vh; height: 11vh;" class="card">
                     <div id="totalNumCard" class="card-body">
-                        <h1 class="card-title">Active Users</h1>
+                        <h1 class="card-title">Total Number Of Users </h1>
                         <?php
-                        $totalitemcount = 'SELECT 
-                                            COUNT(DISTINCT al.user_id) AS total_count
-                                        FROM 
-                                            activity_logs al
-                                        WHERE 
-                                            al.session_start IS NOT NULL
-                                            AND (al.session_end IS NULL OR al.session_end > NOW());
-                                        ';
+                        $totalitemcount = "SELECT COUNT(*) AS total_count FROM users WHERE is_archived = 0;
+                        ";
                         
                         // Make query and get results using the parameters (connection to be used, query to be used)
                         $result = mysqli_query($conn, $totalitemcount);
@@ -112,64 +106,88 @@ include "Processes/show_announcements.php";
 
                 <div style="margin-left:52.4vw; margin-top:-16.5vh; height: 11vh;" class="card">
                     <div id="totalRepairCard"class="card-body">
-                        <h4 class="card-title">Average Session Time</h4>
+                    <h4 class="card-title">Peak Usage Time</h4>
                         <?php
-                        $averageSessionTime = 'SELECT 
-                        SEC_TO_TIME(AVG(TIMESTAMPDIFF(SECOND, session_start, session_end))) AS average_session_time
-                    FROM 
-                        activity_logs
-                    WHERE 
-                        session_end IS NOT NULL;
-                        ';
+                        // SQL Query to get peak usage hour
+                        $peakUsageTimeQuery = "
+                            SELECT 
+                                HOUR(session_start) AS peak_hour,
+                                COUNT(*) AS session_count
+                            FROM 
+                                activity_logs
+                            WHERE 
+                                session_start IS NOT NULL
+                            GROUP BY 
+                                peak_hour
+                            ORDER BY 
+                                session_count DESC
+                            LIMIT 1;
+                        ";
                         
-                        // Make query and get results using the parameters (connection to be used, query to be used)
-                        $result = mysqli_query($conn, $averageSessionTime);
+                        // Execute the query
+                        $result = mysqli_query($conn, $peakUsageTimeQuery);
                         
-                        // Fetch the result as an associative array
-                        $row = mysqli_fetch_assoc($result);
-                        
-                        // Store the total count in a variable
-                        $averageSessionTime = $row['average_session_time'];
-                        
-                        list($hours, $minutes, $seconds) = explode(':', $averageSessionTime);
-                        $humanReadableTime = "{$hours}:{$minutes}";
+                        // Check if query execution was successful and returned a result
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            // Fetch the row as an associative array
+                            $row = mysqli_fetch_assoc($result);
 
-                        // Release the result to avoid stacking up memory
+                            // Retrieve the peak hour
+                            $peakHour = $row['peak_hour'];
+
+                            // Convert the hour to a human-readable format (e.g., 14 -> 2 PM)
+                            $humanReadableTime = date("g A", strtotime("$peakHour:00:00"));
+                        } else {
+                            // Default message if no data is found or an error occurs
+                            $humanReadableTime = "No Data";
+                        }
+
+                        // Free result memory
                         mysqli_free_result($result);
-                        
                         ?>
+                        <!-- Display the peak usage time -->
                         <h2 class="card-text"><?php echo $humanReadableTime; ?></h2>
+
                         <script>
+                            // Example: JavaScript for handling additional logic
                             $('.filter-option').on('click', function(){
-                            var selectedValue = $(this).data('value');
-                            console.log("Selected value:", selectedValue);
-                            updateCardText(selectedValue);
-                        });
+                                var selectedValue = $(this).data('value');
+                                console.log("Selected value:", selectedValue);
+                                updateCardText(selectedValue);
+                            });
                         </script>
                     </div>
                 </div>
             </div>
                 <div style="margin-left:70.6vw; margin-top:-16.5vh;height: 11vh;" class="card">
                     <div id="totalCondemnedCard" class="card-body">
-                        <h4 class="card-title">Total Users</h4>
+                        <h4 class="card-title">Average Session Time</h4>
                         <?php
-                        $totalUserCount = 'SELECT COUNT(student_id) as total_count
-                                          FROM users WHERE student_id IS NOT NULL';
+                         $averageSessionTime = 'SELECT 
+                         SEC_TO_TIME(AVG(TIMESTAMPDIFF(SECOND, session_start, session_end))) AS average_session_time
+                     FROM 
+                         activity_logs
+                     WHERE 
+                         session_end IS NOT NULL;
+                         ';
+                         
+                         // Make query and get results using the parameters (connection to be used, query to be used)
+                         $result = mysqli_query($conn, $averageSessionTime);
                         
-                        // Make query and get results using the parameters (connection to be used, query to be used)
-                        $result = mysqli_query($conn, $totalUserCount);
-                        
-                        // Fetch the result as an associative array
-                        $row = mysqli_fetch_assoc($result);
-                        
-                        // Store the total count in a variable
-                        $totalUsers = $row['total_count'];
+                         // Fetch the result as an associative array
+                         $row = mysqli_fetch_assoc($result);
+                         
+                         // Store the total count in a variable
+                         $averageSessionTime = $row['average_session_time'];
+
+                         list($hours, $minutes, $seconds) = explode(':', $averageSessionTime);
+                         $humanReadableTime = "{$hours}:{$minutes}";
                         
                         // Release the result to avoid stacking up memory
                         mysqli_free_result($result);
                         
                         ?>
-                         <h2 class="card-text"><?php echo $totalUsers; ?></h2>
+                         <h2 class="card-text"><?php echo $humanReadableTime; ?></h2>
                          <script>
                             $('.filter-option').on('click', function(){
                             var selectedValue = $(this).data('value');
@@ -180,62 +198,204 @@ include "Processes/show_announcements.php";
                     </div>
                 </div>
                 
-                <!-- BAR CHART CARD -->
-                <div style="margin-left: 19.5vw; margin-top: 4vh; width: 65vw; height: 20vw; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
-                    <div id="barCard" class="cards-body">
-                    <h6 style="text-align:right; font-weight: bold; font-size: 1.5em; color: #343a40; margin-bottom:20px"><b>Most Visited Locations</b></h6>
-                        <canvas id="barChart" style="width: 100%; height: 20vw;"></canvas>
+                <!-- CHARTS CONTAINER -->
+                <div style="display: flex; justify-content: space-between; margin-top: 4vh; padding: 0 19.5vw; gap: 2vw;">
 
-                        <?php
-                        $query = 'SELECT location, COUNT(location) AS count FROM activity_logs GROUP BY location HAVING COUNT(location) > 0';
-                        $result = mysqli_query($conn, $query);
+                    <!-- MOST VISITED LOCATIONS CHART -->
+                    <div style="flex: 1; height:20vw; width:45vw; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
+                        <div id="barCard" class="cards-body">
+                            <h6 style="text-align:right; font-weight: bold; font-size: 1.5em; color: #343a40; margin-bottom:20px"><b>Most Searched Locations</b></h6>
+                            <canvas id="barChartLocations" style="width: 100%; height: 20vw;"></canvas>
 
-                        $labels = [];
-                        $data = [];
+                            <?php
+                            $query = 'SELECT location, COUNT(location) AS count FROM activity_logs GROUP BY location HAVING COUNT(location) > 0';
+                            $result = mysqli_query($conn, $query);
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $labels[] = $row['location'];
-                            $data[] = $row['count'];
-                        }
-                        ?>
-                        <script>
-                            var labels = <?php echo json_encode($labels); ?>;
-                            var data = <?php echo json_encode($data); ?>;
+                            $labels = [];
+                            $data = [];
 
-                            var config = {
-                                type: 'bar',
-                                data: {
-                                    labels: labels,
-                                    datasets: [{
-                                        label: 'No. of Visits',
-                                        data: data,
-                                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Optional: Set the bar color
-                                        borderColor: 'rgba(75, 192, 192, 1)', // Optional: Set the border color
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    indexAxis: 'y', // Set to 'y' for horizontal bar chart
-                                    responsive: true,
-                                    maintainAspectRatio: false, // Allow the chart to use the full height of the canvas
-                                    scales: {
-                                        x: {
-                                            beginAtZero: true
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $labels[] = $row['location'];
+                                $data[] = $row['count'];
+                            }
+                            ?>
+                            <script>
+                                var labelsLocations = <?php echo json_encode($labels); ?>;
+                                var dataLocations = <?php echo json_encode($data); ?>;
+
+                                var configLocations = {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labelsLocations,
+                                        datasets: [{
+                                            label: 'No. of Visits',
+                                            data: dataLocations,
+                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        indexAxis: 'x',
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        scales: {
+                                            x: {
+                                                beginAtZero: true
+                                            }
                                         }
                                     }
-                                }
-                            };
+                                };
 
-                            var barChart = new Chart(document.getElementById('barChart'), config);
-
-                            $('.filter-option').on('click', function() {
-                                var selectedValue = $(this).data('value');
-                                console.log("Selected value:", selectedValue);
-                                updateBar(selectedValue);
-                            });
-                        </script>
-                    </div>
+                                var barChartLocations = new Chart(document.getElementById('barChartLocations'), configLocations);
+                            </script>
                         </div>
+                    </div>
+
+                    <!-- AVERAGE MONTHLY USERS CHART -->
+                    <div style="flex: 1; height:20vw; width:45vw; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
+                        <div id="barCard" class="cards-body">
+                            <h6 style="text-align:right; font-weight: bold; font-size: 1.5em; color: #343a40; margin-bottom:20px"><b>Average Monthly Users</b></h6>
+                            <canvas id="barChartUsers" style="width: 100%; height: 20vw;"></canvas>
+
+                            <?php
+                            $query = 'SELECT 
+                                        DATE_FORMAT(created_at, "%Y-%m") AS month, 
+                                        COUNT(DISTINCT user_id) AS user_count 
+                                    FROM 
+                                        activity_logs 
+                                    WHERE 
+                                        created_at IS NOT NULL 
+                                    GROUP BY 
+                                        DATE_FORMAT(created_at, "%Y-%m")
+                                    ORDER BY 
+                                        month ASC';
+
+                            $result = mysqli_query($conn, $query);
+
+                            $labels = [];
+                            $data = [];
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $month = DateTime::createFromFormat('Y-m', $row['month']);
+                                $labels[] = $month->format('F');
+                                $data[] = $row['user_count'];
+                            }
+                            ?>
+                            <script>
+                                var labelsUsers = <?php echo json_encode($labels); ?>;
+                                var dataUsers = <?php echo json_encode($data); ?>;
+
+                                var configUsers = {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labelsUsers,
+                                        datasets: [{
+                                            label: 'Average Monthly Users',
+                                            data: dataUsers,
+                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true,
+                                                title: {
+                                                    display: true,
+                                                    text: 'Number of Users'
+                                                }
+                                            },
+                                            x: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Month'
+                                                }
+                                            }
+                                        },
+                                        plugins: {
+                                            legend: {
+                                                display: true,
+                                                position: 'top'
+                                            }
+                                        }
+                                    }
+                                };
+
+                                var barChartUsers = new Chart(document.getElementById('barChartUsers'), configUsers);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 4vh; padding: 0 19.5vw; gap: 2vw;">
+
+                <!-- MOST VISITED LOCATIONS CHART -->
+                <div style="flex: 1; height:20vw; width:45vw; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
+                    <div id="barCard" class="cards-body">
+                    <div class="chart-container">
+                        <canvas id="myBarChart"></canvas>
+                    </div>
+
+                    <script>
+                        // Sample data for the bar chart
+                        const labels = ['1', '2', '3', '4', '5'];
+                        const data = {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Number of Votes',
+                                data: [12, 19, 3, 5, 2], // Sample data points
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        };
+
+                        const config = {
+                            type: 'bar',
+                            data: data,
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: 'Number of Votes'
+                                        }
+                                    },
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: 'Scores'
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        position: 'top'
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Rating Results'
+                                    }
+                                }
+                            }
+                        };
+
+                        // Render the chart
+                        const myBarChart = new Chart(
+                            document.getElementById('myBarChart'),
+                            config
+                        );
+                    </script>
+                    </div>
+                </div>
+
 
                         <div style="margin-left: 19.4vw; margin-top: 1vh; width: 65vw; height: auto; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
                             <div class="d-flex justify-content-between align-items-center mb-3">

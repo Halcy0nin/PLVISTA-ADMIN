@@ -3,7 +3,8 @@
    $selectLogs = "SELECT 
     a.user_id,          
     u.name,              
-    u.role,              
+    u.role,
+    a.location,   
     a.activity_details,           
     a.session_start,    
     a.session_end      
