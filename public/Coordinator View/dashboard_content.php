@@ -333,68 +333,56 @@ include "Processes/show_announcements.php";
 
                 <div style="display: flex; justify-content: space-between; margin-top: 4vh; padding: 0 19.5vw; gap: 2vw;">
 
-                <!-- MOST VISITED LOCATIONS CHART -->
-                <div style="flex: 1; height:20vw; width:45vw; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
-                    <div id="barCard" class="cards-body">
-                    <div class="chart-container">
-                        <canvas id="myBarChart"></canvas>
-                    </div>
+                <!-- User Remarks Chart -->
+                <div style="height:20vw; width:45vw; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
+                        <div id="userRemarks" class="cards-body">
+                            <h6 style="text-align:right; font-weight: bold; font-size: 1.5em; color: #343a40; margin-bottom:20px"><b>User Feedback</b></h6>
+                            <canvas id="barChartFeedback" style="width: 100%; height: 20vw;"></canvas>
 
-                    <script>
-                        // Sample data for the bar chart
-                        const labels = ['1', '2', '3', '4', '5'];
-                        const data = {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Number of Votes',
-                                data: [12, 19, 3, 5, 2], // Sample data points
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        };
+                            <?php
+                            $query = 'SELECT Rates, COUNT(Rates) AS count FROM user_feedback GROUP BY Rates HAVING COUNT(Rates) > 0';
+                            $result = mysqli_query($conn, $query);
 
-                        const config = {
-                            type: 'bar',
-                            data: data,
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,
-                                        title: {
-                                            display: true,
-                                            text: 'Number of Votes'
-                                        }
-                                    },
-                                    x: {
-                                        title: {
-                                            display: true,
-                                            text: 'Scores'
-                                        }
-                                    }
-                                },
-                                plugins: {
-                                    legend: {
-                                        display: true,
-                                        position: 'top'
-                                    },
-                                    title: {
-                                        display: true,
-                                        text: 'Rating Results'
-                                    }
-                                }
+                            $labels = [];
+                            $data = [];
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $labels[] = $row['Rates'];
+                                $data[] = $row['count'];
                             }
-                        };
+                            ?>
+                            <script>
+                                var labelsRating = <?php echo json_encode($labels); ?>;
+                                var dataRating = <?php echo json_encode($data); ?>;
 
-                        // Render the chart
-                        const myBarChart = new Chart(
-                            document.getElementById('myBarChart'),
-                            config
-                        );
-                    </script>
+                                var configLocations = {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labelsRating,
+                                        datasets: [{
+                                            label: 'No. of Votes',
+                                            data: dataRating,
+                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        indexAxis: 'x',
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        scales: {
+                                            x: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                };
+
+                                var barChartFeedback = new Chart(document.getElementById('barChartFeedback'), configLocations);
+                            </script>
+                        </div>
                     </div>
-                </div>
 
 
                         <div style="margin-left: 19.4vw; margin-top: 1vh; width: 65vw; height: auto; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 20px;" class="cards">
