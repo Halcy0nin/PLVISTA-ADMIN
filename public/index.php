@@ -6,7 +6,7 @@
 
   <title>Sign In</title>
   <link href="../Coordinator View/assets/css/login.css" rel="stylesheet">
-  <link rel="icon" type="images/x-icon" href="Coordinator View/PLVISTA Logo.png"/>
+  <link rel="icon" type="images/x-icon" href="Coordinator View/PLVista Logo.png"/>
 </head>
 
 <body>
@@ -50,7 +50,7 @@
         <div class="overlay-container" id="overlayCon">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    <img src="Coordinator View/PLVISTA LOGO.png">
+                    <img src="Coordinator View/PLVista Logo.png">
                 </div>
             </div>
         </div>

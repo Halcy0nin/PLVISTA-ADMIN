@@ -5,7 +5,7 @@
       <div class="main-menu">
   
         <div class="logo">
-        <a href="#" class="SDOlogo"><img src="PLVISTA Logo.png"></a>
+        <a href="#" class="SDOlogo"><img src="PLVista Logo.png"></a>
         </div>
   
       <div class="menu-content">

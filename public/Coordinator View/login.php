@@ -50,7 +50,7 @@
         <div class="overlay-container" id="overlayCon">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    <img src="PLVISTA LOGO.png">
+                    <img src="PLVista Logo.png">
                 </div>
             </div>
         </div>
